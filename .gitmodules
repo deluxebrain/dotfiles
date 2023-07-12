@@ -1,0 +1,15 @@
+[submodule "/Users/deluxebrain/.config/oh-my-zsh"]
+	path = /Users/deluxebrain/.config/oh-my-zsh
+	url = git@github.com:ohmyzsh/ohmyzsh.git
+[submodule ".config/oh-my-zsh"]
+	path = .config/oh-my-zsh
+	url = git@github.com:ohmyzsh/ohmyzsh.git
+[submodule ".config/zsh_custom/themes/powerlevel10k"]
+	path = .config/zsh_custom/themes/powerlevel10k
+	url = git@github.com:romkatv/powerlevel10k.git
+[submodule ".config/zsh_custom/plugins/zsh-autosuggestions"]
+	path = .config/zsh_custom/plugins/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule ".vim/pack/local/start/editorconfig-vim"]
+	path = .vim/pack/local/start/editorconfig-vim
+	url = git@github.com:editorconfig/editorconfig-vim.git

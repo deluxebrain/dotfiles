@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+# Because Git submodule commands cannot operate without a work tree, they must
+# be run from within $HOME (assuming this is the root of your dotfiles)
+cd "$HOME" || exit
+
+echo "Initializing yadm submodules ..." >&2
+yadm submodule update --recursive --init
+
+echo "Removing project metadata from working tree ..." >&2
+yadm gitconfig core.sparseCheckout true
+yadm sparse-checkout set '/*' '!LICENSE'

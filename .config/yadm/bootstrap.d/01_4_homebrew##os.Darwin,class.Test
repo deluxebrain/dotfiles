@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Homebrew and homebrew packages
+# for Darwin OS when running on test account
+
+set -e
+
+echo Running bootstrap file: "$(basename "$0")" >&2
+
+# Best practices on multiuser system are to install Homebrew into
+# a single account
+# Hence check its present and exit with error if not
+if ! command -v brew >/dev/null 2>&1; then
+    echo ERROR: Homebrew not installed >&2
+    exit 1
+fi
+echo Nothing todo on multiuser system >&2

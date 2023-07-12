@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# yadm configuration
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+echo Installing asdf plugins >&2
+    sort < "${XDG_CONFIG_HOME}/asdf/plugins" \
+    | comm -23 - <(asdf plugin-list | sort) \
+    | join - <(asdf plugin list all) \
+    | xargs -L1 -t asdf plugin add

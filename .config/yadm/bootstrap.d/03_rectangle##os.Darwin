@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+echo "Running in Rectangle configuration ..." >&2
+defaults import com.knollsoft.Rectangle "$XDG_CONFIG_HOME/rectangle/com.knollsoft.Rectangle.plist"
+if pgrep -if 'rectangle' ; then
+    osascript -e 'tell application "Rectangle" to quit'
+    open -a "Rectangle"
+fi

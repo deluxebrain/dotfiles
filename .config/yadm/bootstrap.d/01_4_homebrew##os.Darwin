@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Homebrew and homebrew packages
+# for Darwin OS primary user account
+
+set -e
+
+echo Running bootstrap file: "$(basename "$0")" >&2
+
+# Install homebrew if its missing
+if ! command -v brew >/dev/null 2>&1; then
+    echo Installing homebrew >&2
+    NONINTERACTIVE=1 \
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Install homebrew packages
+if [ -f "$XDG_CONFIG_HOME/homebrew/Brewfile" ]; then
+    brew bundle install --file="$XDG_CONFIG_HOME/homebrew/Brewfile"
+fi

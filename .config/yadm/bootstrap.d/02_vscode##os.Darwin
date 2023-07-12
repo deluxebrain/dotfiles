@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# vscode configuration
+# note vscode must be installed before this script is run
+
+set -e
+
+vscode_dir=~/Library/Application\ Support/Code/
+
+# perform first time launch of vscode if necessary
+if [ ! -d "$vscode_dir" ] ; then
+    open -a "Visual Studio Code"
+    osascript -e 'tell application "Visual Studio Code" to quit'
+fi
+
+echo "Backing up existing vscode user configuration ..." >&2
+mv "$vscode_dir/User" "$vscode_dir/User-$(date -Iseconds)"
+
+echo "Linking vscode user configuration ..." >&2
+ln -fs "$XDG_CONFIG_HOME/vscode" "$vscode_dir/User"
+
+echo "Installing vscode extensions ..." >&2
+awk 'NF' "$XDG_CONFIG_HOME/vscode/extensions" \
+| xargs -I{} code --install-extension {} --force
