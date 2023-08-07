@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# vim configuration
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+# generate plugins help
+# e.g. :help editorconfig
+vim -c "helptags ALL" -c "q"

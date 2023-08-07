@@ -1,0 +1,28 @@
+# Example configuration to demonstrate the integration of the aws cli with
+# aws-vault for secure management of aws credentials using the OS keychain
+
+# Assumes identity configured within aws-vault as follows;
+# aws-vault add <profile>
+
+[default]
+region = eu-west-1
+
+# not to be used directly
+# used to provide sts session via aws-vault
+[profile root]
+mfa_serial=arn:aws:iam::<identity_account>:mfa/<user_email>
+credential_process=aws-vault export --format=json <profile>
+
+# profile to assume role foo in the eu-west-1 region
+[profile foo]
+source_profile=root
+region=eu-west-1
+role_arn=arn:aws:iam::<role_account>:role/<foo>
+role_session_name=<session_name>
+
+# profile to assume bar foo in the us-east-1 region
+[profile bar]
+source_profile=root
+region=us-east-1
+role_arn=arn:aws:iam::<role_account>:role/<bar>
+role_session_name=<session_name>

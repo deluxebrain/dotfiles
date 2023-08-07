@@ -1,0 +1,12 @@
+awscli
+azure-cli
+cookiecutter
+dotnet-core
+golang
+helm
+kubectl
+kustomize
+nodejs
+python
+yarn
+yq

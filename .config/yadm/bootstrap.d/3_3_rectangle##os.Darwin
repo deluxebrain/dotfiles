@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Rectangle ( tiling manager ) configuration
+# for Darwin OS
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+# Rectangle configuration is managed using plists
+defaults import com.knollsoft.Rectangle \
+    "${XDG_CONFIG_HOME}/rectangle/com.knollsoft.Rectangle.plist"
+
+# New rectangle configuration will not take affect until restart
+if pgrep -if "rectangle" ; then
+    echo Relaunching Rectangle to bring in new configuration
+    osascript -e 'tell application "Rectangle" to quit'
+    open -a "Rectangle"
+fi

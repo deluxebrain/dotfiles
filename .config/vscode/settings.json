@@ -1,0 +1,12 @@
+{
+    "workbench.colorTheme": "Dracula",
+    "editor.fontSize": 16,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "redhat.telemetry.enabled": false
+}

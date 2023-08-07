@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# vagrant configuration
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+echo Installing vagrant plugins >&2
+sort < "${XDG_CONFIG_HOME}/vagrant/plugins" \
+| comm -23 - <(vagrant plugin list | cut -d' ' -f1 | sort) \
+| xargs -L1 -t vagrant plugin install

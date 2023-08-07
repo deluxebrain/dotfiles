@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# tmux configuration
+# for Darwin OS
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+TMUX_PLUGINS_DIR="${XDG_CONFIG_HOME}/tmux/plugins"
+
+# verify tmux installed
+if ! command -v tmux >/dev/null 2>&1; then
+    echo ERROR: tmux not installed >&2
+    exit 1
+fi
+
+# verify tmux configured
+if ! [ -d "$TMUX_PLUGINS_DIR" ]; then
+    echo ERROR: tmux not configured >&2
+    exit 1
+fi
+
+# verify tpm plugin installed
+if ! [ -d "${TMUX_PLUGINS_DIR}/tpm" ]; then
+    echo ERROR: tpm plugin not installed >&2
+    exit 1
+fi
+
+# install all plugins
+"${TMUX_PLUGINS_DIR}/tpm/bin/install_plugins"

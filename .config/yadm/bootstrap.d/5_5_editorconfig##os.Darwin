@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# editorconfig configuration
+# editorconfig does not support XDG path spec natively
+# so resort to symlinks to keep config file inside of XDG_CONFIG_HOME
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+ln -sf "${XDG_CONFIG_HOME}/editorconfig/editorconfig" \
+    "${HOME}/.editorconfig"

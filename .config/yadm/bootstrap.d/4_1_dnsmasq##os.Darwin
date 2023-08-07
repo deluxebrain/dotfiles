@@ -1,0 +1,128 @@
+#!/bin/bash
+
+# dnsmasq configuration to route .test tld locally
+# for Darwin OS on arm64 architecture
+# uses non priviledged port for dnsmasq to avoid sudo
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+DNSMASQ_PORT= # generated later on
+DNSMASQ_CONFIG_PATH="$(brew --prefix)/etc/dnsmasq.conf"
+DNSMASQ_CUSTOM_CONFIG_PATH="$(brew --prefix)/etc/dnsmasq.d"
+PATTERN_CONF_DIR="conf-dir=$(brew --prefix)/etc/dnsmasq.d/,*.conf"
+
+#### dnsmasq ###
+
+# verify dnsmasq installed
+if ! command -v dnsmasq >/dev/null 2>&1; then
+    echo ERROR: dnsmasq not installed >&2
+    exit 1
+fi
+
+# verify dnsmasq configuration file is as expected
+if ! grep -F "$PATTERN_CONF_DIR" "$DNSMASQ_CONFIG_PATH" >/dev/null; then
+    echo ERROR: unexpected dnsmasq configuration file contents >&2
+    exit 1
+fi
+
+# uncomment conf-dir to support custom configuration files
+# NOTE - using ! instead of usual / delimiter due to / in the pattern
+gsed -i.bak \
+    "!${PATTERN_CONF_DIR}!s!^#*\s*!!g" \
+    "$DNSMASQ_CONFIG_PATH"
+
+# grab a non-privileged port to use for dnsmasq
+DNSMASQ_PORT=$(\
+    comm -23 \
+        <(seq 1024 49151 | sort) \
+        <(
+            lsof -i -Pn \
+            | tail -n+2 \
+            | awk '{print $9}' \
+            | rev \
+            | cut -d':' -f1 \
+            | rev \
+            | grep -e '[[:digit:]]' \
+            | sort -u) \
+    | shuf \
+    | head -n1)
+
+# write custom dnsmasq configuration
+mkdir -p "$DNSMASQ_CUSTOM_CONFIG_PATH"
+cat <<EOF > "${DNSMASQ_CUSTOM_CONFIG_PATH}/dotfiles.conf"
+address=/test/127.0.0.1
+port=$DNSMASQ_PORT
+EOF
+
+# restart dnsmasq
+# note we are running as non-root as not binding to port 53
+echo INFO: ignore any warning below about running as root >&2
+brew services restart dnsmasq
+
+### pfctl ###
+
+if launchctl list | grep dotfiles.pfctl >/dev/null; then
+    sudo launchctl unload /Library/LaunchDaemons/dotfiles.pfctl.plist
+fi
+
+# create pf anchor for dns redirect
+cat <<EOF | sudo tee /etc/pf.anchors/dotfiles >/dev/null
+rdr pass inet proto { tcp, udp } from any to 127.0.0.1 port 53 -> 127.0.0.1 port $DNSMASQ_PORT
+EOF
+
+# create launch daemon configuration for pf anchor
+# note third party launch daemon plists live in /Library/LaunchDaemons
+# not /System/Library/LaunchDaemons ( which are reserved for system daemons )
+cat <<EOF | sudo tee /Library/LaunchDaemons/dotfiles.pfctl.plist >/dev/null
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Disabled</key>
+	<false/>
+	<key>Label</key>
+	<string>dotfiles.pfctl</string>
+	<key>WorkingDirectory</key>
+	<string>/var/run</string>
+	<key>Program</key>
+	<string>/sbin/pfctl</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>pfctl</string>
+        <string>-a</string>
+        <string>com.apple/dotfiles</string>
+		<string>-f</string>
+		<string>/etc/pf.anchors/dotfiles</string>
+        <string>-e</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+</dict>
+</plist>
+EOF
+
+# launch the pfctl daemon
+sudo launchctl load /Library/LaunchDaemons/dotfiles.pfctl.plist
+
+### os ###
+
+# configure os to use dnsmasq for test tld
+sudo mkdir -p /etc/resolver
+cat <<EOF | sudo tee /etc/resolver/test >/dev/null
+nameserver 127.0.0.1
+EOF
+
+# flush DNS
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+
+### tests ###
+
+# verify that routing now works
+# verify domain resolution is working on port 53
+if [ -z "$(dig +short foo.test @127.0.0.1)" ]; then
+    echo ERROR: dnsmasq domain resolution issue >&2
+    exit 1
+fi

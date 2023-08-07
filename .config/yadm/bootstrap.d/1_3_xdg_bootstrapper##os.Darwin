@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# bootstrap zsh to use xdg path spec
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+# ensure /etc/zshenv exists
+if ! [ -f /etc/zshenv ] ; then
+    sudo touch /etc/zshenv
+fi
+
+if grep -q ZDOTDIR /etc/zshenv ; then
+    sudo sed -i.bak -E \
+        "s|(export ZDOTDIR=)(.*)|\1\"\$HOME/.config/zsh\"|" /etc/zshenv
+else
+    cat <<"EOF" | sudo tee -a /etc/zshenv
+export ZDOTDIR="$HOME/.config/zsh"
+EOF
+fi
