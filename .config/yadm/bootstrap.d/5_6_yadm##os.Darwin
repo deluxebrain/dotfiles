@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# yadm configuration
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+# show untracked files when issuing yadm status
+# note relies on ~/.gitconfig being configured correctly
+yadm gitconfig --unset status.showUntrackedFiles
