@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# lightweight macos configuration
+# lightweight macos system configuration
 
 set -e
 
