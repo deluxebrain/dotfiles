@@ -2,6 +2,13 @@
 
 # yadm extensions
 
+# use lazygit with yadm
+function y() {
+    cd "$HOME"
+    yadm enter lazygit
+    cd -
+}
+
 # delete submodule as managed by yadm
 function yadm.delete-submodule() {
     local submodule_path="$1"
