@@ -1,5 +1,7 @@
 /*/
+/.gitconfig.local
+
 !/.gitignore
 !/.gitsubmodules
 !/.config/
-
+!/.github/

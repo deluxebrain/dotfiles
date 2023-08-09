@@ -1,3 +1,2 @@
-[user]
-	email = matt.caton@mac.com
-	name = deluxebrain
+[include]
+    path = ~/.gitconfig.local

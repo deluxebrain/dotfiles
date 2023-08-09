@@ -101,8 +101,6 @@ plugins+=(
 ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_CONFIG="${XDG_CONFIG_HOME}/tmux/tmux.conf"
 ZSH_TMUX_UNICODE=true
-# ZSH_TMUX_ITERM2=true
-# ZSH_TMUX_FIXTERM_WITH_256COLOR=true
 
 # enable oh-my-zsh
 source "${ZSH}/oh-my-zsh.sh"
