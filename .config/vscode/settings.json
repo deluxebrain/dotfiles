@@ -3,6 +3,9 @@
     "editor.fontSize": 16,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.associations": {
+        "ignore": "ignore"
+    },
     "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
     "[python]": {

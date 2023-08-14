@@ -12,10 +12,15 @@ if ! [ -f /etc/zshenv ] ; then
 fi
 
 if grep -q ZDOTDIR /etc/zshenv ; then
+    # example of using sed to update an existing line ...
+    # sudo sed -i.bak -E \
+    #     "s|(export ZDOTDIR=)(.*)|\1\"\$HOME/.config/zsh\"|" /etc/zshenv
+    # but we will just delete it ...
     sudo sed -i.bak -E \
-        "s|(export ZDOTDIR=)(.*)|\1\"\$HOME/.config/zsh\"|" /etc/zshenv
-else
-    cat <<"EOF" | sudo tee -a /etc/zshenv
-export ZDOTDIR="$HOME/.config/zsh"
-EOF
+        "/export ZDOTDIR/d" /etc/zshenv
 fi
+    cat <<"EOF" | sudo tee -a /etc/zshenv
+if ! [ -f "${HOME}/.zshenv" ]; then
+    export ZDOTDIR="$HOME/.config/zsh"
+fi
+EOF

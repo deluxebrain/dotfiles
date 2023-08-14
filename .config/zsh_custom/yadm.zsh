@@ -1,12 +1,34 @@
 #!/bin/zsh
 
-# yadm extensions
+# yadm aliases
 
 # use lazygit with yadm
 function y() {
-    cd "$HOME"
+    cd "$DOTFILES_HOME"
     yadm enter lazygit
     cd -
+}
+
+# yadm extensions
+
+# clone dotfiles to non-HOME and set .zshenv override to activate it
+function yadm.start-testing() {
+    local dotfiles_path="$(pwd)"
+
+    cat <<EOF > "${HOME}/.zshenv"
+export DOTFILES_HOME="$dotfiles_path"
+export ZDOTDIR="${dotfiles_path}/.config/zsh"
+EOF
+
+    echo "Issue yadm.stop-testing to restore main dotfiles"
+    echo "Terminal restart required ..."
+}
+
+# stop testing
+function yadm.stop-testing() {
+    rm "${HOME}/.zshenv"
+
+    echo "Terminal restart required ..."
 }
 
 # delete submodule as managed by yadm

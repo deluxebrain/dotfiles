@@ -5,19 +5,19 @@
 " but *below* set nocompatible ( which resets viminfo )
 
 if empty("$XDG_CACHE_HOME")
-    let $XDG_CACHE_HOME="$HOME/.cache"
+    let $XDG_CACHE_HOME="$DOTFILES_HOME/.cache"
 endif
 
 if empty("$XDG_CONFIG_HOME")
-    let $XDG_CONFIG_HOME="$HOME/.config"
+    let $XDG_CONFIG_HOME="$DOTFILES_HOME/.config"
 endif
 
 if empty("$XDG_DATA_HOME")
-    let $XDG_DATA_HOME="$HOME/.local/share"
+    let $XDG_DATA_HOME="$DOTFILES_HOME/.local/share"
 endif
 
 if empty("$XDG_STATE_HOME")
-    let $XDG_STATE_HOME="$HOME/.local/state"
+    let $XDG_STATE_HOME="$DOTFILES_HOME/.local/state"
 endif
 
 set directory=$XDG_CONFIG_HOME/vim/swap,~/,/tmp

@@ -1,7 +1,15 @@
-/*/
+# ignore everything except this file
+/*
+!/.gitignore
+
+# and to confirm - that includes .gitconfig.local
 /.gitconfig.local
 
-!/.gitignore
-!/.gitsubmodules
+# dotfiles are largely centralized to XDG_CONFIG_HOME
 !/.config/
+
+# except for documentation
 !/.github/
+
+# and the following miscellaneous files:wq
+!/.gitsubmodules

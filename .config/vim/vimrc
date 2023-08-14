@@ -2,7 +2,7 @@
 set nocompatible
 
 " Make Vim XDG compliant
-source $HOME/.config/vim/xdg.vim
+source $DOTFILES_HOME/.config/vim/xdg.vim
 
 " Use the Solarized Dark theme
 @REM set background=dark

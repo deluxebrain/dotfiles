@@ -1,25 +1,32 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# shellcheck disable=SC2148,SC1090,SC2296,SC1091
+
+# _should_ already have been set either in:
+# .config/.zshenv if live dotfiles
+# ~/.zshenv if test dotfiles
+export DOTFILES_HOME="${DOTFILES_HOME:-$HOME}"
+
+# xdg path configuration
+export XDG_CONFIG_HOME="${DOTFILES_HOME}/.config"
+export XDG_CACHE_HOME="${DOTFILES_HOME}/.cache"
+export XDG_DATA_HOME="${DOTFILES_HOME}/.local/share"
+export XDG_STATE_HOME="${DOTFILES_HOME}/.local/state"
 
 # automatic profile selection does not work correctly with tmux plugin
 # hence select dotfiles profile using iterm proprietary escape codes
 # this must be done before tmux is started
 echo -ne "\033]50;SetProfile=dotfiles\a"
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # path
-export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export PATH="${DOTFILES_HOME}/bin:/usr/local/bin:$PATH"
 # add homebrew to path
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# xdg path configuration
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
 
 # zsh
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
@@ -51,7 +58,7 @@ export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
 export SHELL_SESSIONS_DISABLE=1
 # share history between terminals
 setopt share_history
-export HISTSIZE='32768'
+export HISTSIZE="32768"
 export HISTFILESIZE="$HISTSIZE"
 
 # vim configuration
@@ -61,7 +68,8 @@ export EDITOR=vim
 export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
 
 # fix up gpg as installed by brew
-export GPG_TTY=$(tty)
+export GPG_TTY
+GPG_TTY=$(tty)
 
 # used by github cli ( gh ) for authenticating against github
 # set dynamically by gh alias ( see aliases.zsh )
@@ -98,16 +106,16 @@ plugins+=(
 # must be between plugins declaration and starting oh-my-zsh
 
 # tmux plugin configuration
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_CONFIG="${XDG_CONFIG_HOME}/tmux/tmux.conf"
-ZSH_TMUX_UNICODE=true
+export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_CONFIG="${XDG_CONFIG_HOME}/tmux/tmux.conf"
+export ZSH_TMUX_UNICODE=true
 
 # enable oh-my-zsh
 source "${ZSH}/oh-my-zsh.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 # [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-[[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source $ZDOTDIR/.p10k.zsh
+[[ ! -f "${ZDOTDIR}/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
 
 # add iterm2 shell integration
 test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" \

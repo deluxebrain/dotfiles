@@ -4,7 +4,7 @@
 
 # update all dependencies
 function dotfiles.update() {
-    cd $HOME || exit
+    cd "$DOTFILES_HOME" || exit
 
     # Ask for the administrator password upfront
     sudo -v
