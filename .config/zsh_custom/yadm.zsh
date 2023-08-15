@@ -13,7 +13,7 @@ function y() {
 
 # clone dotfiles to non-HOME and set ~/.zshenv override to activate it
 function yadm.start-testing() {
-    local dotfiles_path="$(pwd)"
+    local dotfiles_home="$(pwd)"
     local dotfiles_remote="$(yadm remote get-url origin)"
 
     while true; do
@@ -26,26 +26,22 @@ function yadm.start-testing() {
         esac
     done
 
-    yadm init -f
+    yadm.__patch_env "$dotfiles_home"
     yadm config local.class Test
-    yadm clone -f "$dotfiles_remote" -w "$dotfiles_path" --bootstrap
+    yadm clone -f "$dotfiles_remote" -w "$DOTFILES_HOME" --bootstrap
 
     cat <<EOF > "${HOME}/.zshenv"
-export ZDOTDIR="${dotfiles_path}/.config/zsh"
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 EOF
 
-    echo "Issue yadm.stop-testing to restore main dotfiles"
-    echo "Terminal restart required ..."
+    omg reload
 }
 
 # stop testing
 function yadm.stop-testing() {
-    yadm init -f
-    yadm config --unset local.class
-    yadm clone -f "$dotfiles_remote" -w "$HOME" --bootstrap
+    yadm.__patch_env "$HOME"
     rm "${HOME}/.zshenv"
-
-    echo "Terminal restart required ..."
+    omg reload
 }
 
 # delete submodule as managed by yadm
@@ -71,4 +67,20 @@ function yadm.delete-submodule() {
 
     # remove submodule from .gitmodules
     yadm rm -f "$submodule_path"
+}
+
+function yadm.__patch_env() {
+    local dotfiles_home="$1"
+    if [ -z "$dotfiles_home" ] ; then
+        echo "ERROR: Please provide path to dotfiles home" >&2
+        return 1
+    fi
+
+    DOTFILES_HOME="$dotfiles_home"
+    XDG_CONFIG_HOME="${DOTFILES_HOME}/.config"
+    XDG_CACHE_HOME="${DOTFILES_HOME}/.cache"
+    XDG_DATA_HOME="${DOTFILES_HOME}/.local/share"
+    XDG_STATE_HOME="${DOTFILES_HOME}/.local/state"
+    ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+    ZSH="${XDG_CONFIG_HOME}/oh-my-zsh"
 }

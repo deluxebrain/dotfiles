@@ -8,4 +8,4 @@ echo "Running bootstrap file: $(basename "$0")" >&2
 
 # show untracked files when issuing yadm status
 # note relies on ~/.gitignore being configured correctly
-yadm gitconfig --unset status.showUntrackedFiles
+yadm gitconfig --unset status.showUntrackedFiles || true

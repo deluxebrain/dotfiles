@@ -9,7 +9,7 @@ function asdf.init() {
         return 1
     fi
 
-    cat "${XDG_CONFIG_HOME}/asdf/plugins" | __asdf.install-plugins
+    cat "${XDG_CONFIG_HOME}/asdf/plugins" | asdf.__install-plugins
 }
 
 # syncs dotfiles with currently installed asdf plugins
@@ -19,7 +19,7 @@ function asdf.sync() {
 
 # asdf plugin installer
 # installs all plugins specified on stdin
-function __asdf.install-plugins() {
+function asdf.__install-plugins() {
     sort /dev/stdin \
     | comm -23 - <(asdf plugin-list | sort) \
     | join - <(asdf plugin list all) \

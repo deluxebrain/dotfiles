@@ -7,7 +7,7 @@
 
 set -e
 
-SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_HOME="${SCRIPT_DIR}/../.."
 BOOTSTRAP_D="${SCRIPT_DIR}/bootstrap.d"
 
@@ -30,7 +30,9 @@ if [[ ! -d "$BOOTSTRAP_D" ]]; then
 fi
 find -L "$BOOTSTRAP_D" -type f | sort | while IFS= read -r bootstrap; do
     if [[ -x "$bootstrap" && ! "$bootstrap" =~ "##" && ! "$bootstrap" =~ "~$" ]]; then
-        if ! "$bootstrap"; then
+        # explicitly set stdin as the controlling terminal
+        # ( accessing stdin otherwise would terminate the loop )
+        if ! "$bootstrap" </dev/tty ; then
             echo "Error: bootstrap '$bootstrap' failed" >&2
             exit 1
         fi
