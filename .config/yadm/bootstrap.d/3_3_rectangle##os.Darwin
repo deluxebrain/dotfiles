@@ -12,8 +12,13 @@ defaults import com.knollsoft.Rectangle \
     "${XDG_CONFIG_HOME}/rectangle/com.knollsoft.Rectangle.plist"
 
 # New rectangle configuration will not take affect until restart
-if pgrep -if "rectangle" ; then
-    echo Relaunching Rectangle to bring in new configuration
-    osascript -e 'tell application "Rectangle" to quit' || true
-    open -a "Rectangle" || true
-fi
+osascript <<EOF
+set appName to "Rectangle"
+if application appName is running then
+    tell application appName to quit
+    repeat until application appName is not running
+        delay 1
+    end repeat
+end if
+tell application appName to launch
+EOF

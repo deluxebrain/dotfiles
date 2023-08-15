@@ -76,6 +76,7 @@ function yadm.__patch_env() {
         return 1
     fi
 
+    # set just enough of the environment to get yadm and omz working
     DOTFILES_HOME="$dotfiles_home"
     XDG_CONFIG_HOME="${DOTFILES_HOME}/.config"
     XDG_CACHE_HOME="${DOTFILES_HOME}/.cache"
