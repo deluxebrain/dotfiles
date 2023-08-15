@@ -14,6 +14,20 @@ function y() {
 # clone dotfiles to non-HOME and set ~/.zshenv override to activate it
 function yadm.start-testing() {
     local dotfiles_path="$(pwd)"
+    local dotfiles_remote="$(yadm remote get-url origin)"
+
+    while true; do
+        echo -n "Do you wish to proceed? (y/n) "
+        read yn
+        case $yn in
+            [Yy]* ) break ;;
+            [Nn]* ) return 1 ;;
+            * ) echo "Please answer yes or no" ;;
+        esac
+    done
+
+    yadm config local.class Test
+    yadm clone "$dotfiles_remote" -w "$dotfiles_path" --bootstrap
 
     cat <<EOF > "${HOME}/.zshenv"
 export ZDOTDIR="${dotfiles_path}/.config/zsh"
@@ -25,6 +39,7 @@ EOF
 
 # stop testing
 function yadm.stop-testing() {
+    yadm config --unset local.class
     rm "${HOME}/.zshenv"
 
     echo "Terminal restart required ..."
