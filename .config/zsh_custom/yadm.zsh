@@ -26,8 +26,9 @@ function yadm.start-testing() {
         esac
     done
 
+    yadm init -f
     yadm config local.class Test
-    yadm clone "$dotfiles_remote" -w "$dotfiles_path" --bootstrap
+    yadm clone -f "$dotfiles_remote" -w "$dotfiles_path" --bootstrap
 
     cat <<EOF > "${HOME}/.zshenv"
 export ZDOTDIR="${dotfiles_path}/.config/zsh"
@@ -39,7 +40,9 @@ EOF
 
 # stop testing
 function yadm.stop-testing() {
+    yadm init -f
     yadm config --unset local.class
+    yadm clone -f "$dotfiles_remote" -w "$HOME" --bootstrap
     rm "${HOME}/.zshenv"
 
     echo "Terminal restart required ..."

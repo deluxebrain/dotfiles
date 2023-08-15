@@ -107,5 +107,5 @@ defaults write com.apple.dock show-recents -bool false
 for app in "Activity Monitor" \
 	"Dock" \
 	"Finder" ; do
-	killall "${app}"
+	killall "${app}" >/dev/null 2>&1 ; true
 done
