@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Homebrew and homebrew packages
-# for Darwin OS when running on test account
+# for Darwin OS when running in test
 
 set -e
 
@@ -14,4 +14,5 @@ if ! command -v brew >/dev/null 2>&1; then
     echo ERROR: Homebrew not installed >&2
     exit 1
 fi
-echo Nothing todo for non-primary user on multiuser system >&2
+
+echo Nothing todo when running in test >&2

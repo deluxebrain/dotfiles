@@ -1,14 +1,9 @@
 # shellcheck disable=SC2148
 
-# zshenv
-# used only for environment variables required for bootstrapping
-# all other exports should be in .zshrc
+# if not using /etc/zshenv:
+# remove ZDOTDIR export from /etc/zshenv
+# move this file to ~/.zshenv
+# uncomment the code below
 
-export DOTFILES_HOME
-DOTFILES_HOME="$(cd -- "$(dirname -- "{{ yadm.source }}")/../.." && pwd)"
-
-# if not using /etc/zshenv
-# - remove ZDOTDIR export from /etc/zshenv
-# - move this file to ~/.zshenv ( or the respective dotfiles root )
-
+# DOTFILES_HOME="$(cd -- "$(dirname -- "{{ yadm.source }}")/../.." && pwd)"
 # export ZDOTDIR="${DOTFILES_HOME}/.config/zsh"

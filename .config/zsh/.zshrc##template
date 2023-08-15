@@ -1,9 +1,7 @@
 # shellcheck disable=SC2148,SC1090,SC2296,SC1091
 
-# _should_ already have been set either in:
-# .config/.zshenv if live dotfiles
-# ~/.zshenv if test dotfiles
-export DOTFILES_HOME="${DOTFILES_HOME:-$HOME}"
+export DOTFILES_HOME
+DOTFILES_HOME="$(cd -- "$(dirname -- "{{ yadm.source }}")/../.." && pwd)"
 
 # xdg path configuration
 export XDG_CONFIG_HOME="${DOTFILES_HOME}/.config"

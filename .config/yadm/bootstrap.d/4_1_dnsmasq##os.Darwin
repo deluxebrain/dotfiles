@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # dnsmasq configuration to route .test tld locally
-# for Darwin OS on arm64 architecture
+# for Darwin OS
 # uses non priviledged port for dnsmasq to avoid sudo
 
 set -e

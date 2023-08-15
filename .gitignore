@@ -11,5 +11,7 @@
 # except for documentation
 !/.github/
 
-# and the following miscellaneous files:wq
+# and the following miscellaneous files that cant be centralized:
 !/.gitsubmodules
+!/.editorconfig
+

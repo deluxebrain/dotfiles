@@ -10,7 +10,7 @@ echo "Running bootstrap file: $(basename "$0")" >&2
 # iterm configuration is managed using plists
 # configure iterm to use custom preferences file
 defaults write com.googlecode.iterm2.plist \
-    PrefsCustomFolder -string "$XDG_CONFIG_HOME/iterm2"
+    PrefsCustomFolder -string "${XDG_CONFIG_HOME}/iterm2"
 
 # get iterm to load configuration from the configuration directory
 defaults write com.googlecode.iterm2.plist \

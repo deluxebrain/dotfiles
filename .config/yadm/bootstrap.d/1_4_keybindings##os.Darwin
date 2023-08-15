@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # keyboard bindings configuration
+# for Darwin OS
 
 set -e
 
@@ -15,7 +16,7 @@ if [ -f "$KEYBINDINGS_PATH" ]; then
     mv "$KEYBINDINGS_PATH" "${KEYBINDINGS_PATH}.$(date -Iseconds)"
 fi
 
-cat <<EOF > "${KEYBINDINGS_DIR}/DefaultKeyBinding.dict"
+cat <<EOF > "$KEYBINDINGS_PATH"
 {
     // Use Windows-type behaviour with the Home and End keys
     "\UF729"  = moveToBeginningOfLine:; // home

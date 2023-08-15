@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Rectangle ( tiling manager ) configuration
+# for Darwin OS when running in test
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+echo Nothing todo when running in test >&2

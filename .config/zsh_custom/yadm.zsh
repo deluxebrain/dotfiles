@@ -11,12 +11,11 @@ function y() {
 
 # yadm extensions
 
-# clone dotfiles to non-HOME and set .zshenv override to activate it
+# clone dotfiles to non-HOME and set ~/.zshenv override to activate it
 function yadm.start-testing() {
     local dotfiles_path="$(pwd)"
 
     cat <<EOF > "${HOME}/.zshenv"
-export DOTFILES_HOME="$dotfiles_path"
 export ZDOTDIR="${dotfiles_path}/.config/zsh"
 EOF
 
