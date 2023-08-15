@@ -63,7 +63,7 @@ brew services restart dnsmasq
 
 ### pfctl ###
 
-if launchctl list | grep dotfiles.pfctl >/dev/null; then
+if sudo launchctl list | grep dotfiles.pfctl >/dev/null; then
     sudo launchctl unload /Library/LaunchDaemons/dotfiles.pfctl.plist
 fi
 

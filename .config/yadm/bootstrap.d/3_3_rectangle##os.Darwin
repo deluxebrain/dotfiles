@@ -14,6 +14,6 @@ defaults import com.knollsoft.Rectangle \
 # New rectangle configuration will not take affect until restart
 if pgrep -if "rectangle" ; then
     echo Relaunching Rectangle to bring in new configuration
-    osascript -e 'tell application "Rectangle" to quit'
-    open -a "Rectangle"
+    osascript -e 'tell application "Rectangle" to quit' || true
+    open -a "Rectangle" || true
 fi
