@@ -26,15 +26,21 @@ function yadm.start-testing() {
         esac
     done
 
+    # patch the environment to support the new dotfiles
+    # and then clone and bootstrap them
+    # not setting the local.class requires the new repository to exist
+    # hence the two step process
     yadm.__patch_env "$dotfiles_home"
     yadm clone -f "$dotfiles_remote" -w "$DOTFILES_HOME" --no-bootstrap
     yadm config local.class Test
     yadm bootstrap
 
+    # write down user .zshenv to override main dotfiles
     cat <<EOF > "${HOME}/.zshenv"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 EOF
 
+    # reload the shell using new dotfiles
     omg reload
 }
 
