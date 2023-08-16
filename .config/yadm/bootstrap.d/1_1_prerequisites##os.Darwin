@@ -8,3 +8,10 @@ echo "Running bootstrap file: $(basename "$0")" >&2
 
 echo Installing Rosetta >&2
 sudo softwareupdate --install-rosetta --agree-to-license
+
+# Install homebrew if its missing
+if ! command -v brew >/dev/null 2>&1; then
+    echo Installing homebrew >&2
+    NONINTERACTIVE=1 \
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi

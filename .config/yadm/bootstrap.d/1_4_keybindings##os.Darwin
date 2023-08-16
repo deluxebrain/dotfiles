@@ -12,16 +12,9 @@ KEYBINDINGS_PATH="${HOME}/Library/KeyBindings/DefaultKeyBinding.dict"
 
 mkdir -p "$KEYBINDINGS_DIR"
 
-if [ -f "$KEYBINDINGS_PATH" ]; then
+if [[ -f "$KEYBINDINGS_PATH" && ! -L "$KEYBINDINGS_PATH" ]] ; then
     mv "$KEYBINDINGS_PATH" "${KEYBINDINGS_PATH}.$(date -Iseconds)"
 fi
 
-cat <<EOF > "$KEYBINDINGS_PATH"
-{
-    // Use Windows-type behaviour with the Home and End keys
-    "\UF729"  = moveToBeginningOfLine:; // home
-    "\UF72B"  = moveToEndOfLine:; // end
-    "$\UF729" = moveToBeginningOfLineAndModifySelection:; // shift-home
-    "$\UF72B" = moveToEndOfLineAndModifySelection:; // shift-end
-}
-EOF
+ln -fs "${XDG_CONFIG_HOME}/keybindings/DefaultKeyBinding.dict" \
+    "$KEYBINDINGS_PATH"
