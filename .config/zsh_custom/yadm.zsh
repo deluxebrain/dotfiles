@@ -12,10 +12,12 @@ function y() {
 # yadm extensions
 
 # clone dotfiles to non-HOME and set ~/.zshenv override to activate it
+# TODO: support branches ( probably the whole point of this ... )
 function yadm.start-testing() {
     local dotfiles_home="$(pwd)"
     local dotfiles_remote="$(yadm remote get-url origin)"
 
+    echo "About to clone branch [TODO] to current directory" >&2
     while true; do
         echo -n "Do you wish to proceed? (y/n) "
         read yn
