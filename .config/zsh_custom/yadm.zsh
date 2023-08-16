@@ -27,8 +27,9 @@ function yadm.start-testing() {
     done
 
     yadm.__patch_env "$dotfiles_home"
+    yadm clone -f "$dotfiles_remote" -w "$DOTFILES_HOME" --no-bootstrap
     yadm config local.class Test
-    yadm clone -f "$dotfiles_remote" -w "$DOTFILES_HOME" --bootstrap
+    yadm bootstrap
 
     cat <<EOF > "${HOME}/.zshenv"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
