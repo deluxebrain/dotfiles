@@ -41,14 +41,14 @@ export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 EOF
 
     # reload the shell using new dotfiles
-    omg reload
+    omz reload
 }
 
 # stop testing
 function yadm.stop-testing() {
     yadm.__patch_env "$HOME"
     rm "${HOME}/.zshenv"
-    omg reload
+    omz reload
 }
 
 # delete submodule as managed by yadm
