@@ -8,7 +8,6 @@
 set -e
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_HOME="${SCRIPT_DIR}/../.."
 BOOTSTRAP_D="${SCRIPT_DIR}/bootstrap.d"
 
 # Ask for the administrator password upfront
@@ -16,12 +15,6 @@ sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
-echo Initializing yadm submodules >&2
-# Must be run from within $HOME (assuming this is the root of your dotfiles)
-# ( git submodule commands cannot operate without a work tree )
-cd "$DOTFILES_HOME" || exit
-yadm submodule update --recursive --init
 
 echo Running bootstrappers >&2
 if [[ ! -d "$BOOTSTRAP_D" ]]; then

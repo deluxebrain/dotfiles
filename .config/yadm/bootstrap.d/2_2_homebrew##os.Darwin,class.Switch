@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Homebrew and homebrew packages
+# for Darwin OS primary user account
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+echo "INFO: Ignored as class.Switch" >&2

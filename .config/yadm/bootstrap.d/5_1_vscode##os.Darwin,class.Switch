@@ -7,4 +7,4 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
-echo Nothing todo when running in test >&2
+echo "INFO: Ignored as class.Switch" >&2

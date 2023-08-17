@@ -7,20 +7,6 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
-VSCODE_DIR="${XDG_DATA_HOME}/vscode"
-
-# vscode configuration directory will not exist if app never launched
-# in which case we will need to open/close vscode before continuing
-if [ ! -d "${VSCODE_DIR}" ] ; then
-    echo Performing first time launch of vscode >&2
-    open -a "Visual Studio Code"
-    osascript -e 'tell application "Visual Studio Code" to quit'
-fi
-
-# vscode does not allow user configuration location to be specified
-# hence just symlink in the relevant files
-ln -fs "${XDG_CONFIG_HOME}/vscode/settings.json" "${VSCODE_DIR}/user-data/User"
-
 echo Installing vscode extensions  >&2
 awk "NF" "${XDG_CONFIG_HOME}/vscode/extensions" \
 | xargs -I{} code --force --install-extension {}
