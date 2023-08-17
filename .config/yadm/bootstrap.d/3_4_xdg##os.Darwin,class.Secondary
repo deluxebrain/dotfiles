@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# bootstrap zsh to use xdg path spec
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+echo "INFO: Ignored as class.Secondary" >&2

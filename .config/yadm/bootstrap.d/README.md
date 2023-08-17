@@ -28,3 +28,5 @@ yadm config local.class # returns empty
 ```
 
 E.g. `class.Switch` provides overrides for when switching between dotfile repositories.
+
+The design of the `Class` file attributes was made such that the default situation of no class attributes being set leads to a full install. This is so as to ensure `yadm clone --boostrap` works as intended ( a full installation of your dotfiles ). However this does lead to a clunky implementation with more alternate files required than would otherwise be the case.

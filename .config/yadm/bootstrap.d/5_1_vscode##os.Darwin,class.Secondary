@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# vscode configuration
+# Note vscode must be installed before this script is run
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+echo "INFO: Ignored as class.Secondary" >&2

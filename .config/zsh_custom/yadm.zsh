@@ -13,7 +13,7 @@ function y() {
 
 # clone dotfiles to non-HOME and set ~/.zshenv override to activate it
 # TODO: support branches ( probably the whole point of this ... )
-function yadm.switch() {
+function yadm.clone() {
     local dotfiles_home="$(pwd)"
     local dotfiles_remote="$(yadm remote get-url origin)"
 
@@ -30,11 +30,11 @@ function yadm.switch() {
 
     # patch the environment to support the new dotfiles
     # and then clone and bootstrap them
-    # not setting the local.class requires the new repository to exist
+    # note that setting the local.class requires the new repository to exist
     # hence the two step process
     yadm.__patch_env "$dotfiles_home"
     yadm clone -f "$dotfiles_remote" -w "$DOTFILES_HOME" --no-bootstrap
-    yadm config local.class Test
+    yadm config local.class Secondary
     yadm bootstrap
 
     # write down user .zshenv to override main dotfiles
@@ -50,6 +50,9 @@ EOF
 function yadm.restore() {
     yadm.__patch_env "$HOME"
     rm "${HOME}/.zshenv"
+    yadm config local.class Switch
+    yadm bootstrap
+    yadm config --unset local.class
     omz reload
 }
 

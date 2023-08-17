@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# dnsmasq configuration to route .test tld locally
+# for Darwin OS
+# uses non priviledged port for dnsmasq to avoid sudo
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+echo "INFO: Ignored as class.Secondary" >&2
