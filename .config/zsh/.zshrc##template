@@ -37,6 +37,7 @@ export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh_custom"
 export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # XDG configuration for various apps ( in alphabetical order )
+export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/asdfrc"
 export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
@@ -47,9 +48,13 @@ export GEM_PATH="$XDG_DATA_HOME/gem"
 export GH_CONFIG_DIR="$XDG_CONFIG_HOME/gh"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
+export PUB_CACHE="$XDG_DATA_HOME/pub-cache" # dart pub dep cache
 export VAGRANT_HOME="$XDG_DATA_HOME/vagrant"
 export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
+
+# Non-XDG configuration
+export ANDROID_HOME="${HOMEBREW_PREFIX}/share/android-commandlinetools"
 
 # shell configuration
 # disable shell state sessions ( we are using zsh for this )

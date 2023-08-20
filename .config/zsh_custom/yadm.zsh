@@ -32,6 +32,7 @@ function yadm.clone() {
     # and then clone and bootstrap them
     # note that setting the local.class requires the new repository to exist
     # hence the two step process
+    # yadm.__patch_env "$dotfiles_home"
     yadm.__patch_env "$dotfiles_home"
     yadm clone -f "$dotfiles_remote" -w "$DOTFILES_HOME" --no-bootstrap
     yadm config local.class Secondary
@@ -40,6 +41,7 @@ function yadm.clone() {
     # write down user .zshenv to override main dotfiles
     cat <<EOF > "${HOME}/.zshenv"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+source "${ZDOTDIR}\.zshenv"
 EOF
 
     # reload the shell using new dotfiles
@@ -88,12 +90,10 @@ function yadm.__patch_env() {
         return 1
     fi
 
-    # set just enough of the environment to get yadm and omz working
-    DOTFILES_HOME="$dotfiles_home"
+    # patch env for new yadm repo
+    # https://github.com/TheLocehiliosan/yadm/blob/master/yadm.md#files
     XDG_CONFIG_HOME="${DOTFILES_HOME}/.config"
     XDG_CACHE_HOME="${DOTFILES_HOME}/.cache"
     XDG_DATA_HOME="${DOTFILES_HOME}/.local/share"
     XDG_STATE_HOME="${DOTFILES_HOME}/.local/state"
-    ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-    ZSH="${XDG_CONFIG_HOME}/oh-my-zsh"
 }

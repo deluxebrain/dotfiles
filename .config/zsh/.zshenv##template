@@ -1,4 +1,7 @@
 # shellcheck disable=SC2148
+# .zshenv
+# sourced for every shell
+# exports in here could be overriden by system zsh files
 
 # if not using /etc/zshenv:
 # remove ZDOTDIR export from /etc/zshenv
