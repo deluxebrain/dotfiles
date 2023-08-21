@@ -29,5 +29,8 @@ if ! [ -d "$TMUX_PLUGINS_DIR/tpm" ]; then
     exit 1
 fi
 
+# ensure tmux using this repo config
+tmux source-file "$ZSH_TMUX_CONFIG"
+
 # install all plugins
 "$TMUX_PLUGINS_DIR/tpm/bin/install_plugins"
