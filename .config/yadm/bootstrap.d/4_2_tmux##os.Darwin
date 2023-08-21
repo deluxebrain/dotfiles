@@ -29,19 +29,10 @@ if ! [ -d "$TMUX_PLUGINS_DIR/tpm" ]; then
     exit 1
 fi
 
-# ensure tmux using this repo config
-echo here 1
-tmux set-environment -r -u TMUX_PLUGIN_MANAGER_PATH
-tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH
-
-echo here 2
-tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH "$TMUX_PLUGINS_DIR"
-tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH
-
-echo here 3
-echo $XDG_CONFIG_HOME
-echo $ZSH_TMUX_CONFIG
-tmux source-file "$ZSH_TMUX_CONFIG"
+# reload tmux configuration
+if [ -n "$TMUX" ] ; then
+    tmux source-file "$ZSH_TMUX_CONFIG"
+fi
 
 # install all plugins
 "$TMUX_PLUGINS_DIR/tpm/bin/install_plugins"
