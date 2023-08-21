@@ -11,53 +11,6 @@ function y() {
 
 # yadm extensions
 
-# clone dotfiles to non-HOME and set ~/.zshenv override to activate it
-# TODO: support branches ( probably the whole point of this ... )
-function yadm.clone() {
-    local dotfiles_home="$(pwd)"
-    local dotfiles_remote="$(yadm remote get-url origin)"
-
-    echo "About to clone main branch to current directory" >&2
-    while true; do
-        echo -n "Do you wish to proceed? (y/n) "
-        read yn
-        case $yn in
-            [Yy]* ) break ;;
-            [Nn]* ) return 1 ;;
-            * ) echo "Please answer yes or no" ;;
-        esac
-    done
-
-    # patch the environment to support the new dotfiles
-    # and then clone and bootstrap them
-    # note that setting the local.class requires the new repository to exist
-    # hence the two step process
-    # yadm.__patch_env "$dotfiles_home"
-    yadm.__patch_env "$dotfiles_home"
-    yadm clone -f "$dotfiles_remote" -w "$DOTFILES_HOME" --no-bootstrap
-    yadm config local.class Secondary
-    yadm bootstrap
-
-    # write down user .zshenv to override main dotfiles
-    cat <<EOF > "${HOME}/.zshenv"
-export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-source "${ZDOTDIR}\.zshenv"
-EOF
-
-    # reload the shell using new dotfiles
-    omz reload
-}
-
-# revert to main dotfiles
-function yadm.restore() {
-    yadm.__patch_env "$HOME"
-    rm "${HOME}/.zshenv"
-    yadm config local.class Switch
-    yadm bootstrap
-    yadm config --unset local.class
-    omz reload
-}
-
 # delete submodule as managed by yadm
 function yadm.delete-submodule() {
     local submodule_path="$1"
@@ -83,6 +36,45 @@ function yadm.delete-submodule() {
     yadm rm -f "$submodule_path"
 }
 
+# clone dotfiles to non-HOME
+# TODO: support branches ( probably the whole point of this ... )
+function yadm.clone() {
+    local dotfiles_home="$(pwd)"
+    local dotfiles_remote="$(yadm remote get-url origin)"
+
+    echo "About to clone main branch to current directory" >&2
+    while true; do
+        echo -n "Do you wish to proceed? (y/n) "
+        read yn
+        case $yn in
+            [Yy]* ) break ;;
+            [Nn]* ) return 1 ;;
+            * ) echo "Please answer yes or no" ;;
+        esac
+    done
+
+    # patch the environment to support the new dotfiles
+    # and then clone and bootstrap them
+    # note that setting the local.class requires the new repository to exist
+    # hence the two step process
+    yadm.__patch_env "$dotfiles_home"
+    yadm clone -f "$dotfiles_remote" -w "$dotfiles_home" --no-bootstrap
+    yadm config local.class Secondary
+    yadm bootstrap
+
+    # reload the shell using new dotfiles
+    omz reload
+}
+
+# revert to main dotfiles
+function yadm.restore() {
+    yadm.__patch_env "$HOME"
+    yadm config local.class Switch
+    yadm bootstrap
+    yadm config --unset local.class
+    omz reload
+}
+
 function yadm.__patch_env() {
     local dotfiles_home="$1"
     if [ -z "$dotfiles_home" ] ; then
@@ -92,8 +84,9 @@ function yadm.__patch_env() {
 
     # patch env for new yadm repo
     # https://github.com/TheLocehiliosan/yadm/blob/master/yadm.md#files
-    XDG_CONFIG_HOME="${DOTFILES_HOME}/.config"
-    XDG_CACHE_HOME="${DOTFILES_HOME}/.cache"
-    XDG_DATA_HOME="${DOTFILES_HOME}/.local/share"
-    XDG_STATE_HOME="${DOTFILES_HOME}/.local/state"
+    DOTFILES_HOME="$dotfiles_home"
+    XDG_CONFIG_HOME="$DOTFILES_HOME/.config"
+    XDG_CACHE_HOME="$DOTFILES_HOME/.cache"
+    XDG_DATA_HOME="$DOTFILES_HOME/.local/share"
+    XDG_STATE_HOME="$DOTFILES_HOME/.local/state"
 }
