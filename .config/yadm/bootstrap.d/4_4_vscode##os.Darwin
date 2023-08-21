@@ -22,14 +22,12 @@ EOF
 
 # vscode user directory will not exist if app never launched
 # with this directory override being specified
-if [ ! -d "$VSCODE_PORTABLE/User" ] ; then
-    echo HERE 1
-    close_app "Visual Studio Code"
-    echo HERE 2
-    code --user-data-dir "$VSCODE_PORTABLE"
-    echo HERE 3
+if [ ! -d "$VSCODE_PORTABLE/User" ] ; then   
+    close_app "Visual Studio Code"    
+    code --user-data-dir "$VSCODE_PORTABLE"    
     close_app "Visual Studio Code"
 fi
 
 # symlink user configuration into the vscode user configuration path
-ln -fs "$XDG_CONFIG_HOME/vscode/settings.json" "$VSCODE_PORTABLE/User"
+ln -fs "$XDG_CONFIG_HOME/vscode/settings.json" \
+    "$VSCODE_PORTABLE/User/settings.json"
