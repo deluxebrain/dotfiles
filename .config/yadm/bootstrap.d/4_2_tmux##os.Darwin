@@ -7,6 +7,8 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
+export ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"
+
 TMUX_PLUGINS_DIR="$XDG_CONFIG_HOME/tmux/plugins"
 
 # verify tmux installed
