@@ -27,8 +27,11 @@ EOF
 # vscode user directory will not exist if app never launched
 # with this directory override being specified
 if [ ! -d "$VSCODE_DIR/user-data/User" ] ; then
+    echo HERE 1
     close_app "Visual Studio Code"
+    echo HERE 2
     code --user-data-dir "$VSCODE_DIR"
+    echo HERE 3
     close_app "Visual Studio Code"
 fi
 
