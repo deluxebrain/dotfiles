@@ -30,7 +30,8 @@ if ! [ -d "$TMUX_PLUGINS_DIR/tpm" ]; then
 fi
 
 # ensure tmux using this repo config
-tmux set-environment -r TMUX_PLUGIN_MANAGER_PATH
+tmux set-environment -r -u TMUX_PLUGIN_MANAGER_PATH
+# tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH "$TMUX_PLUGINS_DIR"
 tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH
 echo $XDG_CONFIG_HOME
 echo $ZSH_TMUX_CONFIG
