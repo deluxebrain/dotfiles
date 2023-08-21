@@ -7,6 +7,8 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
+VSCODE_USER="$XDG_DATA_HOME/vscode"
+
 function close_app() {
     osascript <<EOF
 set appName to "$1"
@@ -19,13 +21,13 @@ EOF
 
 # vscode user directory will not exist if app never launched
 # with this directory override being specified
-if [ ! -d "$VSCODE_PORTABLE/vscode/User" ] ; then   
+if [ ! -d "$VSCODE_USER/User" ] ; then   
     close_app "Visual Studio Code"    
     unset VSCODE_PORTABLE
-    code --user-data-dir "$VSCODE_PORTABLE"    
+    code --user-data-dir "$VSCODE_USER"    
     close_app "Visual Studio Code"
 fi
 
 # symlink user configuration into the vscode user configuration path
 ln -fs "$XDG_CONFIG_HOME/vscode/settings.json" \
-    "$VSCODE_PORTABLE/vscode/User/settings.json"
+    "$VSCODE_USER/User/settings.json"
