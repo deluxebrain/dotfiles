@@ -9,7 +9,13 @@ function y() {
     cd -
 }
 
-# yadm extensions
+# yadm extension
+
+# show info re yadm git repo
+function yadm.info() {
+    yadm remote get-url origin
+    yadm rev-parse --show-toplevel
+}
 
 # delete submodule as managed by yadm
 function yadm.delete-submodule() {
