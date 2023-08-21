@@ -31,6 +31,7 @@ fi
 
 # reload tmux configuration
 if [ -n "$TMUX" ] ; then
+    echo reloading tmux configuration >&2
     tmux source-file "$ZSH_TMUX_CONFIG"
 fi
 
