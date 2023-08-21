@@ -31,6 +31,9 @@ fi
 
 # ensure tmux using this repo config
 tmux set-environment -r TMUX_PLUGIN_MANAGER_PATH
+tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH
+echo $XDG_CONFIG_HOME
+echo $ZSH_TMUX_CONFIG
 tmux source-file "$ZSH_TMUX_CONFIG"
 
 # install all plugins
