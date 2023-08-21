@@ -7,7 +7,7 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
-TMUX_PLUGINS_DIR="${XDG_CONFIG_HOME}/tmux/plugins"
+TMUX_PLUGINS_DIR="$XDG_CONFIG_HOME/tmux/plugins"
 
 # verify tmux installed
 if ! command -v tmux >/dev/null 2>&1; then
@@ -22,10 +22,10 @@ if ! [ -d "$TMUX_PLUGINS_DIR" ]; then
 fi
 
 # verify tpm plugin installed
-if ! [ -d "${TMUX_PLUGINS_DIR}/tpm" ]; then
+if ! [ -d "$TMUX_PLUGINS_DIR/tpm" ]; then
     echo ERROR: tpm plugin not installed >&2
     exit 1
 fi
 
 # install all plugins
-"${TMUX_PLUGINS_DIR}/tpm/bin/install_plugins"
+"$TMUX_PLUGINS_DIR/tpm/bin/install_plugins"

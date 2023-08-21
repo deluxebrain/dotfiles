@@ -7,8 +7,8 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
-KEYBINDINGS_DIR="${HOME}/Library/KeyBindings"
-KEYBINDINGS_PATH="${HOME}/Library/KeyBindings/DefaultKeyBinding.dict"
+KEYBINDINGS_DIR="$HOME/Library/KeyBindings"
+KEYBINDINGS_PATH="$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
 
 mkdir -p "$KEYBINDINGS_DIR"
 
@@ -16,5 +16,5 @@ if [[ -f "$KEYBINDINGS_PATH" && ! -L "$KEYBINDINGS_PATH" ]] ; then
     mv "$KEYBINDINGS_PATH" "${KEYBINDINGS_PATH}.$(date -Iseconds)"
 fi
 
-ln -fs "${XDG_CONFIG_HOME}/keybindings/DefaultKeyBinding.dict" \
+ln -fs "$XDG_CONFIG_HOME/keybindings/DefaultKeyBinding.dict" \
     "$KEYBINDINGS_PATH"

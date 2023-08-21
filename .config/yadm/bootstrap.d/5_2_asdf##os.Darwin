@@ -6,8 +6,11 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
+export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/asdfrc"
+export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
+
 echo Installing asdf plugins >&2
-    sort < "${XDG_CONFIG_HOME}/asdf/plugins" \
+    sort < "$XDG_CONFIG_HOME/asdf/plugins" \
     | comm -23 - <(asdf plugin-list | sort) \
     | join - <(asdf plugin list all) \
     | xargs -L1 -t asdf plugin add

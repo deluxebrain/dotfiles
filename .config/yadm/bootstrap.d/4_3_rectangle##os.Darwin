@@ -9,7 +9,7 @@ echo "Running bootstrap file: $(basename "$0")" >&2
 
 # Rectangle configuration is managed using plists
 defaults import com.knollsoft.Rectangle \
-    "${XDG_CONFIG_HOME}/rectangle/com.knollsoft.Rectangle.plist"
+    "$XDG_CONFIG_HOME/rectangle/com.knollsoft.Rectangle.plist"
 
 # New rectangle configuration will not take affect until restart
 osascript <<EOF

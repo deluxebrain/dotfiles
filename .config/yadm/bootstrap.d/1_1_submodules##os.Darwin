@@ -6,9 +6,6 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_HOME="${SCRIPT_DIR}/../.."
-
 echo Initializing yadm submodules >&2
 # Must be run from within $HOME (assuming this is the root of your dotfiles)
 # ( git submodule commands cannot operate without a work tree )

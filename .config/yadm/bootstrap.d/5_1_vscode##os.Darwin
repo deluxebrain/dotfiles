@@ -7,6 +7,9 @@ set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
 
+export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
+export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
+
 echo Installing vscode extensions  >&2
-awk "NF" "${XDG_CONFIG_HOME}/vscode/extensions" \
+awk "NF" "$XDG_CONFIG_HOME/vscode/extensions" \
 | xargs -I{} code --force --install-extension {}

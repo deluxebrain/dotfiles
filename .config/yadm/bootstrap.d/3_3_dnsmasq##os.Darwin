@@ -9,9 +9,9 @@ set -e
 echo "Running bootstrap file: $(basename "$0")" >&2
 
 DNSMASQ_PORT= # generated later on
-DNSMASQ_CONFIG_PATH="${HOMEBREW_PREFIX}/etc/dnsmasq.conf"
-DNSMASQ_CUSTOM_CONFIG_PATH="${HOMEBREW_PREFIX}/etc/dnsmasq.d"
-PATTERN_CONF_DIR="conf-dir=${HOMEBREW_PREFIX}/etc/dnsmasq.d/,*.conf"
+DNSMASQ_CONFIG_PATH="$HOMEBREW_PREFIX/etc/dnsmasq.conf"
+DNSMASQ_CUSTOM_CONFIG_PATH="$HOMEBREW_PREFIX/etc/dnsmasq.d"
+PATTERN_CONF_DIR="conf-dir=$HOMEBREW_PREFIX/etc/dnsmasq.d/,*.conf"
 
 #### dnsmasq ###
 
@@ -51,7 +51,7 @@ DNSMASQ_PORT=$(\
 
 # write custom dnsmasq configuration
 mkdir -p "$DNSMASQ_CUSTOM_CONFIG_PATH"
-cat <<EOF > "${DNSMASQ_CUSTOM_CONFIG_PATH}/dotfiles.conf"
+cat <<EOF > "$DNSMASQ_CUSTOM_CONFIG_PATH/dotfiles.conf"
 address=/test/127.0.0.1
 port=$DNSMASQ_PORT
 EOF

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# bootstrap zsh to use xdg path spec
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+# write down user ~/.zshenv to select current repo as live dotfiles
+cat <<EOF > "$HOME/.zshenv"
+export ZDOTDIR="$DOTFILES_HOME/.config/zsh"
+EOF
