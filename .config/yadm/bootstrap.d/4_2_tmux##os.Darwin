@@ -30,8 +30,7 @@ if ! [ -d "$TMUX_PLUGINS_DIR/tpm" ]; then
 fi
 
 # ensure tmux using this repo config
-unset DEFAULT_TPM_ENV_VAR_NAME
-unset DEFAULT_TPM_PATH
+tmux set-environment -r TMUX_PLUGIN_MANAGER_PATH
 tmux source-file "$ZSH_TMUX_CONFIG"
 
 # install all plugins
