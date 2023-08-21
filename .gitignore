@@ -2,8 +2,11 @@
 /*
 !/.gitignore
 
-# and to confirm - that includes .gitconfig.local
+# explicit ignores
 /.gitconfig.local
+/.zshenv
+
+### DONT IGNORE THE FOLLOWING ###
 
 # dotfiles are largely centralized to XDG_CONFIG_HOME
 !/.config/
