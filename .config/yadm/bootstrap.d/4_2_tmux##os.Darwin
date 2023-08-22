@@ -32,6 +32,7 @@ fi
 # reload tmux configuration
 if [ -n "$TMUX" ] ; then
     echo reloading tmux configuration >&2
+    tmux set-environment -g XDG_CONFIG_HOME "$XDG_CONFIG_HOME"
     tmux set-environment -r DEFAULT_TPM_ENV_VAR_NAME
     tmux source-file "$ZSH_TMUX_CONFIG"
 fi
