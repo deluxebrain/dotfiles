@@ -68,7 +68,7 @@ function yadm.clone() {
     yadm config local.class Secondary
     yadm bootstrap
 
-    # source $ZDOTDIR/.zshrc
+    source $ZDOTDIR/.zshrc
     omz reload
 }
 
@@ -78,7 +78,7 @@ function yadm.restore() {
     yadm config local.class Switch
     yadm bootstrap
     yadm config --unset local.class
-    # source $ZDOTDIR/.zshrc
+    source $ZDOTDIR/.zshrc
     omz reload
 }
 
