@@ -68,7 +68,7 @@ function yadm.clone() {
     yadm config local.class Secondary
     yadm bootstrap
 
-    # reload the shell using new dotfiles
+    # source $ZDOTDIR/.zshrc
     omz reload
 }
 
@@ -78,6 +78,7 @@ function yadm.restore() {
     yadm config local.class Switch
     yadm bootstrap
     yadm config --unset local.class
+    # source $ZDOTDIR/.zshrc
     omz reload
 }
 
@@ -95,4 +96,5 @@ function yadm.patch_xdg_env() {
     XDG_CACHE_HOME="$DOTFILES_HOME/.cache"
     XDG_DATA_HOME="$DOTFILES_HOME/.local/share"
     XDG_STATE_HOME="$DOTFILES_HOME/.local/state"
+    ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 }

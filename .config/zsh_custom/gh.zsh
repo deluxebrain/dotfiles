@@ -2,6 +2,15 @@
 
 # github cli helpers
 
+# wrapper around gh to ensure auth token is set before executing commands
+function gh.wrapper() {
+    if [ -z "$GITHUB_TOKEN" ] ; then
+        gh.set_auth_token
+    fi
+    # the leading "\" calls gh and not the alias
+    \gh "$@"
+}
+
 # pull gh auth token from keychain and set in GITHUB_TOKEN env var
 function gh.set_auth_token() {
     GITHUB_TOKEN=$(\
