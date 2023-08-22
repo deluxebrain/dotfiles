@@ -15,7 +15,7 @@ VSCODE_PORTABLE_USER="$XDG_DATA_HOME/vscode/user-data/User"
 function close_app() {
     local appName="$1"
     osascript <<EOF
-set appName to "appName"
+set appName to "$appName"
 repeat until application appName is not running
     tell application appName to quit
     delay 1
