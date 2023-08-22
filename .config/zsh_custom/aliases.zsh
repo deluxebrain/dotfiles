@@ -9,6 +9,8 @@ alias k="kubectl"
 alias i="istioctl"
 
 # thin facade around gh application to deal with authentication
+# NOTE this causes a clash with the omz gh plugin
+# ( if using gh plugin comment out this alias )
 alias gh='gh.wrapper'
 
 # misc

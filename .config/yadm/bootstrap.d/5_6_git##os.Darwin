@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# xcode configuration
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+if [ ! -f "$DOTFILES_HOME/.gitconfig.local" ] ; then
+    cat <<EOF > "$DOTFILES_HOME/.gitconfig.local"
+# [user]
+#     email = someone@example.com
+#     name = someone
+EOF
+fi
