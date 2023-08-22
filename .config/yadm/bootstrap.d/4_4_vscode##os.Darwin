@@ -13,8 +13,9 @@ export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
 VSCODE_PORTABLE_USER="$XDG_DATA_HOME/vscode/user-data/User"
 
 function close_app() {
+    local appName="$1"
     osascript <<EOF
-set appName to "$1"
+set appName to "appName"
 repeat until application appName is not running
     tell application appName to quit
     delay 1
@@ -30,9 +31,7 @@ if [ ! -d "$VSCODE_PORTABLE_USER" ] ; then
     code --user-data-dir "$VSCODE_PORTABLE"
     # running bare with VSCODE_PORTABLE set creates the portable user directory
     # /vscode/user-data/User
-    sleep 1
     code
-    sleep 1
     close_app "Visual Studio Code"
 fi
 
