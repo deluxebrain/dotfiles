@@ -23,15 +23,23 @@ end repeat
 EOF
 }
 
+function wait_for_directory() {
+    while [ ! -d "$1" ] ; do
+        sleep 1
+    done
+}
+
 # ensure vscode portable directory structure exists
 if [ ! -d "$VSCODE_PORTABLE_USER" ] ; then
     close_app "Visual Studio Code"
     # running with --user-data-dir creates the root vscode "User" directory
     # /vscode/User
     code --user-data-dir "$VSCODE_PORTABLE"
+    wait_for_directory "$VSCODE_PORTABLE/User"
     # running bare with VSCODE_PORTABLE set creates the portable user directory
     # /vscode/user-data/User
     code
+    wait_for_directory "$VSCODE_PORTABLE/user-data/User"
     close_app "Visual Studio Code"
 fi
 
