@@ -63,7 +63,7 @@ function yadm.clone() {
     # and then clone and bootstrap them
     # note that setting the local.class requires the new repository to exist
     # hence the two step process
-    yadm.__patch_env "$dotfiles_home"
+    yadm.patch_xdg_env "$dotfiles_home"
     yadm clone -f "$dotfiles_remote" -w "$dotfiles_home" --no-bootstrap
     yadm config local.class Secondary
     yadm bootstrap
@@ -74,14 +74,14 @@ function yadm.clone() {
 
 # revert to main dotfiles
 function yadm.restore() {
-    yadm.__patch_env "$HOME"
+    yadm.patch_xdg_env "$HOME"
     yadm config local.class Switch
     yadm bootstrap
     yadm config --unset local.class
     omz reload
 }
 
-function yadm.__patch_env() {
+function yadm.patch_xdg_env() {
     local dotfiles_home="$1"
     if [ -z "$dotfiles_home" ] ; then
         echo "ERROR: Please provide path to dotfiles home" >&2

@@ -32,7 +32,7 @@ fi
 # reload tmux configuration
 if [ -n "$TMUX" ] ; then
     echo reloading tmux configuration >&2
-    set-environment -r DEFAULT_TPM_ENV_VAR_NAME
+    tmux set-environment -r DEFAULT_TPM_ENV_VAR_NAME
     tmux source-file "$ZSH_TMUX_CONFIG"
 fi
 
