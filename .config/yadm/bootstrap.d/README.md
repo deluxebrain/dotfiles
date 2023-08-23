@@ -7,6 +7,7 @@ Bootstrap files are chunked into groups and run in numberical order. The groups 
 3. system configuration
 4. windowing, terminal and ide configuration
 5. app configuration
+6. development configuration
 
 Bootstrappers that have alternate files are generated as follows:
 

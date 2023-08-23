@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# android development configuration
+
+set -e
+
+echo "Running bootstrap file: $(basename "$0")" >&2
+
+# bring asdf into current shell
+. "$(brew --prefix asdf)/libexec/asdf.sh"
+
+# sdkmanager depends on java
+asdf install java latest:temurin
+asdf shell java "$(asdf latest java temurin)"
+
+# accept all licenses
+yes | sdkmanager --licenses >/dev/null
+
+# install android sdk etc
+sdkmanager "ndk-bundle"
+sdkmanager "build-tools;34.0.0"
+sdkmanager "platforms;android-32"
+sdkmanager "platform-tools"
+sdkmanager "emulator"
+sdkmanager "tools"
+
+# iOS development dependencies
+asdf install ruby latest:3
+asdf install bundler latest
+asdf install cocoapods latest
+
+# flutter
+asdf install flutter latest
+
+# verify flutter installation
+asdf shell ruby "$(asdf latest ruby)"
+asdf shell bundler "$(asdf latest bundler)"
+asdf shell cocoapods "$(asdf latest cocoapods)"
+asdf shell flutter "$(asdf latest flutter)"
+
+flutter doctor -v
