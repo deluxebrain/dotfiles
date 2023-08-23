@@ -15,3 +15,6 @@ alias gh='gh.wrapper'
 
 # misc
 alias lg="lazygit"
+
+# mobile development
+alias studio="open -a '/Applications/Android Studio.app'"

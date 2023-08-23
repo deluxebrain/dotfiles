@@ -18,11 +18,13 @@ yes | sdkmanager --licenses >/dev/null
 
 # install android sdk etc
 sdkmanager "ndk-bundle"
-sdkmanager "build-tools;34.0.0"
-sdkmanager "platforms;android-32"
 sdkmanager "platform-tools"
 sdkmanager "emulator"
 sdkmanager "tools"
+sdkmanager "build-tools;34.0.0"
+sdkmanager "platforms;android-34"
+sdkmanager "system-images;android-34;google_apis;arm64-v8a"
+sdkmanager "sources;android-34"
 
 # iOS development dependencies
 asdf install ruby latest:3
@@ -39,3 +41,20 @@ asdf shell cocoapods "$(asdf latest cocoapods)"
 asdf shell flutter "$(asdf latest flutter)"
 
 flutter doctor -v
+
+# android studio
+
+# 1. launching
+
+# use "studio" alias to launch from terminal to pickup ANDROID_HOME
+# so that it picks up the android sdk, etc, installed by sdkmanager
+
+# 2. plugins
+
+# manually install flutter and dart plugins from android studio --> plugins
+
+# 3. creating flutter project
+
+# create using create new flutter project wizard
+# as part of the wizard, configure the path to the flutter sdk
+# this can be found from `asdf where flutter`
