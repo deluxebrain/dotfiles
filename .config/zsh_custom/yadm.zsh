@@ -18,15 +18,17 @@ function yadm.info() {
 }
 
 # run development environment bootstrap
-function yadm.bootstrap-dev() {
+function yadm.setup-dev() {
     if [ -z "$1" ] ; then
-        echo "Please specifiy development environment name" >&2
+        echo "Please specifiy dev environment name" >&2
         return 1
     fi
 
-    yadm config local.class "$1"
+    yadm config --unset-all local.class
+    yadm config local.class Post
+    yadm config --add local.class "$1"
     yadm bootstrap
-    yadm config --unset local.class
+    yadm config --unset-all local.class
 }
 
 # delete submodule as managed by yadm
@@ -77,6 +79,7 @@ function yadm.clone() {
     # hence the two step process
     yadm.patch_xdg_env "$dotfiles_home"
     yadm clone -f "$dotfiles_remote" -w "$dotfiles_home" --no-bootstrap
+    yadm config --unset-all local.class
     yadm config local.class Secondary
     yadm bootstrap
 
@@ -87,6 +90,7 @@ function yadm.clone() {
 # revert to main dotfiles
 function yadm.restore() {
     yadm.patch_xdg_env "$HOME"
+    yadm config --unset-all local.class
     yadm config local.class Switch
     yadm bootstrap
     yadm config --unset local.class
