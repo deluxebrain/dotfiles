@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# android development configuration
+# mobile development configuration
 
 set -e
 
 echo "Running bootstrap file: $(basename "$0")" >&2
+
+export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
+export ANDROID_HOME="$HOMEBREW_PREFIX/share/android-commandlinetools"
 
 # bring asdf into current shell
 . "$(brew --prefix asdf)/libexec/asdf.sh"
@@ -13,9 +16,6 @@ echo "Running bootstrap file: $(basename "$0")" >&2
 asdf install java latest:temurin
 asdf shell java "$(asdf latest java temurin)"
 
-# accept all licenses
-yes | sdkmanager --licenses >/dev/null
-
 # install android sdk etc
 sdkmanager "ndk-bundle"
 sdkmanager "platform-tools"
@@ -23,8 +23,20 @@ sdkmanager "emulator"
 sdkmanager "tools"
 sdkmanager "build-tools;34.0.0"
 sdkmanager "platforms;android-34"
-sdkmanager "system-images;android-34;google_apis;arm64-v8a"
 sdkmanager "sources;android-34"
+# sdk
+sdkmanager "system-images;android-34;google_apis;arm64-v8a"
+# avd image
+sdkmanager "system-images;android-34;google_apis_playstore;arm64-v8a"
+
+# accept all licenses
+yes | sdkmanager --licenses >/dev/null
+
+# create avd
+echo no | \
+avdmanager create avd \
+    -n android-34 \
+    -k "system-images;android-34;google_apis_playstore;arm64-v8a"
 
 # iOS development dependencies
 asdf install ruby latest:3
@@ -34,7 +46,7 @@ asdf install cocoapods latest
 # flutter
 asdf install flutter latest
 
-# verify flutter installation
+# verify flutter rminstallation
 asdf shell ruby "$(asdf latest ruby)"
 asdf shell bundler "$(asdf latest bundler)"
 asdf shell cocoapods "$(asdf latest cocoapods)"

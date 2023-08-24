@@ -5,7 +5,23 @@
 # flutter helpers
 
 # create new flutter project in current directory
-function flutter.init() {
+function flutter.create() {
+    if [ -z "$1" ] ; then
+        echo Please provide project name 2>&1
+        return 1
+    fi
+
+    if [ -d "$1" ] ; then
+        echo Project already exists 2>&1
+        return 1
+    fi
+
+    asdf shell flutter latest
+
+    flutter create "$1"
+
+    cd "$1" || return
+
     asdf local java latest:temurin
     asdf local ruby latest:3
     asdf local bundler latest

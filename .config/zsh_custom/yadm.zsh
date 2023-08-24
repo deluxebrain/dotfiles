@@ -17,6 +17,18 @@ function yadm.info() {
     yadm rev-parse --show-toplevel
 }
 
+# run development environment bootstrap
+function yadm.bootstrap-dev() {
+    if [ -z "$1" ] ; then
+        echo "Please specifiy development environment name" >&2
+        return 1
+    fi
+
+    yadm config local.class "$1"
+    yadm bootstrap
+    yadm config --unset local.class
+}
+
 # delete submodule as managed by yadm
 function yadm.delete-submodule() {
     local submodule_path="$1"
