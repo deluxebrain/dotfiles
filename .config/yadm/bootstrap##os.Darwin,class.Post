@@ -3,7 +3,7 @@
 # yadm bootstrapper
 
 # Executes all executable files (excluding templates and editor backups) in the
-# ~/.config/yadm/bootstrap.d directory
+# ~/.config/yadm/bootstrap.d/post directory
 
 set -e
 
@@ -24,29 +24,12 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# install xcode command line tools if missing
-if ! xcode-select -p ; then
-    echo Installing xcode command line tools >&2
-    xcode-select --install
-fi
-
-# Homebrew needs to be installed in top-level bootstrapper
-# so that its environment is available to all child boostrappers
-if ! command -v brew >/dev/null 2>&1; then
-    echo Installing homebrew >&2
-    NONINTERACTIVE=1 \
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-    # add homebrew to environment
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 echo Running bootstrappers >&2
-if [[ ! -d "$DOTFILES_HOME/.config/yadm/bootstrap.d" ]]; then
+if [[ ! -d "$DOTFILES_HOME/.config/yadm/bootstrap.d/post" ]]; then
     echo "Error: bootstrap directory not found" >&2
     exit 1
 fi
-find -L "$DOTFILES_HOME/.config/yadm/bootstrap.d" -type f -maxdepth 1 \
+find -L "$DOTFILES_HOME/.config/yadm/bootstrap.d/post" -type f -maxdepth 1 \
     | sort \
     | while IFS= read -r bootstrap; do
     if [[ -x "$bootstrap" && ! "$bootstrap" =~ "##" && ! "$bootstrap" =~ "~$" ]]; then
