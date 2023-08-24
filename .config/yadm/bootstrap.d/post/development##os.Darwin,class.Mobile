@@ -67,6 +67,16 @@ flutter doctor -v
 
 # 3. creating flutter project
 
+# EITHER:
+
 # create using create new flutter project wizard
 # as part of the wizard, configure the path to the flutter sdk
 # this can be found from `asdf where flutter`
+
+# OR:
+
+# mkdir foo
+# cd foo
+# asdf shell flutter latest
+# flutter create foo
+# studio  .
