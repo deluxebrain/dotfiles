@@ -17,8 +17,8 @@ function yadm.info() {
     yadm rev-parse --show-toplevel
 }
 
-# run development environment bootstrap
-function yadm.setup-dev() {
+# run bootstrapper from post directory
+function yadm.run-post() {
     if [ -z "$1" ] ; then
         echo "Please specifiy dev environment name" >&2
         return 1
