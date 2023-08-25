@@ -35,6 +35,7 @@ yes | sdkmanager --licenses >/dev/null
 # create avd
 echo no | \
 avdmanager create avd \
+    -f \
     -n android-34 \
     -k "system-images;android-34;google_apis_playstore;arm64-v8a"
 
