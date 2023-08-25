@@ -104,11 +104,13 @@ Assuming a clean machine install, this can be done as follows:
 
 ### Dotfiles installation
 
-Assuming all prerequisites have been met, `yadm` can now be used to install the dotfiles. Assuming no fork has been taken, this is performed as follows:
+Assuming all prerequisites have been met, `yadm` can now be used to install the dotfiles:
 
 ```yadm
-
+yadm clone <repo_url> --bootstrap
 ```
+
+This will clone the repository to your home directory and run the installation bootstrap files.
 
 ### Verification
 
