@@ -7,7 +7,7 @@ Bootstrap files are chunked into groups and run in numberical order. The groups 
 3. system configuration
 4. windowing, terminal and ide configuration
 5. app configuration
-6. development configuration
+6. files in the `post` directory
 
 Bootstrappers that have alternate files are generated as follows:
 
@@ -26,6 +26,12 @@ yadm config local.class Foo
 yadm config local.class # returns Foo
 yadm config --unset local.class
 yadm config local.class # returns empty
+```
+
+If multiple classes are required use the following:
+```sh
+yadm config --add local.class Foo
+yadm config --unset-all local.class
 ```
 
 E.g. `class.Switch` provides overrides for when switching between dotfile repositories.
