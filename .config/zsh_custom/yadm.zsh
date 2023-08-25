@@ -17,8 +17,17 @@ function yadm.info() {
     yadm rev-parse --show-toplevel
 }
 
+# list all classes in post directory
+# name of function reflects this is mainly for setting up dev envs
+function yadm.list-dev() {
+    find "$XDG_CONFIG_HOME/yadm/bootstrap.d/post" -type f -name "*class*" \
+    | sed -E "s/^.*class\.(.*).*$/\1/" \
+    | sort -u
+}
+
 # run bootstrapper from post directory
-function yadm.run-post() {
+# name of function reflects this is mainly for setting up dev envs
+function yadm.install-dev() {
     if [ -z "$1" ] ; then
         echo "Please specifiy dev environment name" >&2
         return 1
