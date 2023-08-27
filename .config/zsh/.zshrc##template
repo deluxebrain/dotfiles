@@ -53,6 +53,8 @@ export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
 
 # Non-XDG configuration
 export ANDROID_HOME="$HOMEBREW_PREFIX/share/android-commandlinetools"
+export ANDROID_EMULATOR_HOME="$ANDROID_USER_HOME"
+export ANDROID_AVD_HOME="$ANDROID_EMULATOR_HOME/avd"
 
 # shell configuration
 # disable shell state sessions ( we are using zsh for this )
