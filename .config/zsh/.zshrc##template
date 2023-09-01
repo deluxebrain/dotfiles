@@ -82,6 +82,8 @@ export GITHUB_TOKEN
 export PATH="$DOTFILES_HOME/bin:/usr/local/bin:$PATH"
 PATH="$ANDROID_HOME/platform-tools:$PATH"
 PATH="$ANDROID_HOME/tools:$PATH"
+# use this specific path for the emulator
+PATH="$ANDROID_HOME/emulator:$PATH"
 
 # oh-my-zsh plugins
 # sorted in ascending order
