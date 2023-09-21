@@ -4,6 +4,15 @@
 
 # flutter helpers
 
+# install all flutter dependencies
+function flutter.install() {
+    asdf install java latest:temurin
+    asdf install ruby latest:3
+    asdf install bundler latest
+    asdf install cocoapods latest
+    asdf install flutter latest
+}
+
 # create new flutter project in current directory
 function flutter.create() {
     if [ -z "$1" ] ; then
