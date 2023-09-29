@@ -20,6 +20,26 @@ function android.get-system-image() {
     | sed -n -E "s/^.*(system-images;${version};google_apis_playstore;$(arch)\S*).*$/\1/p" | uniq
 }
 
+function android.create-avd() {
+    # device names can contain spaces so ensure array construction uses EOL
+    # join over two lists, on device name
+    # [device] [device skin?]
+    # output [device] [skin?]
+    IFS=$'\n' choices=( $(join -1 1 -2 1 -a 1 -t $'\t' -o '1.1,2.2' \
+        <(android.list-devices) \
+        <(android.list-devices-with-skins | sed 's/$/\t*/') \
+        | sed 's/\t//' \
+        | sort) )
+
+    PS3="Devices marked '*' have skin"
+    PS3="$PS3"$'\n'"Select device: "
+    select choice in "${choices[@]}" ; do
+        # break when have valid choice
+        # remove any training * (used to denote skin)
+        [ -n "$choice" ] && choice="${choice%\*}" ; break ;
+    done
+}
+
 ### Listing functions ###
 
 function android.list-system-images() {
