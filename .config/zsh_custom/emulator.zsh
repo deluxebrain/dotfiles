@@ -15,7 +15,7 @@ function emulator.run() {
     if [ -z "$avd" ] ; then
         PS3="Select avd: "
         select avd in $(emulator -list-avds) ; do
-            [ -n "${avd}" ] && break ;
+            [ -n "$avd" ] && break ;
         done
     fi
 
@@ -25,21 +25,39 @@ function emulator.run() {
     fi
 
     skin_name="$(sed -n -E 's/skin.name=(.*)/\1/p' $ANDROID_EMULATOR_HOME/avd/$avd.ini)"
-    if [ -z "$skin_name" ] ; then
-        echo "emulator: avd configuration missing skin.name" >&2
-        return 1
+    if [ -n "$skin_name" ] ; then
+        emulator.__run_with_skin "$avd" "$skin_name"
+    else
+        emulator.__run_without_skin "$avd"
     fi
-
-    # emulator ignores skin.name from the .ini file
-    # hence pass as option
-    nohup emulator \
-        -avd "$avd" \
-        -skindir "${ANDROID_HOME}/skins" \
-        -skin "$skin_name" \
-        -no-boot-anim </dev/null >/dev/null 2>&1 &
 }
 
 # kill all running emulators
 function emulator.kill-all() {
     adb devices | grep emulator | cut -f1 | xargs adb emu kill
+}
+
+### PRIVATE FUNCTIONS ###
+
+function emulator.__run_with_skin() {
+    local avd="$1"
+    local skin="$2"
+
+    nohup emulator \
+        -avd "$avd" \
+        -skindir "$ANDROID_HOME/skins" \
+        -skin "$skin_name" \
+        -no-snapshot \
+        -wipe-data \
+        -no-boot-anim </dev/null >/dev/null 2>&1 &
+}
+
+function emulator.__run_without_skin() {
+    local avd="$1"
+
+    nohup emulator \
+        -avd "$avd" \
+        -no-snapshot \
+        -wipe-data \
+        -no-boot-anim </dev/null >/dev/null 2>&1 &
 }
