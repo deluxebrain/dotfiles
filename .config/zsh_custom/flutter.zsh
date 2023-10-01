@@ -5,7 +5,7 @@
 # flutter helpers
 
 # install all flutter dependencies
-function flutter.install() {
+function flutter.update() {
     asdf install java latest:temurin
     asdf install ruby latest:3
     asdf install bundler latest
@@ -27,7 +27,9 @@ function flutter.create() {
 
     asdf shell flutter latest
 
-    flutter create "$1"
+    # use --org to add org
+    # e.g. --org com.example
+    flutter create --project-name "$1"
 
     cd "$1" || return
 
