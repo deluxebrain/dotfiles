@@ -34,7 +34,7 @@ function emulator.run() {
 
 # kill all running emulators
 function emulator.kill-all() {
-    adb devices | grep emulator | cut -f1 | xargs adb emu kill
+    adb devices | grep emulator | cut -f1 | xargs -I {} adb -s {} emu kill
 }
 
 ### PRIVATE FUNCTIONS ###

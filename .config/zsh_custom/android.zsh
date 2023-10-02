@@ -52,29 +52,26 @@ function android.describe-avds() (
 
 function android.create-avd() (
     android.__shell
-    local device skin image
+    local device skin image full_image avd
 
-    IFS=$'\n' devices=( $(android.__list_devices_ex) )
-
+    IFS=$'\n' devices=( $(android.__create_avd_select_device_data) )
     PS3="Devices marked '*' have skin"
     PS3="$PS3"$'\n'"Select device: "
-    select device in "${devices[@]}" ; do
-        [ -n "$device" ] && break ;
+    select device in $(echo "${devices[*]}" | cut -f 3) ; do
+        [ -n "$device" ] && device="${device%\*}" ; break ;
     done
-
-    if [ ${device: -1:1} ] ; then
-        device="${device%\*}"
-        skin="$device"
-    fi
 
     PS3="Select system image version: "
     select image in $(android.__list-system-images) ; do
         [ -n "$image" ] && break ;
     done
 
-    image="$(android.__get-system-image $image)"
+    skin="$(sed -n -E "s/^$device\t(.+)\t.*/\1/p"<<< "${devices[*]}")"
+    full_image="$(android.__get-system-image $image)"
+    # form avd name from allowed characters in device name
+    avd="$(sed 's/[^a-zA-Z0-9._-]//g'<<< $device)"
 
-    if avdmanager list avd -c | grep -q -w "$device" ; then
+    if avdmanager list avd -c | grep -q -w "$avd" ; then
         echo "Specified avd already exists" 2>&1
         echo "Overwrite? [Y/n]" 2>&1
         read ans && [ ${ans:-n} = Y ] || { false ; return }
@@ -82,13 +79,13 @@ function android.create-avd() (
 
     echo no \
     | avdmanager create avd \
-        --force --name "$device" --package "$image" --device "$device"
+        --force --name "$avd" --package "$full_image" --device "$device"
 
-    echo $TMPL_AVD_INI >> "$ANDROID_EMULATOR_HOME/avd/${device}.ini"
+    echo $TMPL_AVD_INI >> "$ANDROID_EMULATOR_HOME/avd/${avd}.ini"
 
     if [ -n "$skin" ] ; then
         echo $TMPL_AVD_INI_SKIN \
-        | __skin="$skin" envsubst >> "$ANDROID_EMULATOR_HOME/avd/${device}.ini"
+        | __skin="$skin" envsubst >> "$ANDROID_EMULATOR_HOME/avd/${avd}.ini"
     fi
 )
 
@@ -133,14 +130,13 @@ function android.__list-skins() {
 }
 
 # list all devices and mark with * if have skin
-function android.__list_devices_ex() (
-    android.__shell
-    join -1 1 -2 1 -a 1 -t $'\t' -i -o '1.1,2.2' \
+function android.__create_avd_select_device_data() {
+    join -1 1 -2 1 -a 1 -t $'\t' -i -o '1.2,2.1' \
         <(paste \
             <(avdmanager list device -c | tr ' ' '_' | tr '[:upper:]' '[:lower:]') \
-            <(avdmanager list device -c) | sort -f) \
-        <(find "$ANDROID_HOME/skins" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; \
-            | sed 's/$/\t*/' \
+            <(avdmanager list device -c) \
             | sort -f) \
-    | sed 's/\t//'
-)
+        <(find "$ANDROID_HOME/skins" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; \
+            | sort -f) \
+    | awk 'BEGIN { FS=IFS=OFS="\t" } { print $1, $2, ($2 == "")?$1:$1"*" }'
+}
