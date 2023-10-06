@@ -49,3 +49,8 @@ function flutter.doctor() {
 
     flutter doctor -v
 }
+
+# run on all devices
+function flutter.run-all() {
+    flutter run -d all
+}
