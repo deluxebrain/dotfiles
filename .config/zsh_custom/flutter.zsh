@@ -29,15 +29,35 @@ function flutter.create() {
 
     # use --org to add org
     # e.g. --org com.example
-    flutter create --project-name "$1"
+    flutter create --project-name "$1" "$1"
 
     cd "$1" || return
 
+    flutter.init
+}
+
+# bring in flutter dependencies for existing project
+# use when cloning existing flutter projects
+function flutter.init() {
     asdf local java latest:temurin
     asdf local ruby latest:3
     asdf local bundler latest
     asdf local cocoapods latest
     asdf local flutter latest
+
+    flutter pub get
+}
+
+function flutter.upgrade() {
+    flutter pub upgrade
+}
+
+function flutter.build-runner-build() {
+    flutter pub run build_runner build --delete-conflicting-outputs
+}
+
+function flutter.build-runner-watch() {
+    flutter pub run build_runner watch --delete-conflicting-outputs
 }
 
 function flutter.doctor() {
