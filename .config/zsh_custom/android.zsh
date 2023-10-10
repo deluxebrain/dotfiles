@@ -7,13 +7,13 @@ cat <<EOF
 hw.keyboard=yes
 hw.gpu.enabled=yes
 hw.gpu.mode=auto
-hw.ramSize=1536
+hw.ramSize=1536M
+showDeviceFrame=yes
 EOF
 )
 
 TMPL_AVD_INI_SKIN=$(
 cat <<'EOF'
-showDeviceFrame=yes
 skin.dynamic=yes
 skin.name=$__skin
 skin.path=$ANDROID_HOME/skins
@@ -81,8 +81,15 @@ function android.create-avd() (
     | avdmanager create avd \
         --force --name "$avd" --package "$full_image" --device "$device"
 
-    echo $TMPL_AVD_INI >> "$ANDROID_EMULATOR_HOME/avd/${avd}.ini"
+    # write to nested config as root level config appears ignored
+    while IFS=$'\t' read -r key value ; do
+        sed -i -E "s/^$key\s*=.+$/$key=$value/" "$ANDROID_EMULATOR_HOME/avd/${avd}.avd/config.ini"
+    done < <(cut -d'=' -f1,2 --output-delimiter=$'\t' <<<"$TMPL_AVD_INI")
 
+    # HACK
+    # we need the skin name when running the emulator
+    # if you write this into the nested config it causes an error
+    # hence write skin information into ROOT config file which appears ignored
     if [ -n "$skin" ] ; then
         echo $TMPL_AVD_INI_SKIN \
         | __skin="$skin" envsubst >> "$ANDROID_EMULATOR_HOME/avd/${avd}.ini"
