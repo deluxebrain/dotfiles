@@ -92,6 +92,18 @@ function emulator.kill-all() {
     adb devices | grep emulator | cut -f1 | xargs -I {} adb -s {} emu kill
 }
 
+function emulator.dark-mode() {
+    emulator.__ios_list_running_devices \
+    | xargs -I {} xcrun simctl ui {} appearance dark
+    adb shell "cmd uimode night yes"
+}
+
+function emulator.light-mode() {
+    emulator.__ios_list_running_devices \
+    | xargs -I {} xcrun simctl ui {} appearance light
+    adb shell "cmd uimode night no"
+}
+
 ### PRIVATE FUNCTIONS ###
 
 function emulator.__android_run_with_skin() {
@@ -146,4 +158,14 @@ function emulator.__ios_list_devices() {
         | .value[]
         | [.name, .udid]
         | @tsv'
+}
+
+function emulator.__ios_list_running_devices() {
+    xcrun simctl list --json \
+    | jq -r '
+        .devices
+        | to_entries[]
+        | .value[]
+        | select(.state=="Booted")
+        | .udid'
 }
