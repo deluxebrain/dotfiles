@@ -1,2 +1,9 @@
 # flutter state file
 tool_state
+
+# Very Good CLI
+.dart-cli-completion
+
+# Firebase
+configstore
+
