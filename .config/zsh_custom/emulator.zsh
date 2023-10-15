@@ -17,7 +17,6 @@ function emulator.run() {
                 emulator.run-android ; break ;;
         esac
     done
-    echo $family
 }
 
 function emulator.run-ios() {
