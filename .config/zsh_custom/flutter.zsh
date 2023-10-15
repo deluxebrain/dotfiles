@@ -4,12 +4,21 @@
 
 # flutter helpers
 
-# install all flutter dependencies
+# download latest version of all flutter dependencies
 function flutter.update() {
     asdf install java latest:temurin
     asdf install ruby latest:3
     asdf install flutter latest
     asdf install firebase latest
+}
+
+# inplace upgrade of a flutter project
+function flutter.upgrade() {
+    flutter.update
+    asdf local flutter latest
+    flutter upgrade
+    flutter pub upgrade
+    flutter doctor -v
 }
 
 # run on all devices
