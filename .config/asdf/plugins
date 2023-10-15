@@ -5,6 +5,7 @@ bundler
 cocoapods
 cookiecutter
 dotnet-core
+firebase
 flutter
 golang
 gradle

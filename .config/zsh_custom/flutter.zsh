@@ -9,6 +9,7 @@ function flutter.update() {
     asdf install java latest:temurin
     asdf install ruby latest:3
     asdf install flutter latest
+    asdf install firebase latest
 }
 
 # run on all devices
@@ -78,4 +79,5 @@ function flutter.__install() {
     pod setup
 
     asdf local flutter latest
+    asdf local firebase latest
 }
