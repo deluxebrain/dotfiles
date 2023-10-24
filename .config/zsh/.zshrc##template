@@ -58,6 +58,8 @@ export ANDROID_EMULATOR_HOME="$ANDROID_USER_HOME"
 export ANDROID_AVD_HOME="$ANDROID_EMULATOR_HOME/avd"
 
 # shell configuration
+export LC_ALL=en_GB.UTF-8
+export LANG=en_GB.UTF-8
 # disable shell state sessions ( we are using zsh for this )
 export SHELL_SESSIONS_DISABLE=1
 # share history between terminals

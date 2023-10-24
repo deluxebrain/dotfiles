@@ -2,7 +2,6 @@ ant
 awscli
 azure-cli
 bundler
-cocoapods
 cookiecutter
 dotnet-core
 firebase

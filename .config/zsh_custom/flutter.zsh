@@ -4,6 +4,18 @@
 
 # flutter helpers
 
+# Ref re activesupport:
+# https://stackoverflow.com/questions/77236339/after-updating-cocoapods-to-1-13-0-it-throws-error
+TMPL_FLUTTER_GEMFILE=$(
+cat <<EOF
+source "https://rubygems.org"
+
+gem "activesupport", "7.0.8"
+gem "cocoapods"
+gem "fastlane"
+EOF
+)
+
 # download latest version of all flutter dependencies
 function flutter.update() {
     asdf install java latest:temurin
@@ -31,15 +43,19 @@ function flutter.run() {
     flutter run --flavor "$1" -t "lib/main_$1.dart"
 }
 
-# build specific flavor ( no code sign )
+# build specific flavor
 function flutter.build() {
     if [ -z "$1" ] ; then
         echo Please provide flavor name 2>&1
         return 1
     fi
 
-    # build iOS version
-    flutter build ios --no-codesign --flavor "$1" -t "lib/main_$1.dart"
+    flutter clean
+    flutter pub get
+
+    # both ios and android apps will be signed later on in build pipeline
+    flutter build ipa --no-codesign --release --flavor "$1" -t "lib/main_$1.dart"
+    flutter build appbundle --release --flavor "$1" -t "lib/main_$1.dart"
 }
 
 # run on all devices
@@ -99,15 +115,22 @@ function flutter.doctor() {
 
 # Configure project with Flutter runtime and dependencies
 function flutter.__install() {
-    asdf local java latest:temurin
     asdf local ruby latest:3
 
-    gem install cocoapods
+    # gem install cocoapods
     # https://stackoverflow.com/questions/77236339/after-updating-cocoapods-to-1-13-0-it-throws-error
-    gem  uninstall --force activesupport
-    gem install activesupport -v 7.0.8
-    pod setup
+    # gem uninstall --force activesupport
+    # gem install activesupport -v 7.0.8
 
+    asdf local java latest:temurin
     asdf local flutter latest
     asdf local firebase latest
+
+    if ! [[ -f Gemfile ]] ; then
+        echo "$TMPL_FLUTTER_GEMFILE" >> Gemfile
+    fi
+
+    bundle install
+
+    bundle exec pod setup
 }
