@@ -86,7 +86,6 @@ PATH="$ANDROID_HOME/tools:$PATH"
 # use this specific path for the emulator
 PATH="$ANDROID_HOME/emulator:$PATH"
 # Dart pub installs
-# PATH="$XDG_DATA_HOME/pub-cache/bin:$PATH"
 PATH="$HOME/.pub-cache/bin:$PATH"
 
 # oh-my-zsh plugins

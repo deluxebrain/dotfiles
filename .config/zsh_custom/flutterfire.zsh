@@ -20,6 +20,7 @@ function flutterfire.configure() {
         return 1
     fi
 
+    flutterfire.__get_latest_dev
     for prefix in "Debug" "Release" "Profile"; do
         echo 'yes' | \
         flutterfire configure \
@@ -33,6 +34,7 @@ function flutterfire.configure() {
             --ios-build-config="$prefix-$flavor" \
             --yes
     done
+    flutterfire.__get_latest_stable
 }
 
 function flutterfire.get_logged_in_account() {
@@ -44,4 +46,12 @@ function flutterfire.get_logged_in_account() {
         *)
             return 1
     esac
+}
+
+function flutterfire.__get_latest_dev() {
+    dart pub global activate flutterfire_cli 0.3.0-dev.18 --overwrite
+}
+
+function flutterfire.__get_latest_stable() {
+    dart pub global activate flutterfire_cli
 }
