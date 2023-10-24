@@ -12,8 +12,9 @@ function flutterfire.configure() {
     local project="$1"
     local flavor="$2"
     local bundle_id="$3"
+    local account
 
-    local account="$(flutterfire.get_logged_in_account)"
+    account="$(flutterfire.get_logged_in_account)"
     if [[ -z "$account" ]] ; then
         echo "Not logged in" >&2
         return 1

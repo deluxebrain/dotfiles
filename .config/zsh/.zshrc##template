@@ -46,7 +46,8 @@ export GEM_PATH="$XDG_DATA_HOME/gem"
 export GH_CONFIG_DIR="$XDG_CONFIG_HOME/gh"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
-export PUB_CACHE="$XDG_DATA_HOME/pub-cache" # dart pub dep cache
+# DO NOT SET PUB_CACHE as the flutterfire_cli will not pick it up
+# export PUB_CACHE="$XDG_DATA_HOME/pub-cache" # dart pub dep cache
 export VAGRANT_HOME="$XDG_DATA_HOME/vagrant"
 export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
 export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
