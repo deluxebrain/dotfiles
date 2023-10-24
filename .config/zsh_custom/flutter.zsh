@@ -31,6 +31,17 @@ function flutter.run() {
     flutter run --flavor "$1" -t "lib/main_$1.dart"
 }
 
+# build specific flavor ( no code sign )
+function flutter.build() {
+    if [ -z "$1" ] ; then
+        echo Please provide flavor name 2>&1
+        return 1
+    fi
+
+    # build iOS version
+    flutter build ios --no-codesign --flavor "$1" -t "lib/main_$1.dart"
+}
+
 # run on all devices
 function flutter.run-all() {
     flutter run -d all
