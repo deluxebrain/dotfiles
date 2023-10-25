@@ -21,6 +21,7 @@ brew "direnv"
 brew "dnsmasq", restart_service: true
 brew "earthly"
 brew "editorconfig"
+brew "fastlane"
 brew "findutils"
 brew "gawk"
 brew "gh"

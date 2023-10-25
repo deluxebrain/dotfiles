@@ -117,20 +117,24 @@ function flutter.doctor() {
 function flutter.__install() {
     asdf local ruby latest:3
 
-    # gem install cocoapods
-    # https://stackoverflow.com/questions/77236339/after-updating-cocoapods-to-1-13-0-it-throws-error
-    # gem uninstall --force activesupport
-    # gem install activesupport -v 7.0.8
+    gem install cocoapods
+    https://stackoverflow.com/questions/77236339/after-updating-cocoapods-to-1-13-0-it-throws-error
+    gem uninstall --force activesupport
+    gem install activesupport -v 7.0.8
 
     asdf local java latest:temurin
     asdf local flutter latest
     asdf local firebase latest
 
-    if ! [[ -f Gemfile ]] ; then
-        echo "$TMPL_FLUTTER_GEMFILE" >> Gemfile
-    fi
+    # DONT install cocoapods via bundler
+    # requires syntax "bundle exec"
+    # e.g. bundle exec pod setup
+    # this fails flutter doctor
+    # if ! [[ -f Gemfile ]] ; then
+    #     echo "$TMPL_FLUTTER_GEMFILE" >> Gemfile
+    # fi
+    # bundle install
+    # bundle exec pod setup
 
-    bundle install
-
-    bundle exec pod setup
+    pod setup
 }
