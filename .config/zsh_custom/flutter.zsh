@@ -64,37 +64,50 @@ function flutter.run-all() {
 }
 
 # create new flutter project in current directory
+# highly opinionated - mangles provided project name to
+# ensure that Apple bundle id and Android application id are the same
 function flutter.create() {
-    if [ -z "$1" ] ; then
+    local project="$1"
+    local org="$2"
+    local output_directory
+    local project_name
+
+    if [ -z "$project" ] ; then
         echo Please provide project name 2>&1
         return 1
     fi
 
-    if [ -d "$1" ] ; then
-        echo Project already exists 2>&1
+    output_directory="$(echo "$project" | tr '[:upper:]' '[:lower:]' | tr '_' '-')"
+    project_name="$(echo "$output_directory" | tr -d '-')"
+
+    echo "Flutter project name: $project_name" 2>&1
+    echo "Project directory: $output_directory" 2>&1
+
+    if [ -d "$output_directory" ] ; then
+        echo Project output directory already exists 2>&1
         return 1
     fi
 
-    if [ -n "$2" ] ; then
+    if [ -n "$org" ] ; then
         ( \
             asdf shell flutter latest && \
             flutter create \
                 --platforms=android,ios \
-                --project-name "$1" \
-                --org "$2" \
-                "$1" \
+                --project-name "$project_name" \
+                --org "$org" \
+                "$output_directory" \
         )
     else
         ( \
             asdf shell flutter latest && \
             flutter create \
                 --platforms=android,ios \
-                --project-name "$1" \
-                "$1" \
+                --project-name "$project_name" \
+                "$output_directory" \
         )
     fi
 
-    cd "$1" || return
+    cd "$output_directory" || return
 
     flutter.__install
 }
