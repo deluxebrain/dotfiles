@@ -75,13 +75,24 @@ function flutter.create() {
         return 1
     fi
 
-    ( \
-        asdf shell flutter latest && \
-        flutter create \
-            --platforms=android,ios \
-            --project-name "$1" \
-            "$1" \
-    )
+    if [ -n "$2" ] ; then
+        ( \
+            asdf shell flutter latest && \
+            flutter create \
+                --platforms=android,ios \
+                --project-name "$1" \
+                --org "$2" \
+                "$1" \
+        )
+    else
+        ( \
+            asdf shell flutter latest && \
+            flutter create \
+                --platforms=android,ios \
+                --project-name "$1" \
+                "$1" \
+        )
+    fi
 
     cd "$1" || return
 
@@ -118,7 +129,7 @@ function flutter.__install() {
     asdf local ruby latest:3
 
     gem install cocoapods
-    https://stackoverflow.com/questions/77236339/after-updating-cocoapods-to-1-13-0-it-throws-error
+    # https://stackoverflow.com/questions/77236339/after-updating-cocoapods-to-1-13-0-it-throws-error
     gem uninstall --force activesupport
     gem install activesupport -v 7.0.8
 
