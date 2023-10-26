@@ -26,7 +26,7 @@ function flutterfire.configure() {
         flutterfire configure \
             --account="$account" \
             --project="$project" \
-            --out="lib/config/firebase/flavor/firebase_options.dart" \
+            --out="lib/config/firebase/$flavor/firebase_options.dart" \
             --android-out="/android/app/src/$flavor/google-services.json" \
             --ios-bundle-id="$bundle_id" \
             --android-package-name="$bundle_id" \
