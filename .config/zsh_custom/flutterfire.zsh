@@ -34,7 +34,9 @@ function flutterfire.configure() {
             --ios-build-config="$prefix-$flavor" \
             --yes
     done
-    flutterfire.__get_latest_stable
+
+    # must continue to use dev version for remaining of build pipeline
+    # flutterfire.__get_latest_stable
 }
 
 function flutterfire.get_logged_in_account() {
