@@ -26,5 +26,6 @@
     },
     "explorer.confirmDragAndDrop": false,
     "dart.openDevTools": "flutter",
-    "workbench.colorTheme": "Dracula"
+    "workbench.colorTheme": "Dracula",
+    "window.zoomLevel": -1
 }
