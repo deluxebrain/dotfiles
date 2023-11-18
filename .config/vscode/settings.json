@@ -1,4 +1,8 @@
 {
+    "dart.previewFlutterUiGuides": true,
+    "dart.openDevTools": "flutter",
+    "dart.renameFilesWithClasses": "prompt",
+    "dart.warnWhenEditingFilesOutsideWorkspace": false,
     "editor.fontSize": 16,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -12,6 +16,7 @@
     },
     "redhat.telemetry.enabled": false,
     "[dart]": {
+        "editor.bracketPairColorization.enabled": true,
         "editor.codeActionsOnSave": {
             "source.fixAll": true,
             "source.organizeImports": true
@@ -20,12 +25,17 @@
         "editor.formatOnType": true,
         "editor.rulers": [80],
         "editor.selectionHighlight": false,
+        "editor.stickyScroll.enabled": true,
         "editor.suggestSelection": "first",
         "editor.tabCompletion": "onlySnippets",
         "editor.wordBasedSuggestions": false
     },
     "explorer.confirmDragAndDrop": false,
-    "dart.openDevTools": "flutter",
+    "explorer.fileNesting.patterns": {
+        "*.dart": "${capture}.g.dart, ${capture}.freezed.dart"
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
     "workbench.colorTheme": "Dracula",
     "window.zoomLevel": -1
 }
