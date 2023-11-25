@@ -26,6 +26,11 @@ function flutter.update() {
 
 # inplace upgrade of a flutter project
 function flutter.upgrade() {
+    if ! [ -f "pubspec.yaml" ] ; then
+        echo Not in root folder 2>&1
+        return 1
+    fi
+
     flutter.update
 
     asdf local java latest:temurin
@@ -36,10 +41,21 @@ function flutter.upgrade() {
     flutter upgrade
     flutter pub upgrade
 
+    cd ios || return
+
+    rm Podfile.lock
+    rm -rf pods
+    pod repo update
+
+    cd ..
+
     flutter clean
     flutter pub get
 
     flutter doctor -v
+
+    echo PLEASE NOTE: 2>&1
+    echo If using precompiled frameworks then please update these now and re-run 2>&1
 }
 
 # run specific flavor
