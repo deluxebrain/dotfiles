@@ -27,9 +27,18 @@ function flutter.update() {
 # inplace upgrade of a flutter project
 function flutter.upgrade() {
     flutter.update
+
+    asdf local java latest:temurin
+    asdf local ruby latest:3
     asdf local flutter latest
+    asdf local firebase latest
+
     flutter upgrade
     flutter pub upgrade
+
+    flutter clean
+    flutter pub get
+
     flutter doctor -v
 }
 
