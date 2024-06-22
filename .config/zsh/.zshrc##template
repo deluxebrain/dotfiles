@@ -56,6 +56,7 @@ export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
 export ANDROID_HOME="$HOMEBREW_PREFIX/share/android-commandlinetools"
 export ANDROID_EMULATOR_HOME="$ANDROID_USER_HOME"
 export ANDROID_AVD_HOME="$ANDROID_EMULATOR_HOME/avd"
+export DOTNET_ROOT="$HOMEBREW_PREFIX/opt/dotnet/libexec"
 
 # shell configuration
 export LC_ALL=en_GB.UTF-8

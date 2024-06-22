@@ -18,8 +18,8 @@
     "[dart]": {
         "editor.bracketPairColorization.enabled": true,
         "editor.codeActionsOnSave": {
-            "source.fixAll": true,
-            "source.organizeImports": true
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
         },
         "editor.formatOnSave": true,
         "editor.formatOnType": true,
@@ -28,7 +28,7 @@
         "editor.stickyScroll.enabled": true,
         "editor.suggestSelection": "first",
         "editor.tabCompletion": "onlySnippets",
-        "editor.wordBasedSuggestions": false
+        "editor.wordBasedSuggestions": "off"
     },
     "explorer.confirmDragAndDrop": false,
     "explorer.fileNesting.patterns": {
