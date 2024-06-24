@@ -3,9 +3,19 @@
     "dart.openDevTools": "flutter",
     "dart.renameFilesWithClasses": "prompt",
     "dart.warnWhenEditingFilesOutsideWorkspace": false,
+    "dotnet.preferCSharpExtension": true,
     "editor.fontSize": 16,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": "off"
+    },
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.acceptSuggestionOnCommitCharacter": true,
+    "editor.tabCompletion": "on",
     "files.associations": {
         "ignore": "ignore"
     },
