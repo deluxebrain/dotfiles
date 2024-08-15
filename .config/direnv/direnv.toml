@@ -1,0 +1,5 @@
+[global]
+load_dotenv = true
+
+[whitelist]
+exact = ["/Users/deluxebrain/Play/conda1", "/Users/deluxebrain/Play/conda2", "/Users/deluxebrain/Play/conda3", "/Users/deluxebrain/Play/conda4"]
