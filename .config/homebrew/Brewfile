@@ -16,6 +16,7 @@ brew "certbot"
 brew "chart-testing"
 brew "colordiff"
 brew "commitizen"
+brew "cookiecutter"
 brew "direnv"
 brew "dnsmasq", restart_service: true
 brew "dotnet"
