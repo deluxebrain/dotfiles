@@ -30,6 +30,7 @@ brew "findutils"
 brew "gawk"
 brew "gh"
 brew "git"
+brew "git-extras"
 brew "gnu-sed"
 brew "unbound"
 brew "gnutls"
@@ -113,6 +114,7 @@ cask "tableplus"
 cask "temurin"
 cask "vagrant"
 cask "visual-studio-code"
+mas "Developer", id: 640199958
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "iReal Pro", id: 409035833
