@@ -23,11 +23,11 @@
 # Example: gcheckpoint my-checkpoint
 alias gcheckpoint="git tag"
 
-# Reset the current branch to a given checkpoint (rollback)
-# This will revert the working directory to the state at the given tag
+# Reset the current branch to a given checkpoint (rollback) and clean untracked files
+# This will revert the working directory to the state at the given tag and remove untracked files
 # Usage: grollback <tag-name>
 # Example: grollback my-checkpoint
-alias grollback="git reset --hard"
+alias grollback="git reset --hard && git clean -fd"
 
 # Delete a lightweight tag (checkpoint) when it's no longer needed
 # Usage: gdelcheckpoint <tag-name>
