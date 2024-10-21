@@ -13,7 +13,7 @@
 			{
 				"key": "sideBar",
 				"width": 250,
-				"visible": true
+				"visible": false
 			},
 			{
 				"key": "noteList",
@@ -28,11 +28,11 @@
 		"visible": true
 	},
 	"noteVisiblePanes": [
-		"editor",
-		"viewer"
+		"editor"
 	],
 	"api.token": "00ef37434738fb488f0a609a242a0ea32ce25cfdc37222574f7b8a398064cee38d29874c1aabb4db8f4e03e2f68d0938a3f3de742de6b9f553a0b4b243b19958",
 	"spellChecker.languages": [
 		"en-GB"
-	]
+	],
+	"windowContentZoomFactor": 120
 }

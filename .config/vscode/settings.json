@@ -47,5 +47,11 @@
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "workbench.colorTheme": "Dracula",
-    "window.zoomLevel": -1
+    "window.zoomLevel": -1,
+    "window.commandCenter": 1,
+    "cSpell.userWords": [
+        "prejoin"
+    ],
+    "parallels-desktop.extension.path": "/Users/deluxebrain/.parallels-desktop-vscode",
+    "parallels-desktop.git.path": "/usr/bin/git"
 }
