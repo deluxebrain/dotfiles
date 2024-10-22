@@ -82,6 +82,7 @@ GPG_TTY=$(tty)
 # used by github cli ( gh ) for authenticating against github
 # set dynamically by gh alias ( see aliases.zsh )
 export GITHUB_TOKEN
+export GH_CURRENT_CONTEXT
 
 # path
 export PATH="$DOTFILES_HOME/bin:/usr/local/bin:$PATH"

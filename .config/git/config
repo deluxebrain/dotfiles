@@ -1,2 +1,22 @@
 [include]
+    # Include local Git configuration from a separate file
+    # This allows for user-specific or machine-specific settings
+    # without modifying the main Git config file
     path = ../../.gitconfig.local
+
+# Include a specific Git configuration file for another directory
+# This allows for project-specific or organization-specific settings
+[includeIf "gitdir:~/Repos/deluxebrain/"]
+    # Path to the Git configuration file to be included
+    # when working in the specified directory
+    path = ~/Repos/deluxebrain/.gitconfig
+
+# Include a specific Git configuration file for a particular directory
+# This allows for project-specific or organization-specific settings
+[includeIf "gitdir:~/Repos/bettermeetings/"]
+    # Path to the Git configuration file to be included
+    # when working in the specified directory
+    path = ~/Repos/bettermeetings/.gitconfig
+
+[init]
+    defaultBranch = main
