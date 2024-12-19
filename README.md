@@ -3,6 +3,9 @@
 ## Prerequisites
 
 ````sh
+sudo softwareupdate -i -a
+xcode-select --install
+
 ssh-keygen -a 100 -o -t rsa -b 4096 -f ~/.ssh/id_rsa
 pbcopy<~/.ssh/id_rsa.pub
 ssh -T git@github.com#
@@ -21,6 +24,11 @@ git push -u origin main
 ## Apply existing dotfiles
 
 See [chezmoi init](https://www.chezmoi.io/reference/commands/init/)
+
+```sh
+# installs to ~/bin/chezmoi
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+```
 
 By default, if repo is given, chezmoi will guess the full git repo URL, using HTTPS by default, or SSH if the --ssh option is specified, assuming the repository name is dotfiles.
 
