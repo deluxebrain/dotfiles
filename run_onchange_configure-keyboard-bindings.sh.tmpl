@@ -14,7 +14,7 @@ mkdir -p "$defaults_directory"
 cat << 'EOF' > "$defaults_directory/DefaultKeyBinding.dict"
 {
     {{- range $key, $action := .keyboard_bindings }}
-    {{ $key }} = {{ $action }};
+    "{{ $key }}" = "{{ $action }}";
     {{- end }}
 }
 EOF
