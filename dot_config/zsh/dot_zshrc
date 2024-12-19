@@ -1,0 +1,6 @@
+# shell configuration
+setopt share_history # share history between terminals
+
+# fix up gpg as installed by brew
+export GPG_TTY
+GPG_TTY=$(tty)

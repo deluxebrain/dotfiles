@@ -3,3 +3,4 @@
 - [] sudo keep-alive is not working
 - [] install homebrew if not installed
 - [] post installation note re chezmoi unmanaged files and reload shell
+- [] support for per-user configuration e.g. system settings

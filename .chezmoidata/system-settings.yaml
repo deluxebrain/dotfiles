@@ -1,0 +1,108 @@
+system_settings:
+  configuration:
+    - domain: NSGlobalDomain
+      settings:
+        # Text Editing
+        - key: NSAutomaticCapitalizationEnabled
+          type: bool
+          value: false
+        - key: NSAutomaticDashSubstitutionEnabled
+          type: bool
+          value: false
+        - key: NSAutomaticPeriodSubstitutionEnabled
+          type: bool
+          value: false
+        - key: NSAutomaticQuoteSubstitutionEnabled
+          type: bool
+          value: false
+        - key: NSAutomaticSpellingCorrectionEnabled
+          type: bool
+          value: false
+
+        # Keyboard
+        - key: ApplePressAndHoldEnabled
+          type: bool
+          value: false
+        - key: KeyRepeat
+          type: int
+          value: 1
+        - key: InitialKeyRepeat
+          type: int
+          value: 10
+
+        # Files
+        - key: NSDocumentSaveNewDocumentsToCloud
+          type: bool
+          value: false
+        - key: AppleShowAllExtensions
+          type: bool
+          value: true
+
+    - domain: com.apple.desktopservices
+      settings:
+        # Disable writing .DS_Store files on network or USB volumes
+        - key: DSDontWriteNetworkStores
+          type: bool
+          value: true
+        - key: DSDontWriteUSBStores
+          type: bool
+          value: true
+
+    - domain: com.apple.finder
+      settings:
+        - key: ShowStatusBar
+          type: bool
+          value: true
+        - key: ShowPathbar
+          type: bool
+          value: true
+        - key: _FXShowPosixPathInTitle
+          type: bool
+          value: true
+        - key: _FXSortFoldersFirst
+          type: bool
+          value: true
+        - key: FXDefaultSearchScope
+          type: string
+          value: SCcf
+        - key: FXEnableExtensionChangeWarning
+          type: bool
+          value: false
+        - key: FXPreferredViewStyle
+          type: string
+          value: Nlsv
+
+    - domain: com.apple.dock
+      settings:
+        - key: mouse-over-hilite-stack
+          type: bool
+          value: true
+        - key: tilesize
+          type: int
+          value: 36
+        - key: mineffect
+          type: string
+          value: scale
+        - key: minimize-to-application
+          type: bool
+          value: true
+        - key: enable-spring-load-actions-on-all-items
+          type: bool
+          value: true
+        - key: show-process-indicators
+          type: bool
+          value: true
+        - key: mru-spaces
+          type: bool
+          value: false
+        - key: autohide
+          type: bool
+          value: false
+        - key: show-recents
+          type: bool
+          value: false
+
+  apps_to_restart:
+    - Activity Monitor
+    - Dock
+    - Finder
