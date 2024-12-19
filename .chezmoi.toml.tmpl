@@ -1,7 +1,9 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $brewExists := lookPath "brew" -}}
 
 [data]
   email = {{ $email | quote }}
+  hasHomebrew = {{ $brewExists | not | not }}
   installCoreDevelopmentPackages = true
   installCloudAndInfrastructurePackages = true
   installDataAndDatabasePackages = true

@@ -3,16 +3,22 @@
 
 {{ if .installAppStorePackages -}}
 echo "[Warning] App Store packages are enabled and require you to be signed into the Mac App Store."
-echo "[Warning] Please ensure you are logged in before continuing."
 read -p "Press Enter to continue or Ctrl+C to cancel..."
 {{ end -}}
 
 echo "[Notice] Some packages will require administrator privileges. Please enter your password when prompted."
-echo "[Notice] This will cache your sudo credentials for a few minutes."
 
 # Request sudo upfront and keep sudo timestamp updated
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Load Homebrew environment variables
+{{ if not .hasHomebrew -}}
+echo "[Info] Loading Homebrew environment variables"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{ else -}}
+echo "[Info] Homebrew is already installed"
+{{ end -}}
 
 {{ $packageGroups := dict
     "core_development" .installCoreDevelopmentPackages
