@@ -1,0 +1,10 @@
+{{- $email := promptStringOnce . "email" "Email address" -}}
+
+[data]
+  email = {{ $email | quote }}
+  installCoreDevelopmentPackages = true
+  installCloudAndInfrastructurePackages = true
+  installDataAndDatabasePackages = true
+  installSystemAndNetworkPackages = true
+  installMediaAndDocumentationPackages = true
+  installAppStorePackages = true

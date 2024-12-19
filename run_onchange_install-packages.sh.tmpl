@@ -1,0 +1,45 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+{{ if .installAppStorePackages -}}
+echo "[Warning] App Store packages are enabled and require you to be signed into the Mac App Store."
+echo "[Warning] Please ensure you are logged in before continuing."
+read -p "Press Enter to continue or Ctrl+C to cancel..."
+{{ end -}}
+
+echo "[Notice] Some packages will require administrator privileges. Please enter your password when prompted."
+echo "[Notice] This will cache your sudo credentials for a few minutes."
+
+# Request sudo upfront and keep sudo timestamp updated
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+{{ $packageGroups := dict
+    "core_development" .installCoreDevelopmentPackages
+    "cloud_and_infrastructure" .installCloudAndInfrastructurePackages
+    "data_and_database" .installDataAndDatabasePackages
+    "system_and_network" .installSystemAndNetworkPackages
+    "media_and_documentation" .installMediaAndDocumentationPackages
+    "app_store" .installAppStorePackages -}}
+
+{{ range $group, $enabled := $packageGroups -}}
+echo "[Configuration] {{ $group }} packages: {{ if $enabled }}✓ enabled{{ else }}✗ skipped{{ end }}"
+{{ if $enabled -}}
+echo "[Installing] Starting installation of {{ $group }} packages..."
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range index $.packages $group "taps" -}}
+tap {{ . | quote | replace " " "\", \"" }}
+{{ end -}}
+{{ range index $.packages $group "brews" -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range index $.packages $group "casks" -}}
+cask {{ . | quote }}
+{{ end -}}
+{{ range index $.packages $group "mas" -}}
+mas {{ .name | quote }}, id: {{ .id }}
+{{ end -}}
+EOF
+{{ end -}}
+{{ end -}}
+{{ end -}}

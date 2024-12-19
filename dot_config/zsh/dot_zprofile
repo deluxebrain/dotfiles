@@ -1,0 +1,13 @@
+# Set XDG Base Directories
+# These variables define where user-specific files, configurations, and caches should be stored.
+# By following the XDG Base Directory Specification, we keep the home directory clean and organized.
+# - XDG_CONFIG_HOME: Configuration files (e.g., ~/.config/git/config)
+# - XDG_DATA_HOME: Application data that should persist (e.g., ~/.local/share)
+# - XDG_CACHE_HOME: Application cache files (e.g., ~/.cache)
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Initialize Homebrew environment
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
