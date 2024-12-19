@@ -1,5 +1,10 @@
-{{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
+
+# This script installs packages using the settings from packages.yaml
+
+set -eu
+
+echo "[Configuration] Installing packages..."
 
 {{ if .installAppStorePackages -}}
 echo "[Warning] App Store packages are enabled and require you to be signed into the Mac App Store."
@@ -41,6 +46,5 @@ cask {{ . | quote }}
 mas {{ .name | quote }}, id: {{ .id }}
 {{ end -}}
 EOF
-{{ end -}}
 {{ end -}}
 {{ end -}}

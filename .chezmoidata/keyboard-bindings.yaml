@@ -1,0 +1,6 @@
+# Home and End key bindings for Windows-style behavior
+keyboard_bindings:
+  "\\UF729": "moveToBeginningOfLine:" # home
+  "\\UF72B": "moveToEndOfLine:" # end
+  "$\\UF729": "moveToBeginningOfLineAndModifySelection:" # shift-home
+  "$\\UF72B": "moveToEndOfLineAndModifySelection:" # shift-end
