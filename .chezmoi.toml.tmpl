@@ -1,12 +1,18 @@
-{{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $brewExists := lookPath "brew" -}}
+# Used by chezmoi init to generate initial ~/.config/chezmoi/chezmoi.toml
+
+{{- $gitUserName := promptStringOnce . "gitUserName" "Git user name" -}}
+{{- $gitUserEmail := promptStringOnce . "gitUserEmail" "Git user email" -}}
 
 [data]
-  email = {{ $email | quote }}
-  hasHomebrew = {{ $brewExists | not | not }}
+  gitUserName = {{ $gitUserName | quote }}
+  gitUserEmail = {{ $gitUserEmail | quote }}
   installCoreDevelopmentPackages = true
   installCloudAndInfrastructurePackages = true
   installDataAndDatabasePackages = true
   installSystemAndNetworkPackages = true
   installMediaAndDocumentationPackages = true
   installAppStorePackages = false
+  xdgConfigHome = "$HOME/.config"
+  xdgDataHome = "$HOME/.local/share"
+  xdgCacheHome = "$HOME/.cache"
+  xdgStateHome = "$HOME/.local/state"

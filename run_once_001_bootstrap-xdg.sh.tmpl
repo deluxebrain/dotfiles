@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eu
+
+# create xdg file system
+mkdir -p "{{ .xdgConfigHome }}"
+mkdir -p "{{ .xdgCacheHome }}"
+mkdir -p "{{ .xdgDataHome }}"
+mkdir -p "{{ .xdgStateHome }}"
+
+# XDG_DATA_HOME paths that must exist
+mkdir -p "{{ .xdgDataHome }}/asdf"
+mkdir -p "{{ .xdgDataHome }}/gnupg"
+mkdir -p "{{ .xdgDataHome }}/vagrant"
+mkdir -p "{{ .xdgDataHome }}/vim"
+mkdir -p "{{ .xdgDataHome }}/vscode"
+
+# XDG_STATE_HOME paths that must exist
+mkdir -p "{{ .xdgStateHome }}/gh"
+mkdir -p "{{ .xdgStateHome }}/less"
+mkdir -p "{{ .xdgStateHome }}/vagrant"
+mkdir -p "{{ .xdgStateHome }}/zsh"
