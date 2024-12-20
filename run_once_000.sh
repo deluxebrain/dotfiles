@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "************************** HERE **************************"
 echo $XDG_CONFIG_HOME
 echo $XDG_DATA_HOME
