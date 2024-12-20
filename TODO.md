@@ -10,3 +10,4 @@
 - [x] keyboard bindings
 - [] verify scripts arent being copied into home
 - [] fix xdg env var sourcing
+- [] remove all $HOME references
