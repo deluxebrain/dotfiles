@@ -11,3 +11,4 @@
 - [] verify scripts arent being copied into home
 - [] fix xdg env var sourcing
 - [] remove all $HOME references
+- [] turn off dictation in settings
