@@ -102,7 +102,19 @@ system_settings:
           type: bool
           value: false
 
+    # iTerm2
+    - domain: com.googlecode.iterm2
+      settings:
+        # Load preferences from custom folder
+        - key: PrefsCustomFolder
+          type: string
+          value: "${XDG_CONFIG_HOME}/iterm2"
+        - key: LoadPrefsFromCustomFolder
+          type: bool
+          value: true
+
   apps_to_restart:
     - Activity Monitor
     - Dock
     - Finder
+    - iTerm2

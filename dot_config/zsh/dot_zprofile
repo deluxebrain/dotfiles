@@ -39,16 +39,26 @@ export GH_CONFIG_DIR="$XDG_CONFIG_HOME/gh"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 export VAGRANT_HOME="$XDG_DATA_HOME/vagrant"
+
+# VS Code configuration
+# VSCODE_PORTABLE: Controls VS Code's portable mode directory
+#   - Stores all VS Code data including settings, keybindings, and snippets
+#   - Keeps VS Code data isolated from system directories
+#   - Useful for backup and syncing between machines
 export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
+
+# VSCODE_EXTENSIONS: Specifies custom extensions directory
+#   - Contains all installed VS Code extensions
+#   - Separates extensions from VS Code's core files
+#   - Makes it easier to backup/restore just extensions
 export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
 
-# vim configuration
-# set as default editor
+# Vim configuration
+# - set as default editor
 export EDITOR=vim
-# bring in support for XDG
+# - bring in support for XDG
 if [ -f "${XDG_CONFIG_HOME}/vim/vimrc" ]; then
-    export VIMINIT
-    VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
+    export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
 fi
 
 # Initialize Homebrew environment

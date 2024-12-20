@@ -3,6 +3,7 @@ packages:
     taps:
       - homebrew/bundle #          Used for managing Brewfiles
       - homebrew/services #        Used for service management
+      - homebrew/cask-fonts #      Required for installing fonts
     brews:
       - asdf #                     Tool for managing multiple runtime versions
       - bash #                     The GNU Bourne Again Shell
@@ -25,6 +26,7 @@ packages:
       - yj #                       CLI for converting YAML to JSON and vice versa
       - yq #                       CLI for processing YAML
     casks:
+      - font-meslo-lg-nerd-font # Patched font with programming ligatures and icons
       - iterm2 #                   Terminal emulator for macOS
       - powershell #               Microsoft's command-line shell
       - visual-studio-code #       Code editor from Microsoft
