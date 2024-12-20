@@ -6,5 +6,5 @@
 - [] support for per-user configuration e.g. system settings
 - [] vscode settings
 - [] vscode extensions
-- [x] iterm2 settings
+- [] iterm2 settings
 - [x] keyboard bindings
