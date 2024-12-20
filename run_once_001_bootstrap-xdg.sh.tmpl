@@ -3,20 +3,20 @@
 set -eu
 
 # create xdg file system
-mkdir -p "{{ .xdgConfigHome }}"
-mkdir -p "{{ .xdgCacheHome }}"
-mkdir -p "{{ .xdgDataHome }}"
-mkdir -p "{{ .xdgStateHome }}"
+mkdir -p "$XDG_CONFIG_HOME"
+mkdir -p "$XDG_CACHE_HOME"
+mkdir -p "$XDG_DATA_HOME"
+mkdir -p "$XDG_STATE_HOME"
 
 # XDG_DATA_HOME paths that must exist
-mkdir -p "{{ .xdgDataHome }}/asdf"
-mkdir -p "{{ .xdgDataHome }}/gnupg"
-mkdir -p "{{ .xdgDataHome }}/vagrant"
-mkdir -p "{{ .xdgDataHome }}/vim"
-mkdir -p "{{ .xdgDataHome }}/vscode"
+mkdir -p "$XDG_DATA_HOME/asdf"
+mkdir -p "$XDG_DATA_HOME/gnupg"
+mkdir -p "$XDG_DATA_HOME/vagrant"
+mkdir -p "$XDG_DATA_HOME/vim"
+mkdir -p "$XDG_DATA_HOME/vscode"
 
 # XDG_STATE_HOME paths that must exist
-mkdir -p "{{ .xdgStateHome }}/gh"
-mkdir -p "{{ .xdgStateHome }}/less"
-mkdir -p "{{ .xdgStateHome }}/vagrant"
-mkdir -p "{{ .xdgStateHome }}/zsh"
+mkdir -p "$XDG_STATE_HOME/gh"
+mkdir -p "$XDG_STATE_HOME/less"
+mkdir -p "$XDG_STATE_HOME/vagrant"
+mkdir -p "$XDG_STATE_HOME/zsh"
