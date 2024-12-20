@@ -8,3 +8,5 @@
 - [] vscode extensions
 - [] iterm2 settings
 - [x] keyboard bindings
+- [] verify scripts arent being copied into home
+- [] fix xdg env var sourcing

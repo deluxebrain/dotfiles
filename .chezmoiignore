@@ -1,0 +1,8 @@
+.vscode/
+
+.editorconfig
+.prettierignore
+.prettierrc.yaml
+
+README.md
+TODO.md
