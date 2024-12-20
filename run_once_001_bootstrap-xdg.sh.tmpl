@@ -4,10 +4,6 @@ set -eu
 
 # create xdg file system
 echo "[Creating] XDG file system..."
-echo "XDG_CONFIG_HOME: {{ env "XDG_CONFIG_HOME" }}"
-echo "XDG_CACHE_HOME: {{ env "XDG_CACHE_HOME" }}"
-echo "XDG_DATA_HOME: {{ env "XDG_DATA_HOME" }}"
-echo "XDG_STATE_HOME: {{ env "XDG_STATE_HOME" }}"
 mkdir -p "{{ env "XDG_CONFIG_HOME" }}"
 mkdir -p "{{ env "XDG_CACHE_HOME" }}"
 mkdir -p "{{ env "XDG_DATA_HOME" }}"
