@@ -1,0 +1,66 @@
+# shellcheck disable=SC2148,SC1090,SC2296,SC1091
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# shell configuration
+setopt share_history # share history between terminals
+
+# fix up gpg as installed by brew
+export GPG_TTY=$(tty)
+
+# oh-my-zsh plugins:
+plugins=(
+    asdf
+    aws
+    brew
+    direnv
+    docker
+    docker-compose
+    dotnet
+    git
+    gitignore
+    gnu-utils
+    helm
+    iterm2
+    kubectl
+    redis-cli
+    tmux
+    virtualenv
+    zsh-autosuggestions
+)
+
+# zsh-syntax-highlighting must be last entry of plugins
+plugins+=(
+    zsh-syntax-highlighting
+)
+
+# plugin configuration:
+# ( must be between plugins declaration and starting oh-my-zsh )
+
+# tmux plugin configuration
+export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_CONFIG="${XDG_CONFIG_HOME}/tmux/tmux.conf"
+export ZSH_TMUX_UNICODE=true
+export ZSH_TMUX_AUTOQUIT=true
+export ZSH_TMUX_AUTOCONNECT=false
+
+# enable oh-my-zsh
+source "${ZSH}/oh-my-zsh.sh"
+
+{{ if eq .installType "full" -}}
+# Initialize conda for the current shell
+eval "$(conda "shell.$(basename "${SHELL}")" hook)"
+{{ end -}}
+
+# Add iTerm2 shell integration
+[[ ! -f $XDG_CONFIG_HOME/iterm2/.iterm2_shell_integration.zsh ]] \
+    || source $XDG_CONFIG_HOME/iterm2/.iterm2_shell_integration.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f $ZDOTDIR/.p10k.zsh ]] \
+    || source $ZDOTDIR/.p10k.zsh

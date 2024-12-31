@@ -1,0 +1,40 @@
+[core]
+    editor = vim
+    excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+
+{{ if .gitUserName -}}
+[user]
+    name = {{ .gitUserName }}
+    {{ if .gitUserEmail }}email = {{ .gitUserEmail }}{{ end }}
+{{ end -}}
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true  # Rebase branches on pull instead of merge
+
+[push]
+    default = current  # Push the current branch to a branch of the same name
+
+[color]
+    ui = auto  # Enable colored output
+
+[alias]
+    # Useful shortcuts
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[merge]
+    conflictstyle = diff3  # Show the original text in conflicts
+
+[help]
+    autocorrect = 1  # Automatically correct and execute mistyped commands
+
+[credential]
+    helper = cache --timeout=3600  # Cache credentials for 1 hour

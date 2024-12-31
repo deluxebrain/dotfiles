@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -euo pipefail
+
+echo "[Installing] Installing omz packages..."
+
+# Function to install a plugin or theme
+install_package() {
+    local type=$1
+    local name=$2
+    local repo=$3
+    local target_dir
+
+    if [[ "$type" == "plugin" ]]; then
+        target_dir="$ZSH_CUSTOM/plugins/$name"
+    elif [[ "$type" == "theme" ]]; then
+        target_dir="$ZSH_CUSTOM/themes/$name"
+    else
+        echo "[Error] Unknown type: $type"
+        exit 1
+    fi
+
+    # Check if the target directory already exists
+    if [[ -d "$target_dir" ]]; then
+        echo "[Skipping] $type: $name already exists at $target_dir"
+        return
+    fi
+
+    echo "[Installing] $type: $name from $repo"
+    git clone --depth 1 "$repo" "$target_dir"
+}
+
+{{ range .omz_custom.plugins -}}
+install_package "plugin" "{{ .plugin }}" "{{ .repo }}"
+{{ end -}}
+
+{{ range .omz_custom.themes -}}
+install_package "theme" "{{ .theme }}" "{{ .repo }}"
+{{ end -}}

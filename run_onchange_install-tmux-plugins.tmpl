@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# This script installs all tmux plugins as listed in tmux-plugins.yaml
+
+echo "[Installing] Installing tmux packages..."
+
+# Function to install a plugin or theme
+install_package() {
+    local type=$1
+    local name=$2
+    local repo=$3
+    local target_dir
+
+    if [[ "$type" == "plugin" ]]; then
+        target_dir="$XDG_CONFIG_HOME/tmux/plugins/$name"
+    else
+        echo "[Error] Unknown type: $type"
+        exit 1
+    fi
+
+    # Check if the target directory already exists
+    if [[ -d "$target_dir" ]]; then
+        echo "[Skipping] $type: $name already exists at $target_dir"
+        return
+    fi
+
+    echo "[Installing] $type: $name from $repo"
+    git clone --depth 1 "$repo" "$target_dir"
+}
+
+{{ range .tmux_plugins.plugins -}}
+install_package "plugin" "{{ .plugin }}" "{{ .repo }}"
+{{ end -}}
+
+if tmux has-session 2>/dev/null; then
+    $TMUX_PLUGIN_MANAGER_PATH/tpm/scripts/install_plugins.sh
+    tmux source "$XDG_CONFIG_HOME/tmux/tmux.conf"
+fi

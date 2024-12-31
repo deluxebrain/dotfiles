@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# This script configures macOS keyboard bindings using the settings from keyboard-bindings.yaml
+
+echo "[Configuration] Configuring macOS keyboard bindings..."
+
+# Create the required directory if it doesn't exist
+defaults_directory="$HOME/Library/KeyBindings"
+mkdir -p "$defaults_directory"
+
+# Generate the DefaultKeyBinding.dict file using the YAML configuration
+cat << 'EOF' > "$defaults_directory/DefaultKeyBinding.dict"
+{
+    {{- range $key, $action := .keyboard_bindings }}
+    "{{ $key }}" = "{{ $action }}";
+    {{- end }}
+}
+EOF
+
+echo "[Notice] Keyboard bindings have been configured"
+echo "[Notice] You may need to restart applications for the changes to take effect"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Include checksum of com.apple.Terminal.xml to force file run
+# com.apple.Terminal.xml hash: {{ include "dot_config/terminal/com.apple.Terminal.xml" | sha256sum }}
+
+echo "[Configuration] Configuring Terminal ..."
+
+plutil -convert binary1 \
+    "{{ .chezmoi.sourceDir }}/dot_config/terminal/com.apple.Terminal.xml" \
+    -o ~/Library/Preferences/com.apple.Terminal.plist

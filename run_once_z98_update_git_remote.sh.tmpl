@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -euo pipefail
+
+{{ if .gitUserName -}}
+CHEZMOI_REPO="{{ .chezmoi.sourceDir }}"
+CURRENT_REMOTE=$(git -C "$CHEZMOI_REPO" remote get-url origin)
+
+# Check if the remote is already using SSH
+if [[ "$CURRENT_REMOTE" =~ ^git@github\.com: ]]; then
+    echo "[Notice] chezmoi git repo already using SSH"
+    exit 0
+fi
+
+# Test SSH access to GitHub
+if ! ssh -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+    echo "[Warning] SSH access to GitHub is not currently setup"
+fi
+
+# Update the Git remote to use SSH
+NEW_REMOTE="git@github.com:${CURRENT_REMOTE#https://github.com/}"
+git -C "$CHEZMOI_REPO" remote set-url origin "$NEW_REMOTE"
+
+echo "[Notice] chezmoi git remote updated to SSH: $NEW_REMOTE"
+{{ end -}}

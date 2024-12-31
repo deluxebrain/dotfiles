@@ -1,0 +1,112 @@
+brew_packages:
+  core:
+    taps:
+      - homebrew/bundle #          Used for managing Brewfiles
+      - homebrew/services #        Used for service management
+    brews:
+      - chezmoi #                  Tool for managing dotfiles
+      - git #                      Distributed version control system
+      - tmux #                     Terminal multiplexer for managing multiple sessions
+      - figlet #                   Tool for generating text banners
+    casks:
+      - font-meslo-lg-nerd-font # Patched font with programming ligatures and icons
+      - iterm2 #                   Terminal emulator for macOS
+      - rectangle #                Window management app for macOS
+      - visual-studio-code #       Code editor from Microsoft
+
+  development:
+    brews:
+      - asdf #                     Tool for managing multiple runtime versions
+      - cookiecutter #             Tool for creating project templates
+      - direnv #                   Environment variable manager for shells
+      - editorconfig #             EditorConfig core for enforcing consistent coding styles
+      - gh #                       GitHub CLI for managing repositories and pull requests
+      - git-extras #               Additional utilities for Git
+      - jq #                       Command-line JSON processor
+      - just #                     A command runner for task automation
+      - lazygit #                  Terminal-based Git UI
+      - llvm #                     Collection of modular compiler and toolchain technologies
+      - make #                     Build automation tool
+      - node-build #               Install and build Node.js versions
+      - pipx #                     Tool for installing and managing Python CLI applications
+      - shellcheck #               Shell script static analysis tool
+      - yj #                       CLI for converting YAML to JSON and vice versa
+      - yq #                       CLI for processing YAML
+    casks:
+      - powershell #               Microsoft's command-line shell
+      - miniconda #                Miniconda installer for managing Python environments
+
+  cloud_and_infrastructure:
+    taps:
+      - goodwithtech/r #           Required by: dockle
+    brews:
+      - awscli #                   AWS Command Line Interface for managing AWS services
+      - istioctl #                 CLI for managing Istio service meshes
+      - kind #                     Kubernetes IN Docker for local clusters
+      - terraform #                HashiCorp's infrastructure as code tool
+      - tflint #                   Linter for Terraform configurations
+      - tfsec #                    Security scanner for Terraform
+      - trivy #                    Vulnerability scanner for containers and other artifacts
+      - wasmedge #                 WebAssembly runtime optimized for the edge
+      - goodwithtech/r/dockle #    Docker image linter
+      - hadolint #                 Dockerfile linter
+      - pre-commit #               Framework for managing pre-commit hooks
+      - k6 #                       Load testing tool for performance testing
+    casks:
+      - aws-vault #                Securely store and access AWS credentials
+      - docker #                   Docker Desktop for containerized applications
+      - lens #                     Kubernetes IDE
+      - vagrant #                  HashiCorp's tool for managing virtual environments
+
+  data_and_database:
+    brews:
+      - dvc #                      Data Version Control for machine learning projects
+      - libpq #                    PostgreSQL C library
+      - redis #                    In-memory key-value store
+      - sqlite #                   Self-contained, serverless database engine
+    casks:
+      - mysqlworkbench #           MySQL database design and management tool
+      - tableplus #                Database GUI for managing various databases
+
+  system_and_network:
+    brews:
+      - bash #                     The GNU Bourne Again Shell
+      - bash-completion #          Bash command-line completion
+      - dnsmasq #                  Lightweight DNS and DHCP server
+      - findutils #                GNU find, xargs, and locate utilities
+      - gawk #                     GNU implementation of AWK programming language
+      - gnu-sed #                  GNU stream editor (sed)
+      - netcat #                   Networking tool for sending/receiving data
+      - nmap #                     Network mapper for security auditing
+      - openssl@3 #                OpenSSL cryptography and SSL/TLS toolkit
+      - readline #                 Library for line-editing and history capabilities
+      - rsync #                    Utility for file synchronization and transfers
+      - smartmontools #            Tools for monitoring hard drives (SMART)
+      - sponge #                   Command for reading and writing to the same file
+      - tree #                     Directory tree viewer
+      - util-linux #               Miscellaneous system utilities
+      - watch #                    Periodically runs a command and shows output
+      - wget #                     Network utility for downloading files
+      - xdg-ninja #                Tool for managing dotfiles to comply with XDG spec
+      - zlib #                     Compression library
+    casks: []
+
+  media_and_documentation:
+    brews:
+      - adr-tools #                Command-line tool for managing Architecture Decision Records
+      - colordiff #                Colorized diff tool
+      - ffmpeg #                   Tool for handling multimedia files
+      - graphicsmagick #           Image processing tool
+      - graphviz #                 Graph visualization software
+      - potrace #                  Tool for tracing bitmaps into vector graphics
+      - promptfoo #                CLI for testing and debugging AI prompts
+      - ydiff #                    Colorized diff tool with side-by-side comparison
+    casks:
+      - anki #                     Flashcard program for memory training
+      - inkscape #                 Vector graphics editor
+      - joplin #                   Open-source note-taking application
+      - chatgpt #                  ChatGPT application for AI interactions
+
+  app_store:
+    mas:
+      - { name: "Xcode", id: 497799835 } # Apple's IDE for macOS/iOS development

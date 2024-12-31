@@ -1,0 +1,8 @@
+# Prettier inherits from .editorconfig file
+
+semi: true
+singleQuote: false
+trailingComma: none
+printWidth: 80
+proseWrap: always # Markdown: Wrap long lines
+tabWidth: 2

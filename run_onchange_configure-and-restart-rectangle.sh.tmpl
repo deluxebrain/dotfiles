@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# This restarts Rectangle when the configuration changes
+
+# Include checksum of RectangleConfig.json to force file run
+# RectangleConfig.json hash: {{ include "dot_config/rectangle/RectangleConfig.json" | sha256sum }}
+
+echo "[Configuration] Configuring and restarting Rectangle ..."
+
+mkdir -p "$HOME/Library/Application Support/Rectangle"
+cp "{{ .chezmoi.sourceDir }}/dot_config/rectangle/RectangleConfig.json" "$HOME/Library/Application Support/Rectangle/RectangleConfig.json"
+
+osascript <<EOF
+set appName to "Rectangle"
+if application appName is running then
+    tell application appName to quit
+    repeat until application appName is not running
+        delay 1
+    end repeat
+    delay 1
+end if
+
+tell application appName to launch
+EOF

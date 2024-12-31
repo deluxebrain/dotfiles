@@ -1,0 +1,61 @@
+# Set XDG Base Directories
+# These variables define where user-specific files, configurations, and caches should be stored.
+# By following the XDG Base Directory Specification, we keep the home directory clean and organized.
+# - XDG_CONFIG_HOME: Configuration files (e.g., ~/.config/git/config)
+# - XDG_DATA_HOME: Application data that should persist (e.g., ~/.local/share)
+# - XDG_CACHE_HOME: Application cache files (e.g., ~/.cache)
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# Add ~/bin and /usr/local/bin to the PATH
+export PATH="$HOME/bin:/usr/local/bin:$PATH"
+
+# zsh
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+# compinit dump files ( used by autocompletion )
+export ZSH_COMPDUMP="$XDG_CACHE_HOME/.zcompdump-$HOST"
+
+# oh-my-zsh
+export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
+export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh_custom"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/.cache/ohmyzsh"
+export ZSH_THEME="powerlevel10k/powerlevel10k"
+
+
+# shell configuration
+export LC_ALL=en_GB.UTF-8
+export LANG=en_GB.UTF-8
+# disable shell state sessions ( we are using zsh for this )
+export SHELL_SESSIONS_DISABLE=1
+export HISTSIZE="32768"
+export HISTFILESIZE="$HISTSIZE"
+
+# XDG configuration for various apps
+export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME/asdf/asdfrc"
+export ASDF_DATA_DIR="$XDG_DATA_HOME/asdf"
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
+export GH_CONFIG_DIR="$XDG_CONFIG_HOME/gh"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export LESSHISTFILE="$XDG_STATE_HOME/less/history"
+export VAGRANT_HOME="$XDG_DATA_HOME/vagrant"
+
+# VS Code configuration
+# VSCODE_PORTABLE: Stores all VS Code data including settings, keybindings, and snippets
+export VSCODE_PORTABLE="$XDG_DATA_HOME/vscode"
+
+# VSCODE_EXTENSIONS: Specifies custom extensions directory
+export VSCODE_EXTENSIONS="$XDG_DATA_HOME/vscode/extensions"
+
+# Vim configuration
+export EDITOR=vim
+if [ -f "${XDG_CONFIG_HOME}/vim/vimrc" ]; then
+    export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
+fi
+
+# Initialize Homebrew environment
+if [ -f "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi

@@ -1,0 +1,29 @@
+{{- $installTypes := list "full" "minimal" -}}
+
+{{- $installType := promptChoiceOnce . "installType" "Install type" $installTypes "full" -}}
+{{- $installAppStorePackages := promptBoolOnce . "installAppStorePackages" "Install App Store packages?" false -}}
+{{- $gitUserName := promptStringOnce . "gitUserName" "Git user name" "" -}}
+{{- $gitUserEmail := promptStringOnce . "gitUserEmail" "Git user email" "" -}}
+{{- $generateSshKey := promptBoolOnce . "generateSshKey" "Generate default SSH keypair?" true -}}
+{{- $updateGitRemote := promptBoolOnce . "updateGitRemote" "Update chezmoi git remote to use ssh?" true -}}
+{{- $timezone := promptStringOnce . "timezone" "Timezone" "Europe/London" -}}
+
+[data]
+    installType = {{ $installType | quote }}
+    installAppStorePackages = {{ $installAppStorePackages }}
+    gitUserName = {{ $gitUserName | quote }}
+    gitUserEmail = {{ $gitUserEmail | quote }}
+    generateSshKey = {{ $generateSshKey }}
+    updateGitRemote = {{ $updateGitRemote }}
+    timezone = {{ $timezone | quote }}
+
+[scriptEnv]
+    XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
+    XDG_DATA_HOME = "{{ .chezmoi.homeDir }}/.local/share"
+    XDG_CACHE_HOME = "{{ .chezmoi.homeDir }}/.cache"
+    XDG_STATE_HOME = "{{ .chezmoi.homeDir }}/.local/state"
+    ZSH = "{{ .chezmoi.homeDir }}/.config/oh-my-zsh"
+    ZSH_CUSTOM = "{{ .chezmoi.homeDir }}/.config/zsh_custom"
+    VSCODE_PORTABLE = "{{ .chezmoi.homeDir }}/.local/share/vscode"
+    VSCODE_EXTENSIONS = "{{ .chezmoi.homeDir }}/.local/share/vscode/extensions"
+    TMUX_PLUGIN_MANAGER_PATH = "{{ .chezmoi.homeDir }}/.config/tmux/plugins/"

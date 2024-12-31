@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# This script installs VSCode extensions from the vscode-extensions.yaml file
+
+echo "[Installing] Installing VSCode extensions..."
+
+# Load Homebrew environment variables only if not already loaded
+if ! command -v brew &>/dev/null; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+{{ if eq .installType "full" }}
+{{ range .vscode_extensions -}}
+code --force --install-extension {{ . }}
+{{ end }}
+{{ end }}

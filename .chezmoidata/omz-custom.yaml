@@ -1,0 +1,9 @@
+omz_custom:
+  plugins:
+    - plugin: zsh-syntax-highlighting
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    - plugin: zsh-autosuggestions
+      repo: https://github.com/zsh-users/zsh-autosuggestions
+  themes:
+    - theme: powerlevel10k
+      repo: https://github.com/romkatv/powerlevel10k.git

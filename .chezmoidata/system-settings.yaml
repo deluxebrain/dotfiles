@@ -1,0 +1,165 @@
+system_settings:
+  configuration:
+    # ==============================================
+    # System-Level Settings
+    # ==============================================
+    - domain: NSGlobalDomain
+      settings:
+        # Text editing behavior
+        - key: NSAutomaticCapitalizationEnabled
+          type: bool
+          value: false
+        - key: NSAutomaticDashSubstitutionEnabled
+          type: bool
+          value: false
+        - key: NSAutomaticPeriodSubstitutionEnabled
+          type: bool
+          value: false
+        - key: NSAutomaticQuoteSubstitutionEnabled
+          type: bool
+          value: false
+        - key: NSAutomaticSpellingCorrectionEnabled
+          type: bool
+          value: false
+        # Keyboard behavior
+        - key: ApplePressAndHoldEnabled
+          type: bool
+          value: false
+        - key: KeyRepeat
+          type: int
+          value: 1
+        - key: InitialKeyRepeat
+          type: int
+          value: 10
+        # Dictation
+        - key: AppleDictationAutoEnable
+          type: int
+          value: 0
+        # File behavior
+        - key: NSDocumentSaveNewDocumentsToCloud
+          type: bool
+          value: false
+        - key: AppleShowAllExtensions
+          type: bool
+          value: true
+        # Time format
+        - key: AppleICUForce24HourTime
+          type: bool
+          value: true
+        - key: AppleInterfaceStyle
+          type: string
+          value: Dark
+
+    # ==============================================
+    # Input & Keyboard Settings
+    # ==============================================
+    - domain: com.apple.TextInputMenu
+      settings:
+        - key: visible
+          type: bool
+          value: true
+
+    - domain: com.apple.HIToolbox
+      settings:
+        - key: AppleCurrentKeyboardLayoutInputSourceID
+          type: string
+          value: com.apple.keylayout.British
+
+    # ==============================================
+    # UI & Display Settings
+    # ==============================================
+    - domain: com.apple.dock
+      settings:
+        # Appearance
+        - key: tilesize
+          type: int
+          value: 36
+        - key: mineffect
+          type: string
+          value: scale
+        # Behavior
+        - key: mouse-over-hilite-stack
+          type: bool
+          value: true
+        - key: minimize-to-application
+          type: bool
+          value: true
+        - key: enable-spring-load-actions-on-all-items
+          type: bool
+          value: true
+        - key: show-process-indicators
+          type: bool
+          value: true
+        - key: mru-spaces
+          type: bool
+          value: false
+        - key: autohide
+          type: bool
+          value: false
+        - key: show-recents
+          type: bool
+          value: false
+
+    # ==============================================
+    # File System & Finder Settings
+    # ==============================================
+    - domain: com.apple.desktopservices
+      settings:
+        # Disable .DS_Store file creation
+        - key: DSDontWriteNetworkStores
+          type: bool
+          value: true
+        - key: DSDontWriteUSBStores
+          type: bool
+          value: true
+
+    - domain: com.apple.finder
+      settings:
+        # UI Elements
+        - key: ShowStatusBar
+          type: bool
+          value: true
+        - key: ShowPathbar
+          type: bool
+          value: true
+        - key: _FXShowPosixPathInTitle
+          type: bool
+          value: true
+        # Behavior
+        - key: _FXSortFoldersFirst
+          type: bool
+          value: true
+        - key: FXDefaultSearchScope
+          type: string
+          value: SCcf
+        - key: FXEnableExtensionChangeWarning
+          type: bool
+          value: false
+        - key: FXPreferredViewStyle
+          type: string
+          value: Nlsv
+
+    # ==============================================
+    # Application Settings
+    # ==============================================
+    - domain: com.googlecode.iterm2
+      settings:
+        - key: PrefsCustomFolder
+          type: string
+          value: "${XDG_CONFIG_HOME}/iterm2"
+        - key: LoadPrefsFromCustomFolder
+          type: bool
+          value: true
+        # Required for Rectangle.app window management compatibility
+        - key: DisableWindowSizeSnap
+          type: int
+          value: 1
+
+  # ==============================================
+  # Apps that need to be restarted
+  # ==============================================
+  apps_to_restart:
+    - Activity Monitor
+    - Dock
+    - Finder
+    - SystemUIServer

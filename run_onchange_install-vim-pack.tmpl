@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -euo pipefail
+
+echo "[Installing] Installing vim packages..."
+
+# Function to install a plugin or theme
+install_package() {
+    local type=$1
+    local name=$2
+    local repo=$3
+    local target_dir
+
+    if [[ "$type" == "plugin" ]]; then
+        target_dir="$XDG_CONFIG_HOME/vim/pack/local/start/$name"
+    elif [[ "$type" == "theme" ]]; then
+        target_dir="$XDG_CONFIG_HOME/vim/pack/themes/start/$name"
+    else
+        echo "[Error] Unknown type: $type"
+        exit 1
+    fi
+
+    # Check if the target directory already exists
+    if [[ -d "$target_dir" ]]; then
+        echo "[Skipping] $type: $name already exists at $target_dir"
+        return
+    fi
+
+    echo "[Installing] $type: $name from $repo"
+    git clone --depth 1 "$repo" "$target_dir"
+}
+
+{{ range .vim_pack.plugins -}}
+install_package "plugin" "{{ .plugin }}" "{{ .repo }}"
+{{ end -}}
+
+{{ range .vim_pack.themes -}}
+install_package "theme" "{{ .theme }}" "{{ .repo }}"
+{{ end -}}
+
+# generate plugins help
+# e.g. :help editorconfig
+vim -c "helptags ALL" -c "q"

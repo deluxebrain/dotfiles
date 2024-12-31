@@ -1,0 +1,47 @@
+# Python related
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.env
+.venv
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Mac system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# ML specific
+*.h5
+*.pkl
+*.model
+tensorboard/
+runs/
+wandb/
+mlruns/
+
+# Large files & datasets
+*.csv
+*.dat
+*.log
+*.zip
+*.tar.gz

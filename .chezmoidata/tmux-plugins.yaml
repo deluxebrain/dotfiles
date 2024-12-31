@@ -1,0 +1,12 @@
+tmux_plugins:
+  plugins:
+    - plugin: tpm
+      repo: https://github.com/tmux-plugins/tpm
+    - plugin: tmux-sensible
+      repo: https://github.com/tmux-plugins/tmux-sensible
+    - plugin: tmux
+      repo: https://github.com/dracula/tmux.git
+    - plugin: tmux-pain-control
+      repo: https://github.com/tmux-plugins/tmux-pain-control
+    - plugin: tmux-resurrect
+      repo: https://github.com/tmux-plugins/tmux-resurrect

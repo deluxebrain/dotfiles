@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# This script generates an Ed25519 SSH keypair if one doesn't already exist.
+
+# Create .ssh directory if it doesn't exist
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+echo "[Configuration] Adding GitHub SSH key to known_hosts..."
+ssh-keyscan -t rsa,ecdsa,ed25519 github.com >> "$HOME/.ssh/known_hosts"
+
+# Ensure correct permissions
+chmod 644 ~/.ssh/known_hosts
+
+{{ if .generateSshKey -}}
+# Check if SSH key already exists
+if [ ! -f "$HOME/.ssh/id_ed25519" ]; then
+    echo "[Configuring] Creating default SSH keypair..."
+
+    # Generate Ed25519 key using chezmoi variables
+    ssh-keygen -t ed25519 -f "$HOME/.ssh/id_ed25519" -N "" -C "{{ .chezmoi.username }}@{{ .chezmoi.hostname }}"
+
+    # Set correct permissions
+    chmod 600 "$HOME/.ssh/id_ed25519"
+    chmod 644 "$HOME/.ssh/id_ed25519.pub"
+
+    # Add to keychain
+    ssh-add --apple-use-keychain "$HOME/.ssh/id_ed25519"
+else
+    echo "[Skipping] Default Ed25519 keypair already exists"
+fi
+{{ end -}}

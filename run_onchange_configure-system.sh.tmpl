@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# This script configures macOS system settings using the settings from system-settings.yaml
+
+echo "[Configuration] Configuring macOS system settings..."
+
+{{ range $config := .system_settings.configuration -}}
+echo "[Configuration] Configuring {{ $config.domain }}..."
+{{ range .settings -}}
+defaults write {{ $config.domain }} {{ .key }} -{{ .type }} {{ .value }}
+{{ end -}}
+{{ end -}}
+
+#
+# Apply Changes
+#
+
+echo "[Notice] Affected applications will be restarted to ensure all settings take effect."
+for app in {{ range .system_settings.apps_to_restart }}"{{ . }}" {{ end }}; do
+	killall "${app}" >/dev/null 2>&1 || true
+done

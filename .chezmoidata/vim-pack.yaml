@@ -1,0 +1,7 @@
+vim_pack:
+  plugins:
+    - plugin: editorconfig-vim
+      repo: https://github.com/editorconfig/editorconfig-vim.git
+  themes:
+    - theme: dracula
+      repo: https://github.com/dracula/vim.git

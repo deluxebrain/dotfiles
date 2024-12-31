@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# This script configures macOS system date and time settings
+
+echo "[Configuration] Configuring macOS system date and time settings..."
+
+#!/bin/bash
+
+# Define constants
+TIMEZONE="{{ .timezone }}"
+NETWORK_TIME_SERVER="time.apple.com"
+
+# Set the time zone
+sudo systemsetup -settimezone "$TIMEZONE"
+
+# Enable automatic time and date setting
+sudo systemsetup -setusingnetworktime on
+
+# Set the network time server
+sudo systemsetup -setnetworktimeserver "$NETWORK_TIME_SERVER"
+
+# Restart SystemUIServer to apply UI changes
+killall SystemUIServer
