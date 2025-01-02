@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+# This script updates the Git remote origin to use SSH if a git username has been specified.
+
 {{ if .gitUserName -}}
 CHEZMOI_REPO="{{ .chezmoi.sourceDir }}"
 CURRENT_REMOTE=$(git -C "$CHEZMOI_REPO" remote get-url origin)

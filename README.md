@@ -55,9 +55,10 @@ Before installing, ensure the following:
 
 ## Installation
 
-To set up your dotfiles, run the following command in your terminal, replacing
+To set up your dotfiles, first **fork this repository** to your own GitHub
+account, then run the following command in your terminal, replacing
 `GITHUB_USERNAME` with your GitHub username. This assumes your repository is
-named `dotfiles` and uses HTTPS by default.
+named `dotfiles`. The clone will use HTTPS by default.
 
 ```sh
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
@@ -81,6 +82,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
    ```
 
 3. **View Managed Files**:
+
    ```sh
    chezmoi managed
    ```

@@ -5,7 +5,6 @@
 {{- $gitUserName := promptStringOnce . "gitUserName" "Git user name" "" -}}
 {{- $gitUserEmail := promptStringOnce . "gitUserEmail" "Git user email" "" -}}
 {{- $generateSshKey := promptBoolOnce . "generateSshKey" "Generate default SSH keypair?" true -}}
-{{- $updateGitRemote := promptBoolOnce . "updateGitRemote" "Update chezmoi git remote to use ssh?" true -}}
 {{- $timezone := promptStringOnce . "timezone" "Timezone" "Europe/London" -}}
 
 [data]
@@ -14,7 +13,6 @@
     gitUserName = {{ $gitUserName | quote }}
     gitUserEmail = {{ $gitUserEmail | quote }}
     generateSshKey = {{ $generateSshKey }}
-    updateGitRemote = {{ $updateGitRemote }}
     timezone = {{ $timezone | quote }}
 
 [scriptEnv]

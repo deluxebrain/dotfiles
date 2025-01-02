@@ -3,13 +3,18 @@
 ## BUGS
 
 - [] Sudo keep-alive is not working
+- [x] Git remote origin update not using its associated variable. Remove the
+      var?
+- [] README is technically wrong wrt GITHUB_USERNAME would imply you have forked
+  the repo
 
 ## NEXT
 
-- [] Remove git history
+- [x] Remove git history
 - [x] Add ChatGPT brew
 - [x] Add support for not entering git config
 - [x] Test min install no git, update to full then update to git config
+- [] Migration guide ( for users with some existing dotfiles )
 
 ## BACKLOG
 
