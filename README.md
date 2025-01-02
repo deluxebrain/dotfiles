@@ -64,6 +64,47 @@ named `dotfiles`. The clone will use HTTPS by default.
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 ```
 
+### Suggested installation process
+
+Due to the weight of Brew packages, a full installation can take tens of minutes
+to complete. It is therefore advisable to first perform a **minimal
+installation**. This will minimize the overall installation time and quickly
+reveal any issues across the entire dotfiles installation process without having
+to wait for all of the Brew packages to install.
+
+The installation can optionally update your dotfiles GitHub repo to use SSH.
+This will be performed if you provide a non-blank response to `gitUserName` when
+prompted. A potential installation process is to run the dotfiles first without
+specifying your GitHub username and respond `Yes` to the prompt to generate a
+default SSH keypair. You can then register this keypair with GitHub and run the
+dotfiles installation again, specifying your GitHub username.
+
+This would look as follows:
+
+1. **Perform a Minimal Installation**
+
+   - Select **minimum installation type**
+   - Use defaults for all other settings
+   - Leave GitHub username and email blank
+
+   ```sh
+   sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply
+   ```
+
+2. **Add Generated SSH Key to GitHub**
+3. **Restart Terminal**
+4. **Perform a Full Installation**
+
+   - Select **full installation type**
+   - Enter your GitHub username and email
+
+   ```sh
+   chezmoi init --prompt --apply
+   ```
+
+This will perform a delta to a full install and update the chezmoi dotfiles git
+remote to SSH.
+
 ---
 
 ## Post-installation Steps

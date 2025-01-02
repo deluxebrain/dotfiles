@@ -4,6 +4,7 @@ brew_packages:
       - homebrew/bundle #          Used for managing Brewfiles
       - homebrew/services #        Used for service management
     brews:
+      - asdf #                     Tool for managing multiple runtime versions
       - chezmoi #                  Tool for managing dotfiles
       - git #                      Distributed version control system
       - tmux #                     Terminal multiplexer for managing multiple sessions
@@ -16,7 +17,6 @@ brew_packages:
 
   development:
     brews:
-      - asdf #                     Tool for managing multiple runtime versions
       - cookiecutter #             Tool for creating project templates
       - direnv #                   Environment variable manager for shells
       - editorconfig #             EditorConfig core for enforcing consistent coding styles

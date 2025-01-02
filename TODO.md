@@ -5,11 +5,13 @@
 - [] Sudo keep-alive is not working
 - [x] Git remote origin update not using its associated variable. Remove the
       var?
-- [] README is technically wrong wrt GITHUB_USERNAME would imply you have forked
-  the repo
+- [x] README is technically wrong wrt GITHUB_USERNAME would imply you have
+      forked the repo
 
 ## NEXT
 
+- [x] Add recommended installation procedure to README
+- [] Default ASDF plugins
 - [x] Remove git history
 - [x] Add ChatGPT brew
 - [x] Add support for not entering git config
@@ -25,7 +27,7 @@
 - [] Chezmoi autocommit?
 - [] Override vim to chezmoi edit managed files
 - [] Git rebase workflow
-- [] Rectangle documentation generation ( keymap visualization from config)
+- [] Rectangle documentation generation ( keyman visualization from config)
 - [] App appendix
 - [] GitHub actions test on macos on PR
 - [] Aws-vault
