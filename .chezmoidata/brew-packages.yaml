@@ -35,6 +35,7 @@ brew_packages:
     casks:
       - powershell #               Microsoft's command-line shell
       - miniconda #                Miniconda installer for managing Python environments
+      - cursor #                   AI code editor
 
   cloud_and_infrastructure:
     taps:

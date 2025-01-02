@@ -1,0 +1,10 @@
+asdf_plugins:
+  - awscli
+  - azure-cli
+  - dotnet-core
+  - golang
+  - helm
+  - kubectl
+  - kustomize
+  - nodejs
+  - python
