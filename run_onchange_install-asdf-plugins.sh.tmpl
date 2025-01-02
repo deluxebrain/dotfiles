@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+{{ if eq .installType "full" -}}
 echo "[Installing] Installing asdf plugins..."
 
 # Load Homebrew environment variables only if not already loaded
@@ -14,3 +15,4 @@ asdf plugin add "{{ . }}"
 {{ end -}}
 
 asdf plugin update --all
+{{ end -}}
