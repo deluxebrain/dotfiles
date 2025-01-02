@@ -27,6 +27,7 @@
     "keypair",
     "lazygit",
     "libpq",
+    "luajit",
     "meslo",
     "Miniconda",
     "mysqlworkbench",
