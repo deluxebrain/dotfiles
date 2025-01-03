@@ -10,42 +10,35 @@ if ! command -v brew &>/dev/null; then
 fi
 
 # Path to the main dnsmasq configuration file
-DNSMASQ_CONF="$(brew --prefix)/etc/dnsmasq.conf"
+DNSMASQ_CONF="$HOMEBREW_PREFIX/etc/dnsmasq.conf"
 
 # Path to the dnsmasq.d directory
-DNSMASQ_D_DIR="$(brew --prefix)/etc/dnsmasq.d"
+DNSMASQ_D_DIR="$HOMEBREW_PREFIX/etc/dnsmasq.d"
+
+# Pattern in dnsmasq config file to enable custom config directory
+PATTERN_CONF_DIR="conf-dir=$HOMEBREW_PREFIX/etc/dnsmasq.d/,\*.conf"
 
 # Function to ensure dnsmasq.d directory exists and is configured
 configure_dnsmasq() {
-    echo "[Configuration] Configuring dnsmasq to use $DNSMASQ_D_DIR for additional configuration files..."
+    echo "Configuring dnsmasq to use $DNSMASQ_D_DIR for additional configuration files..."
 
-    # Create the dnsmasq.d directory if it doesn't exist
-    if [[ ! -d "$DNSMASQ_D_DIR" ]]; then
-        echo "Creating directory: $DNSMASQ_D_DIR"
-        mkdir -p "$DNSMASQ_D_DIR"
-    else
-        echo "✔ Directory already exists: $DNSMASQ_D_DIR"
+    # Verify the dnsmasq config file is as expected
+    if ! grep "$PATTERN_CONF_DIR" "$DNSMASQ_CONF" &>/dev/null; then
+        echo Unexpected dnsmasq configuration file contents
+        exit 1
     fi
 
     # Ensure conf-dir is uncommented and correctly configured
-    if grep -q "#conf-dir=$DNSMASQ_D_DIR/,*.conf" "$DNSMASQ_CONF"; then
-        echo "Uncommenting and configuring conf-dir=$DNSMASQ_D_DIR"
-        sed -i '' "s|#conf-dir=.*|conf-dir=$DNSMASQ_D_DIR|" "$DNSMASQ_CONF"
-    elif ! grep -q "conf-dir=$DNSMASQ_D_DIR" "$DNSMASQ_CONF"; then
-        echo "Adding conf-dir=$DNSMASQ_D_DIR to $DNSMASQ_CONF"
-        echo "conf-dir=$DNSMASQ_D_DIR" >> "$DNSMASQ_CONF"
-    else
-        echo "✔ dnsmasq.conf already configured to include $DNSMASQ_D_DIR"
-    fi
+    gsed -i.bak "\:${PATTERN_CONF_DIR}:s:^#\s*::g" "$DNSMASQ_CONF"
 }
 
 # Function to check if dnsmasq is registered as a system-level service
 check_registered() {
     if sudo brew services list | grep -q dnsmasq; then
-        echo "✔ dnsmasq is registered as a system-level service (root)."
+        echo "dnsmasq is registered as a system-level service (root)."
         return 0
     else
-        echo "✘ dnsmasq is NOT registered as a system-level service."
+        echo "dnsmasq is NOT registered as a system-level service."
         return 1
     fi
 }
@@ -55,9 +48,9 @@ restart_dnsmasq() {
     echo "Restarting dnsmasq as a system-level service..."
     brew services stop dnsmasq &>/dev/null
     if sudo brew services start dnsmasq; then
-        echo "✔ dnsmasq has been successfully registered and started as a system-level service."
+        echo "dnsmasq has been successfully registered and started as a system-level service."
     else
-        echo "✘ Failed to start dnsmasq as a system-level service. Check for errors."
+        echo "Failed to start dnsmasq as a system-level service. Check for errors."
         exit 1
     fi
 }
@@ -74,5 +67,3 @@ configure_dnsmasq
 # Step 3: Restart dnsmasq to apply new configuration
 echo "Restarting dnsmasq to apply configuration..."
 restart_dnsmasq
-
-echo "✔ dnsmasq is properly configured and running with $DNSMASQ_D_DIR included."
