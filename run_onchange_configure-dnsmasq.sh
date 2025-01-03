@@ -18,6 +18,14 @@ DNSMASQ_D_DIR="$HOMEBREW_PREFIX/etc/dnsmasq.d"
 # Pattern in dnsmasq config file to enable custom config directory
 PATTERN_CONF_DIR="conf-dir=$HOMEBREW_PREFIX/etc/dnsmasq.d/,\*.conf"
 
+# Function to check dnsmasq is installed
+check_installed() {
+    if ! command -v dnsmasq &>/dev/null; then
+        echo "dnsmasq not installed!"
+        exit 1
+    fi
+}
+
 # Function to ensure dnsmasq.d directory exists and is configured
 configure_dnsmasq() {
     echo "Configuring dnsmasq to use $DNSMASQ_D_DIR for additional configuration files..."
@@ -55,15 +63,18 @@ start_dnsmasq_as_sudo() {
     fi
 }
 
-# Step 1: Check registration
+# Step 1: Check dnsmasq installed
+check_installed
+
+# Step 2: Check registration
 if ! check_registered; then
     echo "Attempting to fix dnsmasq registration..."
     start_dnsmasq_as_sudo
 fi
 
-# Step 2: Configure dnsmasq
+# Step 3: Configure dnsmasq
 configure_dnsmasq
 
-# Step 3: Restart dnsmasq to apply new configuration
+# Step 4: Restart dnsmasq to apply new configuration
 echo "Restarting dnsmasq to apply configuration..."
 sudo brew services restart dnsmasq
