@@ -43,8 +43,8 @@ check_registered() {
     fi
 }
 
-# Function to restart dnsmasq as a system-level service
-restart_dnsmasq() {
+# Function to start dnsmasq as a system-level service
+start_dnsmasq_as_sudo() {
     echo "Restarting dnsmasq as a system-level service..."
     brew services stop dnsmasq &>/dev/null
     if sudo brew services start dnsmasq; then
@@ -58,7 +58,7 @@ restart_dnsmasq() {
 # Step 1: Check registration
 if ! check_registered; then
     echo "Attempting to fix dnsmasq registration..."
-    restart_dnsmasq
+    start_dnsmasq_as_sudo
 fi
 
 # Step 2: Configure dnsmasq
@@ -66,4 +66,4 @@ configure_dnsmasq
 
 # Step 3: Restart dnsmasq to apply new configuration
 echo "Restarting dnsmasq to apply configuration..."
-restart_dnsmasq
+sudo brew services restart dnsmasq
