@@ -6,7 +6,9 @@ brew_packages:
     brews:
       - asdf #                     Tool for managing multiple runtime versions
       - chezmoi #                  Tool for managing dotfiles
+      - dnsmasq #                  Lightweight DNS and DHCP server
       - git #                      Distributed version control system
+      - gnu-sed #                  GNU stream editor (sed)
       - tmux #                     Terminal multiplexer for managing multiple sessions
       - figlet #                   Tool for generating text banners
     casks:
@@ -73,10 +75,8 @@ brew_packages:
     brews:
       - bash #                     The GNU Bourne Again Shell
       - bash-completion #          Bash command-line completion
-      - dnsmasq #                  Lightweight DNS and DHCP server
       - findutils #                GNU find, xargs, and locate utilities
       - gawk #                     GNU implementation of AWK programming language
-      - gnu-sed #                  GNU stream editor (sed)
       - netcat #                   Networking tool for sending/receiving data
       - nmap #                     Network mapper for security auditing
       - openssl@3 #                OpenSSL cryptography and SSL/TLS toolkit
