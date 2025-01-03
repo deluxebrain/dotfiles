@@ -10,6 +10,7 @@
 
 ## NEXT
 
+- [] DNSMasq setup
 - [x] Add recommended installation procedure to README
 - [] Default ASDF plugins
 - [x] Remove git history
