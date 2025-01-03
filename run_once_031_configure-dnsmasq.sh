@@ -2,6 +2,13 @@
 
 set -euo pipefail
 
+echo "[Configuration] Checking dnsmasq registration and configuration..."
+
+# Load Homebrew environment variables only if not already loaded
+if ! command -v brew &>/dev/null; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # Path to the main dnsmasq configuration file
 DNSMASQ_CONF="$(brew --prefix)/etc/dnsmasq.conf"
 
@@ -54,13 +61,6 @@ restart_dnsmasq() {
         exit 1
     fi
 }
-
-echo "[Configuration] Checking dnsmasq registration and configuration..."
-
-# Load Homebrew environment variables only if not already loaded
-if ! command -v brew &>/dev/null; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
 
 # Step 1: Check registration
 if ! check_registered; then
