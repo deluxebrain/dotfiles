@@ -34,8 +34,7 @@ configure_dnsmasq() {
 
 # Function to check if dnsmasq is registered as a system-level service
 check_registered() {
-    sudo brew services list | grep dnsmasq | grep -q "root"
-    if [[ $? -eq 0 ]]; then
+    if sudo brew services list | grep -q dnsmasq; then
         echo "✔ dnsmasq is registered as a system-level service (root)."
         return 0
     else
@@ -48,8 +47,7 @@ check_registered() {
 restart_dnsmasq() {
     echo "Restarting dnsmasq as a system-level service..."
     brew services stop dnsmasq &>/dev/null
-    sudo brew services start dnsmasq
-    if [[ $? -eq 0 ]]; then
+    if sudo brew services start dnsmasq; then
         echo "✔ dnsmasq has been successfully registered and started as a system-level service."
     else
         echo "✘ Failed to start dnsmasq as a system-level service. Check for errors."
@@ -59,9 +57,13 @@ restart_dnsmasq() {
 
 echo "[Configuration] Checking dnsmasq registration and configuration..."
 
+# Load Homebrew environment variables only if not already loaded
+if ! command -v brew &>/dev/null; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # Step 1: Check registration
-check_registered
-if [[ $? -ne 0 ]]; then
+if ! check_registered; then
     echo "Attempting to fix dnsmasq registration..."
     restart_dnsmasq
 fi
