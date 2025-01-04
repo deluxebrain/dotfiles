@@ -1,2 +1,6 @@
 dnsmasq_config:
-  domains: []
+  domains:
+    - tld: internal
+      ip_address: 127.0.0.1
+    - tld: test
+      ip_address: 127.0.0.1

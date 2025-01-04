@@ -15,8 +15,10 @@
     "direnv",
     "dnsmasq",
     "dockle",
+    "dscacheutil",
     "figlet",
     "findutils",
+    "flushcache",
     "goodwithtech",
     "graphicsmagick",
     "graphviz",
@@ -26,6 +28,7 @@
     "istioctl",
     "iterm",
     "keypair",
+    "killall",
     "lazygit",
     "libpq",
     "luajit",
@@ -45,6 +48,7 @@
     "tableplus",
     "tflint",
     "tfsec",
+    "tmpl",
     "wasmedge",
     "ydiff"
   ]

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Load Homebrew environment variables only if not already loaded
+if ! command -v brew &>/dev/null; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Path to the dnsmasq.d directory
+DNSMASQ_D_DIR="$HOMEBREW_PREFIX/etc/dnsmasq.d"
+
+mkdir -p "$DNSMASQ_D_DIR"
+cat <<EOF > "$DNSMASQ_D_DIR/dns-routes.conf"
+{{- template "dns-routes.conf.tmpl" .dnsmasq_config -}}
+EOF
+
+# configure os to use dnsmasq for local dns resolution
+sudo mkdir -p /etc/resolver
+cat <<EOF | sudo tee /etc/resolver/dnsmasq >/dev/null
+{{- template "dnsmasq-resolver.tmpl" .dnsmasq_config -}}
+EOF
+
+# reload dnsmasq configuration
+sudo brew services restart dnsmasq
+
+# flush dns
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder

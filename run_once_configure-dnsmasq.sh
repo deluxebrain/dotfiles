@@ -18,28 +18,6 @@ DNSMASQ_D_DIR="$HOMEBREW_PREFIX/etc/dnsmasq.d"
 # Pattern in dnsmasq config file to enable custom config directory
 PATTERN_CONF_DIR="conf-dir=$HOMEBREW_PREFIX/etc/dnsmasq.d/,\*.conf"
 
-# Function to check dnsmasq is installed
-check_installed() {
-    if ! command -v dnsmasq &>/dev/null; then
-        echo "dnsmasq not installed!"
-        exit 1
-    fi
-}
-
-# Function to ensure dnsmasq.d directory exists and is configured
-configure_dnsmasq() {
-    echo "Configuring dnsmasq to use $DNSMASQ_D_DIR for additional configuration files..."
-
-    # Verify the dnsmasq config file is as expected
-    if ! grep "$PATTERN_CONF_DIR" "$DNSMASQ_CONF" &>/dev/null; then
-        echo Unexpected dnsmasq configuration file contents
-        exit 1
-    fi
-
-    # Ensure conf-dir is uncommented and correctly configured
-    gsed -i.bak "\:${PATTERN_CONF_DIR}:s:^#\s*::g" "$DNSMASQ_CONF"
-}
-
 # Function to check if dnsmasq is registered as a system-level service
 check_registered() {
     if sudo brew services list | grep -q dnsmasq; then
@@ -51,30 +29,36 @@ check_registered() {
     fi
 }
 
+# Function to ensure dnsmasq.d directory exists and is configured
+configure_dnsmasq() {
+    echo "Configuring dnsmasq to use $DNSMASQ_D_DIR for additional configuration files..."
+
+    # Verify the dnsmasq config file is as expected
+    if ! grep "$PATTERN_CONF_DIR" "$DNSMASQ_CONF" &>/dev/null; then
+        echo "Unexpected dnsmasq configuration file contents"
+        exit 1
+    fi
+
+    # Ensure conf-dir is uncommented and correctly configured
+    gsed -i.bak "\:${PATTERN_CONF_DIR}:s:^#\s*::g" "$DNSMASQ_CONF"
+}
+
 # Function to start dnsmasq as a system-level service
 start_dnsmasq_as_sudo() {
     echo "Restarting dnsmasq as a system-level service..."
     brew services stop dnsmasq &>/dev/null
-    if sudo brew services start dnsmasq; then
-        echo "dnsmasq has been successfully registered and started as a system-level service."
-    else
-        echo "Failed to start dnsmasq as a system-level service. Check for errors."
-        exit 1
-    fi
+    sudo brew services start dnsmasq
 }
 
-# Step 1: Check dnsmasq installed
-check_installed
-
-# Step 2: Check registration
+# Step 1: Check registration
 if ! check_registered; then
     echo "Attempting to fix dnsmasq registration..."
     start_dnsmasq_as_sudo
 fi
 
-# Step 3: Configure dnsmasq
+# Step 2: Configure dnsmasq
 configure_dnsmasq
 
-# Step 4: Restart dnsmasq to apply new configuration
+# Step 3: Restart dnsmasq to apply new configuration
 echo "Restarting dnsmasq to apply configuration..."
 sudo brew services restart dnsmasq

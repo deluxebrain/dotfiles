@@ -11,6 +11,9 @@
 ## NEXT
 
 - [] DNSMasq setup
+- [] dnsmasq configuration should be onchange on dnsmasq-config.yaml and full
+  install type. It should check for dnsmasq and exit 1 only if the config file
+  is empty.
 - [x] Add recommended installation procedure to README
 - [] Default ASDF plugins
 - [x] Remove git history
