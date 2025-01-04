@@ -10,16 +10,14 @@
 
 ## NEXT
 
-- [] DNSMasq setup
-- [] dnsmasq configuration should be onchange on dnsmasq-config.yaml and full
-  install type. It should check for dnsmasq and exit 1 only if the config file
-  is empty.
+- [x] DNSMasq setup
 - [x] Add recommended installation procedure to README
-- [] Default ASDF plugins
+- [x] Default ASDF plugins
 - [x] Remove git history
 - [x] Add ChatGPT brew
 - [x] Add support for not entering git config
 - [x] Test min install no git, update to full then update to git config
+- [] Document minimal vs full install type
 - [] Migration guide ( for users with some existing dotfiles )
 
 ## BACKLOG
