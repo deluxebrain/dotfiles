@@ -37,6 +37,7 @@
     "mysqlworkbench",
     "netcat",
     "nmap",
+    "NONINTERACTIVE",
     "pipefail",
     "pipx",
     "potrace",
