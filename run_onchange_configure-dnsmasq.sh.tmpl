@@ -12,13 +12,13 @@ DNSMASQ_D_DIR="$HOMEBREW_PREFIX/etc/dnsmasq.d"
 
 mkdir -p "$DNSMASQ_D_DIR"
 cat <<EOF > "$DNSMASQ_D_DIR/dns-routes.conf"
-{{- template "dns-routes.conf.tmpl" .dnsmasq_config -}}
+{{ template "dns-routes.conf.tmpl" .dnsmasq_config -}}
 EOF
 
 # configure os to use dnsmasq for local dns resolution
 sudo mkdir -p /etc/resolver
 cat <<EOF | sudo tee /etc/resolver/dnsmasq >/dev/null
-{{- template "dnsmasq-resolver.tmpl" .dnsmasq_config -}}
+{{ template "dnsmasq-resolver.tmpl" .dnsmasq_config -}}
 EOF
 
 # reload dnsmasq configuration
