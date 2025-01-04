@@ -46,7 +46,6 @@ brew_packages:
       - awscli #                   AWS Command Line Interface for managing AWS services
       - istioctl #                 CLI for managing Istio service meshes
       - kind #                     Kubernetes IN Docker for local clusters
-      - terraform #                HashiCorp's infrastructure as code tool
       - tflint #                   Linter for Terraform configurations
       - tfsec #                    Security scanner for Terraform
       - trivy #                    Vulnerability scanner for containers and other artifacts
