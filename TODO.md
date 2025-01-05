@@ -10,6 +10,7 @@
 
 ## NEXT
 
+- [x] mkcert package and configuration
 - [x] DNSMasq setup
 - [x] Add recommended installation procedure to README
 - [x] Default ASDF plugins

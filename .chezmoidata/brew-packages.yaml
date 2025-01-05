@@ -9,8 +9,9 @@ brew_packages:
       - dnsmasq #                  Lightweight DNS and DHCP server
       - git #                      Distributed version control system
       - gnu-sed #                  GNU stream editor (sed)
-      - tmux #                     Terminal multiplexer for managing multiple sessions
       - figlet #                   Tool for generating text banners
+      - mkcert #                   Tool for creating locally-trusted development certificates
+      - tmux #                     Terminal multiplexer for managing multiple sessions
     casks:
       - font-meslo-lg-nerd-font # Patched font with programming ligatures and icons
       - iterm2 #                   Terminal emulator for macOS
