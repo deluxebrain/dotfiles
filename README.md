@@ -192,6 +192,90 @@ chezmoi update --init
 
 ---
 
+## Team Usage
+
+When used in a team setting, `chezmoi` can provide both individual flexibility
+and shared consistency. The recommended approach is to maintain a **shared team
+repository** that acts as a parent, from which each team member creates their
+own fork. Team members can then personalize their configurations while still
+benefiting from a shared, reviewed baseline.
+
+### Recommended Model
+
+1. The **team creates a shared parent repository**, e.g. `org/dotfiles-team`.
+2. Each **team member forks** this repository to their own account, e.g.
+   `username/dotfiles`.
+3. Each member manages their personal dotfiles in their fork.
+4. When useful updates are made, members open **pull requests** to the team
+   repository for review.
+5. The team periodically merges agreed-upon improvements into the shared
+   repository.
+
+This model allows personal customization while enabling collaborative
+improvements to propagate across the team.
+
+### Configuring the Team Remote
+
+After forking the team repository, add the **upstream remote** pointing to the
+shared team repository:
+
+```sh
+chezmoi cd
+git remote add upstream git@github.com:org/dotfiles-team.git
+```
+
+### Fetching and Comparing Changes
+
+Fetch all new commits from the upstream repository:
+
+```sh
+git fetch upstream
+```
+
+Compare your fork with the team repository using either direction:
+
+- **Show commits in your branch but not in upstream** (your local changes not
+  yet merged into the team repo):
+
+  ```sh
+  git log upstream/main..main --oneline
+  ```
+
+- **Show commits in upstream but not in your branch** (team updates you haven’t
+  yet pulled):
+
+  ```sh
+  git log main..upstream/main --oneline
+  ```
+
+### Syncing Changes from the Team Repository
+
+Bring the latest team changes into your local branch (linear history preferred):
+
+```sh
+git fetch upstream
+git rebase upstream/main
+```
+
+### Pushing and Contributing Changes Back
+
+Push your personalized updates to your fork:
+
+```sh
+git push origin main
+```
+
+To contribute changes back to the shared configuration, open a **pull request**
+from your fork (`username/dotfiles`) into the team repository
+(`org/dotfiles-team`). After review and merge, everyone can sync with the
+updated baseline:
+
+```sh
+git pull --rebase upstream main
+```
+
+---
+
 ## Advanced Use Cases
 
 ### Creating a New Dotfiles Repository

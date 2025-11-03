@@ -90,6 +90,7 @@
     "nload",
     "nmap",
     "NONINTERACTIVE",
+    "oneline",
     "patbenatar",
     "pflannery",
     "pipefail",
