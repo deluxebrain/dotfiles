@@ -36,7 +36,7 @@ brew update
 echo "[Configuration] {{ $group }} packages: {{ if $enabled }}✓ enabled{{ else }}✗ skipped{{ end }}"
 {{ if $enabled -}}
 echo "[Installing] Starting installation of {{ $group }} packages..."
-brew bundle --no-lock --file=/dev/stdin <<EOF
+brew bundle --file=/dev/stdin <<EOF
 {{ range index $.brew_packages $group "taps" -}}
 tap {{ . | quote | replace " " "\", \"" }}
 {{ end -}}
@@ -50,5 +50,21 @@ cask {{ . | quote }}
 mas {{ .name | quote }}, id: {{ .id }}
 {{ end -}}
 EOF
+{{ range index $.brew_packages $group "links" -}}
+brew link {{ . | quote }} --force
 {{ end -}}
 {{ end -}}
+{{ end -}}
+
+# Report pinned packages
+echo "[Information] Checking for pinned packages..."
+PINNED_PACKAGES=$(brew list --pinned 2>/dev/null | echo "")
+
+if [ -z "$PINNED_PACKAGES" ]; then
+    echo "[Information] No pinned packages found."
+else
+    echo "[Information] The following packages are pinned and will not be upgraded automatically:"
+    echo "$PINNED_PACKAGES" | while read pkg; do
+        echo " - $pkg"
+    done
+fi

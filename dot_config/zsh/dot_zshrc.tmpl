@@ -29,6 +29,7 @@ plugins=(
     iterm2
     kubectl
     redis-cli
+    ssh-agent
     tmux
     virtualenv
     zsh-autosuggestions
@@ -41,6 +42,10 @@ plugins+=(
 
 # plugin configuration:
 # ( must be between plugins declaration and starting oh-my-zsh )
+
+# ssh-agent configuration
+zstyle :omz:plugins:ssh-agent agent-forwarding yes
+zstyle :omz:plugins:ssh-agent identities id_ed25519
 
 # tmux plugin configuration
 export ZSH_TMUX_AUTOSTART=true

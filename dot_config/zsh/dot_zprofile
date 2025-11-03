@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # Set XDG Base Directories
 # These variables define where user-specific files, configurations, and caches should be stored.
 # By following the XDG Base Directory Specification, we keep the home directory clean and organized.
@@ -18,6 +19,7 @@ export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export ZSH_COMPDUMP="$XDG_CACHE_HOME/.zcompdump-$HOST"
 
 # oh-my-zsh
+export DISABLE_AUTO_UPDATE="false"
 export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh_custom"
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/.cache/ohmyzsh"
@@ -39,8 +41,16 @@ export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
 export GH_CONFIG_DIR="$XDG_CONFIG_HOME/gh"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export KREW_ROOT="$XDG_DATA_HOME/krew"
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 export VAGRANT_HOME="$XDG_DATA_HOME/vagrant"
+
+# Conda configuration
+# Wired in $XDG_CONFIG_HOME/conda/condarc
+# View using `conda info`
+export CONDA_ENVS_PATH="$XDG_DATA_HOME/conda/envs"
+export CONDA_PKGS_DIRS="$XDG_DATA_HOME/conda/pkgs"
+export CONDA_CACHE_DIR="$XDG_CACHE_HOME/conda"
 
 # VS Code configuration
 # VSCODE_PORTABLE: Stores all VS Code data including settings, keybindings, and snippets
@@ -54,6 +64,12 @@ export EDITOR=vim
 if [ -f "${XDG_CONFIG_HOME}/vim/vimrc" ]; then
     export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
 fi
+
+# Helm configuration
+export HELM_DIFF_THREE_WAY_MERGE="true"
+
+# Krew configuration
+export PATH="$KREW_ROOT/bin:$PATH"
 
 # Initialize Homebrew environment
 if [ -f "/opt/homebrew/bin/brew" ]; then

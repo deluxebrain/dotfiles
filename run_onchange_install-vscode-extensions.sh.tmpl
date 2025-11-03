@@ -12,7 +12,15 @@ if ! command -v brew &>/dev/null; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+installed_extensions=$(code --list-extensions | tr '[:upper:]' '[:lower:]')
+
 {{ range .vscode_extensions -}}
-code --force --install-extension {{ . }}
+ext_lower=$(echo "{{ .}} tr '[:upper:]' '[:lower:]')
+if ! echo "$installed_extensions" | grep -q "^${ext_lower}$"; then
+    echo "Installing extension: {{ . }}"
+    code --force --install-extension {{ . }}
+else
+    echo "Extension already installed: {{ . }}"
+fi
 {{ end -}}
 {{ end -}}

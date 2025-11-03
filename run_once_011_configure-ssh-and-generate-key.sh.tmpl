@@ -11,8 +11,13 @@ chmod 700 "$HOME/.ssh"
 echo "[Configuration] Adding GitHub SSH key to known_hosts..."
 ssh-keyscan -t rsa,ecdsa,ed25519 github.com >> "$HOME/.ssh/known_hosts"
 
+if [ ! -f "$HOME/.ssh/config" ]; then
+    touch "$HOME/.ssh/config"
+fi
+
 # Ensure correct permissions
-chmod 644 ~/.ssh/known_hosts
+chmod 644 "$HOME/.ssh/known_hosts"
+chmod 644 "$HOME/.ssh/config"
 
 {{ if .generateSshKey -}}
 # Check if SSH key already exists

@@ -1,4 +1,7 @@
 [global]
+# load .envrc if exists
+# else load .env if exists
+# use `dotenv` to in .envrc to load .env in addition to .envrc
 load_dotenv = true
 
 [whitelist]

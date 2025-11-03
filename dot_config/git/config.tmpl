@@ -1,6 +1,7 @@
 [core]
     editor = vim
     excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+    pager = delta
 
 {{ if .gitUserName -}}
 [user]
@@ -21,7 +22,6 @@
     ui = auto  # Enable colored output
 
 [alias]
-    # Useful shortcuts
     st = status
     co = checkout
     br = branch
@@ -29,6 +29,10 @@
     unstage = reset HEAD --
     last = log -1 HEAD
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+    # Review incoming changes using Meld in directory mode
+    # Example: git review main..origin.main
+    review = difftool -d -t meld
 
 [merge]
     conflictstyle = diff3  # Show the original text in conflicts
@@ -38,3 +42,15 @@
 
 [credential]
     helper = cache --timeout=3600  # Cache credentials for 1 hour
+
+[interactive]
+    diffFilter = delta --color-only
+
+[diff]
+    tool = meld
+
+[difftool]
+    prompt = false
+
+[difftool "meld"]
+    cmd = meld --label=\"LOCAL:$BASE\" \"$LOCAL\" --label=\"REMOTE:$BASE\" \"$REMOTE\"

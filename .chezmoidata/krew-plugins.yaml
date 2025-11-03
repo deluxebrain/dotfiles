@@ -1,0 +1,7 @@
+krew_plugins:
+  - plugin: images
+  - plugin: pog-logs
+  - plugin: resource-capacity
+  - plugin: tree
+  - plugin: view-secret
+  - plugin: view-allocations

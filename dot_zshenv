@@ -1,6 +1,6 @@
 # ZDOTDIR must be set in ~/.zshenv to take effect early in the shell initialization process.
 # ZDOTDIR changes the default directory where Zsh looks for its configuration files
-# (e.g., .zprofile, .zshrc, .zlogin, .zlogout). 
-# This allows us to organize Zsh configuration files under ~/.config/zsh, 
+# (e.g., .zprofile, .zshrc, .zlogin, .zlogout).
+# This allows us to organize Zsh configuration files under ~/.config/zsh,
 # adhering to the XDG Base Directory Specification.
 export ZDOTDIR="$HOME/.config/zsh"

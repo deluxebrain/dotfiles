@@ -11,7 +11,10 @@ if ! command -v brew &>/dev/null; then
 fi
 
 {{ range .asdf_plugins -}}
-asdf plugin add "{{ . }}"
+asdf plugin add "{{ .plugin }}"
+{{ if .set_system_version -}}
+asdf set --home "{{ .plugin }}"
+{{ end -}}
 {{ end -}}
 
 asdf plugin update --all

@@ -8,8 +8,11 @@ vscode_extensions:
   - aaron-bond.better-comments
   - editorconfig.editorconfig
   - esbenp.prettier-vscode
+  - github.
   - pflannery.vscode-versionlens
   - plibither8.remove-comments
+  - qcz.text-power-tools
+  - streetsidesoftware.code-spell-checker
 
   # Remote Development
   - ms-vscode-remote.remote-containers
@@ -23,13 +26,20 @@ vscode_extensions:
   # Cloud and DevOps
   - ms-azure-devops.azure-pipelines
   - ms-azuretools.vscode-azureresourcegroups
+  - ms-azuretools.vscode-bicep
   - ms-azuretools.vscode-docker
+  - ms-azuretools.vscode-containers
+  - ms-azuretools.vscode-azure-github-copilot
   - ms-kubernetes-tools.vscode-kubernetes-tools
   - ms-vscode.azure-account
   - hashicorp.terraform
   - earthly.earthfile-syntax-highlighting
   - exiasr.hadolint
   - timonwong.shellcheck
+  - skellock.just
+  - tim-koehler.helm-intellisense
+  - ms-vscode.makefile-tools
+  - tilt-dev.tiltfile
 
   # Python Development
   - ms-python.black-formatter
@@ -37,6 +47,7 @@ vscode_extensions:
   - ms-python.isort
   - ms-python.python
   - ms-python.vscode-pylance
+  - ms-python.flake8
 
   # Jupyter Notebooks
   - ms-toolsai.jupyter
@@ -56,12 +67,15 @@ vscode_extensions:
   - dbaeumer.vscode-eslint
   - dsznajder.es7-react-js-snippets
   - ms-vscode.vscode-typescript-next
+  - casualjim.gotemplate
 
   # Markdown and Documentation
   - bierner.markdown-mermaid
   - bierner.markdown-preview-github-styles
   - davidanson.vscode-markdownlint
   - redhat.vscode-yaml
+  - jebbs.plantuml
+  - tomoki1207.pdf
 
   # Collaboration
   - teamsdevapp.ms-teams-vscode-extension

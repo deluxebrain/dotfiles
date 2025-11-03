@@ -1,0 +1,6 @@
+default_context:
+    full_name: "{{ .fullName }}"
+    email: "{{ .gitUserEmail }}"
+    github_username: "{{ .gitUserName }}"
+cookiecutters_dir: "{{ .chezmoi.homeDir }}/.cache/cookiecutters"
+replay_dir: "{{ .chezmoi.homeDir }}/.config/cookiecutter/replay"

@@ -63,7 +63,7 @@ system_settings:
       settings:
         - key: AppleCurrentKeyboardLayoutInputSourceID
           type: string
-          value: com.apple.keylayout.British
+          value: com.apple.keylayout.British-PC
 
     # ==============================================
     # UI & Display Settings

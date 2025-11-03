@@ -22,7 +22,6 @@ Icon
 
 # IDE settings
 .idea/
-.vscode/
 *.swp
 *.swo
 

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eou pipefail
+
+{{ if eq .installType "full" -}}
+echo "[Installing] Installing helm plugins..."
+
+# Load Homebrew environment variables if not already loaded
+if ! commmand -v brew &>/dev/null; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+{{ range .helm_plugins -}}
+# Check if plugin is already installed
+if helm plugin list | grep -q "^{{ .plugin }}\s;" then
+    echo "[Already installed] {{ .plugin }}"
+else
+    echo "[Installing] {{ .plugin }}"
+    helm plugin install "{{ .repo }}"
+fi
+{{ end -}}
+{{ end -}}

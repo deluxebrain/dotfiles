@@ -1,33 +1,35 @@
 {
-    "dotnet.preferCSharpExtension": true,
-    "editor.fontSize": 16,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.quickSuggestions": {
-        "other": "on",
-        "comments": "off",
-        "strings": "off"
-    },
-    "editor.suggestOnTriggerCharacters": true,
-    "editor.acceptSuggestionOnEnter": "on",
-    "editor.acceptSuggestionOnCommitCharacter": true,
-    "editor.tabCompletion": "on",
-    "files.associations": {
-        "ignore": "ignore"
-    },
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "[python]": {
-        "editor.formatOnType": true
-    },
-    "redhat.telemetry.enabled": false,
-    "explorer.confirmDragAndDrop": false,
-    "explorer.fileNesting.enabled": true,
-    "explorer.fileNesting.expand": false,
-    "workbench.colorTheme": "Default Dark Modern",
-    "window.zoomLevel": -1,
-    "window.commandCenter": 1,
-    "git.openRepositoryInParentFolders": "always",
-    "editor.renderWhitespace": "all",
-    "terminal.integrated.inheritEnv": false
+  "dotnet.preferCSharpExtension": true,
+  "editor.fontSize": 16,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.tabCompletion": "on",
+  "files.associations": {
+    "ignore": "ignore"
+  },
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "redhat.telemetry.enabled": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "workbench.colorTheme": "Dracula Theme",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "window.zoomLevel": -1,
+  "window.commandCenter": 1,
+  "git.openRepositoryInParentFolders": "always",
+  "editor.renderWhitespace": "all",
+  "terminal.integrated.inheritEnv": false
 }
