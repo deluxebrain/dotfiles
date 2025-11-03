@@ -12,7 +12,7 @@ asdf_plugins:
   - plugin: kubectl
     set_system_version: true
   - plugin: kustomize
-    set_system_version: false
+    set_system_version: true
   - plugin: nodejs
     set_system_version: false
   - plugin: python
