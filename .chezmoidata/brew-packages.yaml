@@ -13,17 +13,21 @@ brew_packages:
       - mkcert #                   Tool for creating locally-trusted development certificates
       - tmux #                     Terminal multiplexer for managing multiple sessions
     casks:
-      - font-meslo-lg-nerd-font # Patched font with programming ligatures and icons
+      - font-meslo-lg-nerd-font #  Patched font with programming ligatures and icons
       - iterm2 #                   Terminal emulator for macOS
       - rectangle #                Window management app for macOS
       - visual-studio-code #       Code editor from Microsoft
 
   development:
+    taps:
+      - supabase/tap
     brews:
       - cookiecutter #             Tool for creating project templates
+      - cruft #                    Tool for managing project templates
       - direnv #                   Environment variable manager for shells
       - editorconfig #             EditorConfig core for enforcing consistent coding styles
       - gh #                       GitHub CLI for managing repositories and pull requests
+      - git-delta #                Syntax-highlighting pager for Git
       - git-extras #               Additional utilities for Git
       - jq #                       Command-line JSON processor
       - just #                     A command runner for task automation
@@ -31,30 +35,54 @@ brew_packages:
       - llvm #                     Collection of modular compiler and toolchain technologies
       - make #                     Build automation tool
       - node-build #               Install and build Node.js versions
+      - operator-sdk #             SDK for building Kubernetes operators
       - pipx #                     Tool for installing and managing Python CLI applications
+      - python #                   Python3 programming language
       - shellcheck #               Shell script static analysis tool
+      - sqlfluff #                 SQL linter and formatter
+      - tig #                      Text-mode interface for Git repositories
       - yj #                       CLI for converting YAML to JSON and vice versa
       - yq #                       CLI for processing YAML
+      - gomplate #                 Template processor for generating text files
+      - supabase/tap/supabase #    CLI for interacting with Supabase projects
     casks:
       - powershell #               Microsoft's command-line shell
       - miniconda #                Miniconda installer for managing Python environments
       - cursor #                   AI code editor
+      - temurin #                  OpenJDK binaries from Eclipse Temurin
+      - meld #                     Visual diff and merge tool
+      - devtunnel #                Tool for exposing local servers to the internet
+      - langflow #                 Tool for building language model applications
 
   cloud_and_infrastructure:
     taps:
+      - azure/azd #                Required by: azure-azd
       - goodwithtech/r #           Required by: dockle
     brews:
       - awscli #                   AWS Command Line Interface for managing AWS services
+      - azure/azd/azd #            Azure Developer CLI for cloud development
+      - azure/kubelogin/kubelogin # Azure Kubernetes login helper
+      - ctop #                     Top-like interface for container metrics
+      - colima #                   Container runtime for local development
+      - helm #                     Kubernetes package manager
+      - helmfile #                 Tool for managing Helm charts
+      - helmify #                  Tool for templating Helm charts
       - istioctl #                 CLI for managing Istio service meshes
+      - k3d #                      Lightweight Kubernetes distribution for local development
       - kind #                     Kubernetes IN Docker for local clusters
+      - kubernetes-cli #           Kubernetes command-line tool (kubectl)
+      - krew #                     Plugin manager for kubectl
       - tflint #                   Linter for Terraform configurations
       - tfsec #                    Security scanner for Terraform
       - trivy #                    Vulnerability scanner for containers and other artifacts
       - wasmedge #                 WebAssembly runtime optimized for the edge
+      - tilt #                     Tool for simplifying Kubernetes development
       - goodwithtech/r/dockle #    Docker image linter
       - hadolint #                 Dockerfile linter
       - pre-commit #               Framework for managing pre-commit hooks
       - k6 #                       Load testing tool for performance testing
+      - k9s #                      Terminal UI for managing Kubernetes clusters
+      - stern #                    Multi-pod and container log tailing for Kubernetes
     casks:
       - aws-vault #                Securely store and access AWS credentials
       - docker #                   Docker Desktop for containerized applications
@@ -63,26 +91,37 @@ brew_packages:
 
   data_and_database:
     brews:
+      - cypher-shell #             CLI for interacting with Neo4j graph databases
       - dvc #                      Data Version Control for machine learning projects
       - libpq #                    PostgreSQL C library
       - redis #                    In-memory key-value store
       - sqlite #                   Self-contained, serverless database engine
     casks:
+      - clickhouse #               Columnar database management system
       - mysqlworkbench #           MySQL database design and management tool
       - tableplus #                Database GUI for managing various databases
+    links:
+      - libpq #                    Link libpq to make it discoverable by other applications
 
   system_and_network:
     brews:
       - bash #                     The GNU Bourne Again Shell
       - bash-completion #          Bash command-line completion
+      - bmon #                     Bandwidth monitor and rate estimator
+      - btop #                     Resource monitor for CPU, memory, disks, network, and processes
       - findutils #                GNU find, xargs, and locate utilities
       - gawk #                     GNU implementation of AWK programming language
+      - htop #                     Interactive process viewer
+      - iftop #                    Real-time network bandwidth monitoring tool
       - netcat #                   Networking tool for sending/receiving data
+      - nload #                    Network load monitor
       - nmap #                     Network mapper for security auditing
+      - swaks #                    SMTP testing tool
       - openssl@3 #                OpenSSL cryptography and SSL/TLS toolkit
       - readline #                 Library for line-editing and history capabilities
       - rsync #                    Utility for file synchronization and transfers
       - smartmontools #            Tools for monitoring hard drives (SMART)
+      - speedtest-cli #            Command-line interface for testing internet bandwidth
       - sponge #                   Command for reading and writing to the same file
       - tree #                     Directory tree viewer
       - util-linux #               Miscellaneous system utilities
@@ -90,7 +129,8 @@ brew_packages:
       - wget #                     Network utility for downloading files
       - xdg-ninja #                Tool for managing dotfiles to comply with XDG spec
       - zlib #                     Compression library
-    casks: []
+    casks:
+      - tunnelblick #              VPN client for macOS
 
   media_and_documentation:
     brews:
@@ -99,6 +139,7 @@ brew_packages:
       - ffmpeg #                   Tool for handling multimedia files
       - graphicsmagick #           Image processing tool
       - graphviz #                 Graph visualization software
+      - plantuml #                 Tool for creating UML diagrams from text
       - potrace #                  Tool for tracing bitmaps into vector graphics
       - promptfoo #                CLI for testing and debugging AI prompts
       - ydiff #                    Colorized diff tool with side-by-side comparison
@@ -107,6 +148,9 @@ brew_packages:
       - inkscape #                 Vector graphics editor
       - joplin #                   Open-source note-taking application
       - chatgpt #                  ChatGPT application for AI interactions
+      - claude #                   Claude AI application for AI interactions
+      - microsoft-edge #           Web browser from Microsoft
+      - slack #                    Collaboration hub for workplaces
 
   app_store:
     mas:
