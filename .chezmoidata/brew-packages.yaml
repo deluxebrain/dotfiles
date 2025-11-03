@@ -53,6 +53,7 @@ brew_packages:
       - meld #                     Visual diff and merge tool
       - devtunnel #                Tool for exposing local servers to the internet
       - langflow #                 Tool for building language model applications
+      - utm #                      Virtual machine manager for macOS
 
   cloud_and_infrastructure:
     taps:

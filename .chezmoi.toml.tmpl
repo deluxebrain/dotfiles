@@ -2,7 +2,7 @@
 
 {{- $installType := promptChoiceOnce . "installType" "Install type" $installTypes "full" -}}
 {{- $installAppStorePackages := promptBoolOnce . "installAppStorePackages" "Install App Store packages?" false -}}
-{{- fullName := promptStringOnce . "fullName" "Full name" "" -}}
+{{- $fullName := promptStringOnce . "fullName" "Full name" "" -}}
 {{- $gitUserName := promptStringOnce . "gitUserName" "Git user name" "" -}}
 {{- $gitUserEmail := promptStringOnce . "gitUserEmail" "Git user email" "" -}}
 {{- $generateSshKey := promptBoolOnce . "generateSshKey" "Generate default SSH keypair?" true -}}

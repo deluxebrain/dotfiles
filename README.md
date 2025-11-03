@@ -4,28 +4,6 @@ This repository contains my dotfiles, managed by
 [Chezmoi](https://www.chezmoi.io/). It provides a streamlined way to set up and
 maintain a consistent development environment across multiple systems.
 
-## Table of Contents
-
-1. [Overview](#overview)
-2. [Prerequisites](#prerequisites)
-3. [Installation](#installation)
-4. [Post-installation Steps](#post-installation-steps)
-5. [Chezmoi Usage Guide](#chezmoi-usage-guide)
-   - [Adding Files](#adding-files)
-   - [Editing Managed Files](#editing-managed-files)
-   - [Deleting or Renaming Files](#deleting-or-renaming-files)
-   - [Pushing Changes](#pushing-changes)
-   - [Updating from Upstream](#updating-from-upstream)
-6. [Advanced Use Cases](#advanced-use-cases)
-   - [Creating a New Dotfiles Repository](#creating-a-new-dotfiles-repository)
-7. [Contribution Guidelines](#contribution-guidelines)
-8. [Additional Notes](#additional-notes)
-   - [File Ordering](#file-ordering)
-   - [Seed Configuration](#seed-configuration)
-   - [Run-on-Change Scripts](#run-on-change-scripts)
-9. [FAQ](#faq)
-10. [License](#license)
-
 ---
 
 ## Overview
@@ -66,11 +44,11 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 
 ### Suggested installation process
 
-Due to the weight of Brew packages, a full installation can take tens of minutes
-to complete. It is therefore advisable to first perform a **minimal
-installation**. This will minimize the overall installation time and quickly
-reveal any issues across the entire dotfiles installation process without having
-to wait for all of the Brew packages to install.
+Due to the weight of Brew packages, a full installation can take a while to
+complete. It is therefore advisable to first perform a **minimal installation**.
+This will minimize the overall installation time and quickly reveal any issues
+across the entire dotfiles installation process without having to wait for all
+of the Brew packages to install.
 
 The installation can optionally update your dotfiles GitHub repo to use SSH.
 This will be performed if you provide a non-blank response to `gitUserName` when
@@ -134,13 +112,13 @@ remote to SSH.
 
 ### Adding Files
 
-#### Without Templating:
+#### Without Templating
 
 ```sh
 chezmoi add ~/.config/zsh/.zprofile
 ```
 
-#### With Templating:
+#### With Templating
 
 ```sh
 chezmoi add --template ~/.config/zsh/.zshrc
@@ -148,7 +126,7 @@ chezmoi add --template ~/.config/zsh/.zshrc
 
 ### Editing Managed Files
 
-#### Non-templated Files:
+#### Non-templated Files
 
 ```sh
 chezmoi edit ~/.config/zsh/.zprofile
@@ -161,7 +139,7 @@ $EDITOR ~/.config/zsh/.zprofile
 chezmoi add ~/.config/zsh/.zprofile
 ```
 
-#### Templated Files:
+#### Templated Files
 
 ```sh
 chezmoi cd
@@ -171,13 +149,13 @@ chezmoi apply
 
 ### Deleting or Renaming Files
 
-#### Delete:
+#### Delete
 
 ```sh
 chezmoi forget ~/.config/zsh/.zprofile
 ```
 
-#### Rename:
+#### Rename
 
 ```sh
 chezmoi forget ~/.config/zsh/zprofile
@@ -228,18 +206,6 @@ git add -A .
 git commit -m "Initial commit"
 git push -u origin main
 ```
-
----
-
-## Contribution Guidelines
-
-Contributions are welcome! Please follow these guidelines:
-
-- **Error Visibility**: Ensure errors are easy to spot and debug.
-- **Troubleshooting**: Maintain simplicity in troubleshooting.
-- **Commit Messages**: Write clear, descriptive messages.
-- **Testing**: Test changes thoroughly.
-- **Pull Requests**: Include relevant information for reviewers.
 
 ---
 

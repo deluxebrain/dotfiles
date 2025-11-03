@@ -5,6 +5,8 @@
     "*.tmpl": "text",
     "*zshenv": "shellscript"
   },
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
   "cSpell.words": [
     "anki",
     "asdfrc",
@@ -81,6 +83,7 @@
     "meslo",
     "mineffect",
     "Miniconda",
+    "mkcert",
     "myip",
     "mysqlworkbench",
     "netcat",

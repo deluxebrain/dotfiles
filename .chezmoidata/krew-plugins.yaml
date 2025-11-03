@@ -1,6 +1,6 @@
 krew_plugins:
   - plugin: images
-  - plugin: pog-logs
+  - plugin: pod-logs
   - plugin: resource-capacity
   - plugin: tree
   - plugin: view-secret

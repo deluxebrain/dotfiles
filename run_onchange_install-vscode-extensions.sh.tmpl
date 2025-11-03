@@ -15,7 +15,7 @@ fi
 installed_extensions=$(code --list-extensions | tr '[:upper:]' '[:lower:]')
 
 {{ range .vscode_extensions -}}
-ext_lower=$(echo "{{ .}} tr '[:upper:]' '[:lower:]')
+ext_lower=$(echo "{{ . }}" tr '[:upper:]' '[:lower:]')
 if ! echo "$installed_extensions" | grep -q "^${ext_lower}$"; then
     echo "Installing extension: {{ . }}"
     code --force --install-extension {{ . }}

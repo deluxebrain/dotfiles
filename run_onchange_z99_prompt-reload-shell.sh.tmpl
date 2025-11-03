@@ -6,7 +6,7 @@ set -euo pipefail
 # It is used to reload the Zsh shell to apply the changes.
 
 # .zprofile hash: {{ include "dot_config/zsh/dot_zprofile" | sha256sum }}
-# .zshrc hash: {{ include "dot_config/zsh/dot_zshrc" | sha256sum }}
+# .zshrc hash: {{ include "dot_config/zsh/dot_zshrc.tmpl" | sha256sum }}
 # tmux.conf hash: {{ include "dot_config/tmux/tmux.conf" | sha256sum }}
 # com.apple.Terminal.xml hash: {{ include "dot_config/terminal/com.apple.Terminal.xml" | sha256sum }}
 

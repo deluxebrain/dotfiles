@@ -58,7 +58,7 @@ brew link {{ . | quote }} --force
 
 # Report pinned packages
 echo "[Information] Checking for pinned packages..."
-PINNED_PACKAGES=$(brew list --pinned 2>/dev/null | echo "")
+PINNED_PACKAGES=$(brew list --pinned 2>/dev/null || echo "")
 
 if [ -z "$PINNED_PACKAGES" ]; then
     echo "[Information] No pinned packages found."

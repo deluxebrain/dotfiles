@@ -19,12 +19,11 @@ export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export ZSH_COMPDUMP="$XDG_CACHE_HOME/.zcompdump-$HOST"
 
 # oh-my-zsh
-export DISABLE_AUTO_UPDATE="false"
+export DISABLE_AUTO_UPDATE=false
 export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh_custom"
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/.cache/ohmyzsh"
 export ZSH_THEME="powerlevel10k/powerlevel10k"
-
 
 # shell configuration
 export LC_ALL=en_GB.UTF-8
@@ -48,7 +47,7 @@ export VAGRANT_HOME="$XDG_DATA_HOME/vagrant"
 # Conda configuration
 # Wired in $XDG_CONFIG_HOME/conda/condarc
 # View using `conda info`
-export CONDA_ENVS_PATH="$XDG_DATA_HOME/conda/envs"
+export CONDA_ENVS_DIRS="$XDG_DATA_HOME/conda/envs"
 export CONDA_PKGS_DIRS="$XDG_DATA_HOME/conda/pkgs"
 export CONDA_CACHE_DIR="$XDG_CACHE_HOME/conda"
 
