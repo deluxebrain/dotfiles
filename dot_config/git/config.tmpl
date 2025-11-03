@@ -31,7 +31,7 @@
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
     # Review incoming changes using Meld in directory mode
-    # Example: git review main..origin.main
+    # Example: git review main..origin/main
     review = difftool -d -t meld
 
 [merge]
