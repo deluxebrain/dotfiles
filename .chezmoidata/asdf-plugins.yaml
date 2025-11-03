@@ -1,10 +1,23 @@
 asdf_plugins:
-  - awscli
-  - azure-cli
-  - dotnet-core
-  - golang
-  - helm
-  - kubectl
-  - kustomize
-  - nodejs
-  - python
+  - plugin: awscli
+    set_system_version: false
+  - plugin: azure-cli
+    set_system_version: false
+  - plugin: dotnet-core
+    set_system_version: false
+  - plugin: golang
+    set_system_version: false
+  - plugin: helm
+    set_system_version: true
+  - plugin: kubectl
+    set_system_version: true
+  - plugin: kustomize
+    set_system_version: false
+  - plugin: nodejs
+    set_system_version: false
+  - plugin: python
+    set_system_version: true
+  - plugin: uv
+    set_system_version: false
+  - plugin: deno
+    set_system_version: false
