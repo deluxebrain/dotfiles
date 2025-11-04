@@ -20,7 +20,8 @@ brew_packages:
 
   development:
     taps:
-      - supabase/tap
+      - supabase/tap #             Required by: supabase
+      - cirruslabs/cli #           Required by: tart
     brews:
       - cookiecutter #             Tool for creating project templates
       - cruft #                    Tool for managing project templates
@@ -45,6 +46,7 @@ brew_packages:
       - yq #                       CLI for processing YAML
       - gomplate #                 Template processor for generating text files
       - supabase/tap/supabase #    CLI for interacting with Supabase projects
+      - cirruslabs/cli/tart #      Virtual machine management tool
     casks:
       - powershell #               Microsoft's command-line shell
       - miniconda #                Miniconda installer for managing Python environments
