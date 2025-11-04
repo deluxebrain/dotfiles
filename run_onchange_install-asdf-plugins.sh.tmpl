@@ -13,7 +13,7 @@ fi
 {{ range .asdf_plugins -}}
 asdf plugin add "{{ .plugin }}"
 {{ if .set_system_version -}}
-asdf set --home "{{ .plugin }}"
+asdf set --home "{{ .plugin }}" system
 {{ end -}}
 {{ end -}}
 
