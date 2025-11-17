@@ -12,7 +12,7 @@ fi
 
 {{ range .helm_plugins -}}
 # Check if plugin is already installed
-if helm plugin list | grep -q "^{{ .plugin }}\s;" then
+if helm plugin list | grep -q "^{{ .plugin }}\s"; then
     echo "[Information] {{ .plugin }} is already installed"
 else
     echo "[Installing] {{ .plugin }}"
