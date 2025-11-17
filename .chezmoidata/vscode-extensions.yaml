@@ -33,6 +33,7 @@ vscode_extensions:
   - ms-kubernetes-tools.vscode-kubernetes-tools
   - ms-vscode.azure-account
   - hashicorp.terraform
+  - hashicorp.hcl
   - earthly.earthfile-syntax-highlighting
   - exiasr.hadolint
   - timonwong.shellcheck
