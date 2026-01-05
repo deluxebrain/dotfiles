@@ -70,6 +70,9 @@ export HELM_DIFF_THREE_WAY_MERGE="true"
 # Krew configuration
 export PATH="$KREW_ROOT/bin:$PATH"
 
+# Kubectl configuration
+export KUBECOLOR_PRESET=protanopia-dark
+
 # Initialize Homebrew environment
 if [ -f "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
