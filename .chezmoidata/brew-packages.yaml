@@ -75,6 +75,7 @@ brew_packages:
       - kind #                     Kubernetes IN Docker for local clusters
       - kubernetes-cli #           Kubernetes command-line tool (kubectl)
       - krew #                     Plugin manager for kubectl
+      - kubecolor #                Tool for managing multiple Kubernetes contexts
       - tflint #                   Linter for Terraform configurations
       - tfsec #                    Security scanner for Terraform
       - trivy #                    Vulnerability scanner for containers and other artifacts
