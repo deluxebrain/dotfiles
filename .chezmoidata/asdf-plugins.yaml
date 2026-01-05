@@ -1,4 +1,4 @@
-# set_system_version to true to use the system/brew version of the plugin globally
+# Set set_system_version to true to use the system/brew version of the plugin globally
 # Typically required to support certain oh-my-zsh plugins ( e.g. helm )
 asdf_plugins:
   - plugin: awscli
