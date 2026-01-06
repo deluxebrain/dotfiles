@@ -16,7 +16,7 @@ if helm plugin list | grep -q "^{{ .plugin }}\s"; then
     echo "[Information] {{ .plugin }} is already installed"
 else
     echo "[Installing] {{ .plugin }}"
-    helm plugin install "{{ .repo }}"
+    helm plugin install "{{ .repo }}" --verify=false
 fi
 {{ end -}}
 {{ end -}}

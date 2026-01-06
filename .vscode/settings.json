@@ -93,6 +93,7 @@
     "nmap",
     "NONINTERACTIVE",
     "oneline",
+    "osascript",
     "patbenatar",
     "pflannery",
     "pipefail",
