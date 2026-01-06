@@ -13,7 +13,7 @@ mkdir -p "$HOME/Library/Application Support/Rectangle"
 cp "{{ .chezmoi.sourceDir }}/dot_config/rectangle/RectangleConfig.json" "$HOME/Library/Application Support/Rectangle/RectangleConfig.json"
 
 # Only restart if we have GUI access
-if [[ -n "${SSH_TTY:-}]]; then
+if [[ -n "${SSH_TTY:-}" ]]; then
     echo "[Configuration] SSH session detected, skipping Rectangle restart"
     exit 0
 fi
