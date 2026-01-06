@@ -4,9 +4,10 @@ set -euo pipefail
 
 # This script is run once to install system updates and tools.
 
-# Install macOS updates
-echo "[Installing] macOS updates..."
-sudo softwareupdate -i -a
+# Disable automatic software updates until move to Packer images
+# ( software updates require the recovery partition to exist )
+# echo "[Installing] macOS updates..."
+# sudo softwareupdate -i -a
 
 # Install Xcode command line tools
 if ! xcode-select -p &> /dev/null; then

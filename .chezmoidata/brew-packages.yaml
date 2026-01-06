@@ -56,6 +56,7 @@ brew_packages:
   cloud_and_infrastructure:
     taps:
       - azure/azd #                Required by: azure-azd
+      - azure/kubelogin #          Required by: azure-kubelogin
       - goodwithtech/r #           Required by: dockle
     brews:
       - awscli #                   AWS Command Line Interface for managing AWS services
