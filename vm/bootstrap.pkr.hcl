@@ -53,7 +53,7 @@ build {
       "eval \"$(/opt/homebrew/bin/brew shellenv)\"",
       "brew --version || (echo 'ERROR: Homebrew not installed' && exit 1)",
       "xcode-select -p || (echo 'ERROR: Xcode CLI tools not installed' && exit 1)",
-      "git --version || (echo 'ERROR: Git not available' && exit 1)",
+      "git --version || (echo 'ERROR: git not available' && exit 1)",
       "echo '=== All verifications passed ==='"
     ]
   }
