@@ -1,5 +1,5 @@
 {{- /* chezmoi:modify-template */ -}}
-{{- $managed := `#=== CHEZMOI MANAGED - DO NOT EDIT ===
+{{- $managed := `# === CHEZMOI MANAGED - DO NOT EDIT ===
 # This section is managed by chezmoi. Manual changes will be overwritten.
 # Add your custom SSH hosts below the "END CHEZMOI" marker.
 Host github.com
@@ -16,6 +16,6 @@ Host *
 {{- else -}}
 {{ $managed }}
 
-{{.chezmoi.stdin -}}
+{{ .chezmoi.stdin -}}
 {{- end -}}
 {{- /* end chezmoi:modify-template */ -}}
