@@ -16,6 +16,6 @@ Host *
 {{- else -}}
 {{ $managed }}
 
-{{ .chezmoi.stdin -}}
+{{ .chezmoi.stdin }}
 {{- end -}}
 {{- /* end chezmoi:modify-template */ -}}
