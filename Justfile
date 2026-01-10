@@ -20,7 +20,7 @@ vm-build macos_version=default_macos:
     packer init vm/bootstrap.pkr.hcl
     packer build -var "macos_version={{macos_version}}" vm/bootstrap.pkr.hcl
 
-vm-validate macos_version=default_macos:
+vm-validate:
     packer validate vm/bootstrap.pkr.hcl
 
 vm-clean macos_version=default_macos:
@@ -48,16 +48,16 @@ vm-test-run-headless macos_version=default_macos:
         {{macos_version}}-test &
 
 vm-test-stop macos_version=default_macos:
-    tart stop {{macos_version}}-bootstrap
+    tart stop {{macos_version}}-test
 
 vm-test-ssh macos_version=default_macos:
     ssh -A -o StrictHostKeyChecking=no admin@$(tart ip --resolver=arp {{macos_version}}-test)
 
 vm-test-reset macos_version=default_macos:
-    -tart stop {{macos_version}}-bootstrap
-    -tart delete {{macos_version}}-bootstrap
+    -tart stop {{macos_version}}-test
+    -tart delete {{macos_version}}-test
     tart clone {{macos_version}}-bootstrap {{macos_version}}-test
 
 vm-test-clean macos_version=default_macos:
-    -tart stop {{macos_version}}-bootstrap
-    -tart delete {{macos_version}}-bootstrap
+    -tart stop {{macos_version}}-test
+    -tart delete {{macos_version}}-test

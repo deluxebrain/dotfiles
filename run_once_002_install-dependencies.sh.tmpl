@@ -10,7 +10,7 @@ sudo softwareupdate -i -a
 {{ end -}}
 
 # Install Homebrew and Xcode Command Line Tools if either is missing
-if ! command -v brew &> /dev/null || xcode-select -p &> /dev/null; then
+if ! command -v brew &> /dev/null || ! xcode-select -p &> /dev/null; then
     echo "[Installing] Homebrew and Xcode CLT..."
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else

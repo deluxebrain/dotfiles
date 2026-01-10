@@ -13,7 +13,7 @@ variable "macos_version" {
 }
 
 source "tart-cli" "bootstrap" {
-  vm_base_name       = "ghcr.io/cirruslabs/tart/macos-${var.macos_version}-base:latest"
+  vm_base_name       = "ghcr.io/cirruslabs/macos-${var.macos_version}-base:latest"
   vm_name            = "${var.macos_version}-bootstrap"
   disk_size_gb       = 80
   recovery_partition = "relocate"
@@ -26,9 +26,9 @@ source "tart-cli" "bootstrap" {
   # Bridged networking uses the host's network directly.
   run_extra_args = ["--net-bridged=en0"]
 
-  # IP discovery: Use bridged networking instead of default NAT.
-  # NAT doesn't provide outbound internet access (suspected host firewall).
-  # Bridged networking uses the host's network directly.
+  # IP discovery: Use ARP instead of DHCP leases.
+  # With bridged networking, the macOS DHCP server isn't involved, so
+  # tart ip can't read /var/db/dhcpd_leases. ARP queries the host's ARP table instead.
   ip_extra_args = ["--resolver=arp"]
 }
 
