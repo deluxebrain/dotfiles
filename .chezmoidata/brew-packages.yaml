@@ -3,6 +3,7 @@ brew_packages:
     brews:
       - asdf #                     Tool for managing multiple runtime versions
       - chezmoi #                  Tool for managing dotfiles
+      - direnv #                   Environment variable manager for shells
       - dnsmasq #                  Lightweight DNS and DHCP server
       - git #                      Distributed version control system
       - gnu-sed #                  GNU stream editor (sed)
@@ -21,7 +22,6 @@ brew_packages:
     brews:
       - cookiecutter #             Tool for creating project templates
       - cruft #                    Tool for managing project templates
-      - direnv #                   Environment variable manager for shells
       - editorconfig #             EditorConfig core for enforcing consistent coding styles
       - gh #                       GitHub CLI for managing repositories and pull requests
       - git-delta #                Syntax-highlighting pager for Git
@@ -58,6 +58,7 @@ brew_packages:
       - azure/azd #                Required by: azure-azd
       - azure/kubelogin #          Required by: azure-kubelogin
       - goodwithtech/r #           Required by: dockle
+      - hashicorp/tap #            Required by: terraform, etc
     brews:
       - awscli #                   AWS Command Line Interface for managing AWS services
       - azure/azd/azd #            Azure Developer CLI for cloud development
@@ -80,12 +81,14 @@ brew_packages:
       - tilt #                     Tool for simplifying Kubernetes development
       - goodwithtech/r/dockle #    Docker image linter
       - hadolint #                 Dockerfile linter
+      - hashicorp/tap/packer #     Tool for creating machine images
       - pre-commit #               Framework for managing pre-commit hooks
       - k6 #                       Load testing tool for performance testing
       - k9s #                      Terminal UI for managing Kubernetes clusters
       - stern #                    Multi-pod and container log tailing for Kubernetes
+      - hashicorp/tap/terraform #  Infrastructure as Code tool
     casks:
-      - aws-vault #                Securely store and access AWS credentials
+      - aws-vault-binary #         Securely store and access AWS credentials
       - docker #                   Docker Desktop for containerized applications
       - lens #                     Kubernetes IDE
       - vagrant #                  HashiCorp's tool for managing virtual environments

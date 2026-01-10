@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# This script is run once to install system updates and tools.
+
+{{ if .installSoftwareUpdates -}}
+echo "[Installing] macOS updates..."
+sudo softwareupdate -i -a
+{{ end -}}
+
+# Install Homebrew and Xcode Command Line Tools if either is missing
+if ! command -v brew &> /dev/null || xcode-select -p &> /dev/null; then
+    echo "[Installing] Homebrew and Xcode CLT..."
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+    echo "[Skipping] Homebrew and Xcode CLT already installed"
+fi

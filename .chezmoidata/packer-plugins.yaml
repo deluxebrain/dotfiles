@@ -1,0 +1,2 @@
+packer_plugins:
+  - plugin: github.com/cirruslabs/tart

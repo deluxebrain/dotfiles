@@ -4,7 +4,7 @@ asdf_plugins:
   - plugin: awscli
     set_system_version: false
   - plugin: azure-cli
-    set_system_version: false
+    set_system_version: true
   - plugin: dotnet-core
     set_system_version: false
   - plugin: golang

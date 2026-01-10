@@ -3,15 +3,15 @@
 set -euo pipefail
 
 {{ if eq .installType "full" -}}
-echo "[Installing] Installing krew plugins..."
+echo "[Installing] Installing packer plugins..."
 
 # Load Homebrew environment variables only if not already loaded
 if ! command -v brew &>/dev/null; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-{{ range .krew_plugins -}}
+{{ range .packer_plugins -}}
 echo "[Installing] {{ .plugin }}"
-kubectl krew install "{{ .plugin }}"
+packer plugins install "{{ .plugin }}"
 {{ end -}}
 {{ end -}}

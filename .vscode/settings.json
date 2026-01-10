@@ -3,7 +3,9 @@
   "editor.formatOnSave": true,
   "files.associations": {
     "*.tmpl": "text",
-    "*zshenv": "shellscript"
+    "*zshenv": "shellscript",
+    ".chezmoiignore": "ignore",
+    "modify_*": "helm"
   },
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
@@ -69,6 +71,7 @@
     "jebbs",
     "jmrog",
     "jsayol",
+    "Justfile",
     "keylayout",
     "keymap",
     "keypair",
@@ -94,7 +97,9 @@
     "NONINTERACTIVE",
     "oneline",
     "osascript",
+    "passwordless",
     "patbenatar",
+    "pathexpand",
     "pflannery",
     "pipefail",
     "pipx",

@@ -4,6 +4,9 @@
 .prettierignore
 .prettierrc.yaml
 
+Justfile
+
 README.md
 TODO.md
 docs/
+vm/

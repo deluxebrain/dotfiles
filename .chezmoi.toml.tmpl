@@ -1,15 +1,28 @@
-{{- $installTypes := list "full" "minimal" -}}
+{{- $installTypes := list "minimal" "full" -}}
 
-{{- $installType := promptChoiceOnce . "installType" "Install type" $installTypes "full" -}}
-{{- $installAppStorePackages := promptBoolOnce . "installAppStorePackages" "Install App Store packages?" false -}}
-{{- $fullName := promptStringOnce . "fullName" "Full name" "" -}}
-{{- $gitUserName := promptStringOnce . "gitUserName" "Git user name" "" -}}
-{{- $gitUserEmail := promptStringOnce . "gitUserEmail" "Git user email" "" -}}
-{{- $generateSshKey := promptBoolOnce . "generateSshKey" "Generate default SSH keypair?" true -}}
-{{- $timezone := promptStringOnce . "timezone" "Timezone" "Europe/London" -}}
+{{- /* Prompts */ -}}
+{{- $installType := promptChoiceOnce . "installType" "Install type" $installTypes (index . "installType" | default "minimal") -}}
+{{- $installSoftwareUpdates := promptBoolOnce . "installSoftwareUpdates" "Install software updates" (index . "installSoftwareUpdates" | default false) -}}
+{{- $installAppStorePackages := promptBoolOnce . "installAppStorePackages" "Install App Store packages" (index . "installAppStorePackages" | default false) -}}
+{{- $fullName := promptStringOnce . "fullName" "Full name" (index . "fullName" | default "") -}}
+{{- $gitUserName := promptStringOnce . "gitUserName" "Git user name" (index . "gitUserName" | default "") -}}
+{{- $gitUserEmail := promptStringOnce . "gitUserEmail" "Git user email" (index . "gitUserEmail" | default "") -}}
+{{- $generateSshKey := promptBoolOnce . "generateSshKey" "Generate default SSH keypair" (index . "generateSshKey" | default true) -}}
+{{- $timezone := promptStringOnce . "timezone" "Timezone" (index . "timezone" | default "Europe/London") -}}
+
+{{- /* Validate required fields */ -}}
+{{- $errors := list -}}
+{{- if not $fullName }}{{ $errors = append $errors "fullName }}{{end -}}
+{{- if not $gitUserName }}{{ $errors = append $errors "gitUserEmail }}{{end -}}
+{{- if not $gitUserEmail }}{{ $errors = append $errors "gitUserEmail }}{{end -}}
+{{- if $errors -}}
+{{-   writeToStdout (printf "Error: required fields missing: %s\n" (join ", " $errors)) -}}
+{{-   exit 1 -}}
+{{- end -}}
 
 [data]
     installType = {{ $installType | quote }}
+    installSoftwareUpdates = {{ $installSoftwareUpdates | quote }}
     installAppStorePackages = {{ $installAppStorePackages }}
     fullName = {{ $fullName | quote }}
     gitUserName = {{ $gitUserName | quote }}
@@ -24,6 +37,7 @@
     XDG_STATE_HOME = "{{ .chezmoi.homeDir }}/.local/state"
     ZSH = "{{ .chezmoi.homeDir }}/.config/oh-my-zsh"
     ZSH_CUSTOM = "{{ .chezmoi.homeDir }}/.config/zsh_custom"
+    HOMEBREW_PREFIX = "/opt/homebrew"
     ASDF_CONFIG_FILE="{{ .chezmoi.homeDir }}/.config/asdf/asdfrc"
     ASDF_DATA_DIR="{{ .chezmoi.homeDir }}/.local/share/asdf"
     TMUX_PLUGIN_MANAGER_PATH = "{{ .chezmoi.homeDir }}/.config/tmux/plugins/"

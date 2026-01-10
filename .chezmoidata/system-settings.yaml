@@ -95,7 +95,7 @@ system_settings:
           value: false
         - key: autohide
           type: bool
-          value: false
+          value: true
         - key: show-recents
           type: bool
           value: false

@@ -15,7 +15,7 @@ max_line_length = 80
 [*.py]
 profile = black
 
-[*.yaml]
+[{*.yaml,*.hcl}]
 indent_size = 2
 
 [{Makefile,*.mk}]
