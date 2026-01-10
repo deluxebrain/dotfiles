@@ -12,9 +12,9 @@
 
 {{- /* Validate required fields */ -}}
 {{- $errors := list -}}
-{{- if not $fullName }}{{ $errors = append $errors "fullName" }}{{end -}}
-{{- if not $gitUserName }}{{ $errors = append $errors "gitUserName" }}{{end -}}
-{{- if not $gitUserEmail }}{{ $errors = append $errors "gitUserEmail" }}{{end -}}
+{{- if not $fullName }}{{ $errors = append $errors "fullName" }}{{ end -}}
+{{- if not $gitUserName }}{{ $errors = append $errors "gitUserName" }}{{ end -}}
+{{- if not $gitUserEmail }}{{ $errors = append $errors "gitUserEmail" }}{{ end -}}
 {{- if $errors -}}
 {{-   writeToStdout (printf "Error: required fields missing: %s\n" (join ", " $errors)) -}}
 {{-   exit 1 -}}
