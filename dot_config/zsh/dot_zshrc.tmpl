@@ -48,7 +48,11 @@ zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent identities id_ed25519
 
 # tmux plugin configuration
-export ZSH_TMUX_AUTOSTART=true
+if [[ -n "$SSH_TTY" ]]; then
+    export ZSH_TMUX_AUTOSTART=false
+else
+    export ZSH_TMUX_AUTOSTART=true
+fi
 export ZSH_TMUX_CONFIG="${XDG_CONFIG_HOME}/tmux/tmux.conf"
 export ZSH_TMUX_UNICODE=true
 export ZSH_TMUX_AUTOQUIT=true
