@@ -53,7 +53,7 @@ cask {{ . | quote }}
 {{- end }}
 {{ end -}}
 {{ range index $.brew_packages $group "mas" -}}
-{{- if not (has . (default (list) $.brew_exclusions.mas)) }}
+{{- if not (has .name (default (list) $.brew_exclusions.mas)) }}
 mas {{ .name | quote }}, id: {{ .id }}
 {{- end }}
 {{ end -}}
