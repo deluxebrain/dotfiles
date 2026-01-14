@@ -61,6 +61,7 @@ brew_packages:
       - hashicorp/tap #            Required by: terraform, etc
     brews:
       - awscli #                   AWS Command Line Interface for managing AWS services
+      - azure-cli #                Azure Command Line Interface for managing Azure services
       - azure/azd/azd #            Azure Developer CLI for cloud development
       - azure/kubelogin/kubelogin # Azure Kubernetes login helper
       - ctop #                     Top-like interface for container metrics
@@ -74,6 +75,7 @@ brew_packages:
       - kubernetes-cli #           Kubernetes command-line tool (kubectl)
       - krew #                     Plugin manager for kubectl
       - kubecolor #                Tool for managing multiple Kubernetes contexts
+      - kustomize #                 Tool for customizing Kubernetes configurations
       - tflint #                   Linter for Terraform configurations
       - tfsec #                    Security scanner for Terraform
       - trivy #                    Vulnerability scanner for containers and other artifacts
