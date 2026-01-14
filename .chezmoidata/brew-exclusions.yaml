@@ -1,5 +1,5 @@
 # Packages to exclude from installation
-# Use this for machine-managed conflicts (e.g. Kandji-installed software)
+# Use this for machine-managed conflicts (e.g., Kandji-installed software)
 brew_exclusions:
   brews: []
   casks: []
