@@ -34,9 +34,9 @@ echo "Searching for Command Line Tools package..."
 CLT_LABEL=$(softwareupdate -l 2>&1 | \
     grep -B 1 -E 'Command Line Tools' | \
     awk -F'*' '/^\*/{print $2}' | \
-    sed 's/^ *Label: //g' | \
+    sed 's/^ *Label: //' | \
     sort -V | \
-    tail -n 1)
+    tail -n1)
 
 if [[ -z "${CLT_LABEL}" ]]; then
     echo "ERROR: Could not find Command Line Tools in softwareupdate" >&2
