@@ -26,7 +26,6 @@ sudo touch "${CLT_PLACEHOLDER}"
 cleanup() {
     sudo rm -f "${CLT_PLACEHOLDER}"
 }
-
 trap cleanup EXIT
 
 echo "Searching for Command Line Tools package..."

@@ -3,11 +3,11 @@
 #
 # Environment variables:
 #   SSH_PUBLIC_KEY  - Public key to add to authorized_keys (required)
-#   SSH_HOSTS - Space-separated hosts to add to known_hosts (default: "github.com")
+#   SSH_HOSTS       - Space-separated hosts to add to known_hosts (default: "github.com")
 set -euo pipefail
 
 if [[ -z "${SSH_PUBLIC_KEY:-}" ]]; then
-    echo "Error: SSH_PUBLIC_KEY environment variable is required" >&2
+    echo "ERROR: SSH_PUBLIC_KEY environment variable is required" >&2
     exit 1
 fi
 

@@ -19,7 +19,7 @@ if [[ "${VERIFY_HOMEBREW}" == "true" ]]; then
     echo -n "Homebrew: "
     if [[ -x "/opt/homebrew/bin/brew" ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
-        brew --version | head -n 1
+        brew --version | head -n1
     else
         echo "NOT INSTALLED"
         ((errors++))
