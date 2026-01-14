@@ -13,10 +13,9 @@ variable "macos_version" {
 }
 
 source "tart-cli" "bootstrap" {
-  vm_base_name       = "ghcr.io/cirruslabs/macos-${var.macos_version}-vanilla:latest"
+  vm_base_name       = "ghcr.io/cirruslabs/macos-${var.macos_version}-base:latest"
   vm_name            = "${var.macos_version}-bootstrap"
   disk_size_gb       = 80
-  recovery_partition = "relocate"
   ssh_username       = "admin"
   ssh_password       = "admin"
   ssh_timeout        = "120s"
@@ -35,22 +34,26 @@ source "tart-cli" "bootstrap" {
 build {
   sources = ["source.tart-cli.bootstrap"]
 
+  # Copy host's SSH public key for passwordless access
   provisioner "shell" {
-    script = "${path.root}/scripts/setup-ssh.sh"
-    environment_vars = [
-      "SSH_PUBLIC_KEY=${file(pathexpand("~/.ssh/id_ed25519.pub"))}"
+    inline = [
+      "mkdir -p ~/.ssh",
+      "chmod 700 ~/.ssh",
+      "echo '${file(pathexpand("~/.ssh/id_ed25519.pub"))}' >> ~/.ssh/authorized_keys",
+      "chmod 600 ~/.ssh/authorized_keys",
+      "ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null"
     ]
   }
 
+  # Verify Homebrew and Xcode CLI tools were installed correctly
   provisioner "shell" {
-    script = "${path.root}/scripts/install-xcode-clt.sh"
-  }
-
-  provisioner "shell" {
-    script = "${path.root}/scripts/install-homebrew.sh"
-  }
-
-  provisioner "shell" {
-    script = "${path.root}/scripts/verify.sh"
+    inline = [
+      "echo '=== Verifying installations ==='",
+      "eval \"$(/opt/homebrew/bin/brew shellenv)\"",
+      "brew --version || (echo 'ERROR: Homebrew not installed' && exit 1)",
+      "xcode-select -p || (echo 'ERROR: Xcode CLI tools not installed' && exit 1)",
+      "git --version || (echo 'ERROR: git not available' && exit 1)",
+      "echo '=== All verifications passed ==='"
+    ]
   }
 }

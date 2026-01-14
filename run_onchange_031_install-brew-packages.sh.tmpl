@@ -38,13 +38,19 @@ echo "[Configuration] {{ $group }} packages: {{ if $enabled }}✓ enabled{{ else
 echo "[Installing] Starting installation of {{ $group }} packages..."
 brew bundle --file=/dev/stdin <<EOF
 {{ range index $.brew_packages $group "taps" -}}
-tap {{ . | quote | replace " " "\", \"" }}
+{{- if not (has .(default (list) $.brew_exclusions.taps)) }}
+tap {{ . | quote }}
+{{- end }}
 {{ end -}}
 {{ range index $.brew_packages $group "brews" -}}
+{{- if not (has .(default (list) $.brew_exclusions.brews)) }}
 brew {{ . | quote }}
+{{- end }}
 {{ end -}}
 {{ range index $.brew_packages $group "casks" -}}
+{{- if not (has .(default (list) $.brew_exclusions.casks)) }}
 cask {{ . | quote }}
+{{- end }}
 {{ end -}}
 {{ range index $.brew_packages $group "mas" -}}
 mas {{ .name | quote }}, id: {{ .id }}
