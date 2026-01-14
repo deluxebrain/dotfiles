@@ -3,7 +3,7 @@
 #
 # Environment variables:
 #   SKIP_IF_EXISTS - Skip installation if Homebrew already present (default: "true")
-set -eou pipefail
+set -euo pipefail
 
 SKIP_IF_EXISTS="${SKIP_IF_EXISTS:-true}"
 HOMEBREW_PREFIX="/opt/homebrew"

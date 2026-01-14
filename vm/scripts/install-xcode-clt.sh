@@ -2,8 +2,8 @@
 # Install Xcode Command Line Tools headlessly (without GUI dialog).
 #
 # Environment variables:
-#   SKIP_IF_EXISTS - Skip installation if Homebrew already present (default: "true")
-set -eou pipefail
+#   SKIP_IF_EXISTS - Skip installation if CLT already present (default: "true")
+set -euo pipefail
 
 SKIP_IF_EXISTS="${SKIP_IF_EXISTS:-true}"
 CLT_PLACEHOLDER="/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
@@ -20,7 +20,7 @@ if [[ -e "/Library/Developer/CommandLineTools/usr/bin/git" ]]; then
     fi
 fi
 
-# Create placeholder to trigger software update to list CLT
+# Create placeholder to trigger softwareupdate to list CLT
 sudo touch "${CLT_PLACEHOLDER}"
 
 cleanup() {
@@ -33,19 +33,20 @@ echo "Searching for Command Line Tools package..."
 
 # Find the CLT label from softwareupdate
 CLT_LABEL=$(softwareupdate -l 2>&1 | \
-    grep -B 1 -E "Command Line Tools" | \
-    awk -F"*" '/^ *\*/ {print $2}' | \
+    grep -B 1 -E 'Command Line Tools' | \
+    awk -F'*' '/^\*/{print $2}' | \
     sed 's/^ *Label: //g' | \
+    sort -V | \
     tail -n 1)
 
 if [[ -z "${CLT_LABEL}" ]]; then
-    echo "Error: Could not find Command Line Tools in softwareupdate" >&2
+    echo "ERROR: Could not find Command Line Tools in softwareupdate" >&2
     echo "Available updates:" >&2
     softwareupdate -l >&2
     exit 1
 fi
 
-echo "Installing ${CLT_LABEL}"
+echo "Installing: ${CLT_LABEL}"
 sudo softwareupdate -i "${CLT_LABEL}"
 
 # Point xcode-select to the installed tools

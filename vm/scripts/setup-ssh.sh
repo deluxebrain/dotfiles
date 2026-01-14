@@ -3,15 +3,15 @@
 #
 # Environment variables:
 #   SSH_PUBLIC_KEY  - Public key to add to authorized_keys (required)
-#   SSH_KNOWN_HOSTS - Space-separated hosts to add to known_hosts (default: "github.com")
-set -eou pipefail
+#   SSH_HOSTS - Space-separated hosts to add to known_hosts (default: "github.com")
+set -euo pipefail
 
 if [[ -z "${SSH_PUBLIC_KEY:-}" ]]; then
     echo "Error: SSH_PUBLIC_KEY environment variable is required" >&2
     exit 1
 fi
 
-SSH_HOSTS="${SSH_KNOWN_HOSTS:-github.com}"
+SSH_HOSTS="${SSH_HOSTS:-github.com}"
 
 echo "=== Setting up SSH ==="
 
@@ -23,7 +23,7 @@ chmod 600 ~/.ssh/authorized_keys
 echo "Added public key to authorized_keys"
 
 for host in ${SSH_HOSTS}; do
-    ssh-keyscan -H "${host}" >> ~/.ssh/known_hosts 2>/dev/null
+    ssh-keyscan "${host}" >> ~/.ssh/known_hosts 2>/dev/null
     echo "Added ${host} to known_hosts"
 done
 
