@@ -23,14 +23,14 @@ fi
 brew update
 
 # Install packages
-{{- $ifFull := eq .installType "full" }}
+{{- $isFull := eq .installType "full" }}
 {{- $packageGroups := dict
     "core" true
-    "development" $full
-    "cloud_and_infrastructure" $full
-    "data_and_database" $full
-    "system_and_network" $full
-    "media_and_documentation" $full
+    "development" $isFull
+    "cloud_and_infrastructure" $isFull
+    "data_and_database" $isFull
+    "system_and_network" $isFull
+    "media_and_documentation" $isFull
     "app_store" .installAppStorePackages }}
 
 {{- range $group, $enabled := $packageGroups }}
@@ -38,11 +38,11 @@ echo "[Configuration] {{ $group }} packages: {{ if $enabled }}✓ enabled{{ else
 {{- if $enabled }}
 echo "[Installing] Starting installation of {{ $group }} packages..."
 brew bundle --file=/dev/stdin <<EOF
-{{- range index $.brew_packages $group "taps" -}}
+{{- range index $.brew_packages $group "taps" }}
 {{- if not (has . (default (list) $.brew_exclusions.taps)) }}
 tap {{ . | quote }}
 {{- end }}
-{{ end -}}
+{{- end }}
 {{ range index $.brew_packages $group "brews" }}
 {{- if not (has . (default (list) $.brew_exclusions.brews)) }}
 brew {{ . | quote }}
