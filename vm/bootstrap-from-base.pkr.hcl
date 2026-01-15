@@ -15,7 +15,7 @@ variable "macos_version" {
 source "tart-cli" "bootstrap" {
   vm_base_name       = "ghcr.io/cirruslabs/macos-${var.macos_version}-base:latest"
   vm_name            = "${var.macos_version}-bootstrap"
-  disk_size_gb       = 80
+  disk_size_gb       = 100
   ssh_username       = "admin"
   ssh_password       = "admin"
   ssh_timeout        = "120s"

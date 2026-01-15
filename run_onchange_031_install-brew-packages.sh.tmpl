@@ -4,10 +4,10 @@ set -euo pipefail
 
 echo "[Configuration] Installing brew packages..."
 
-{{ if .installAppStorePackages -}}
+{{- if .installAppStorePackages }}
 echo "[Warning] App Store packages are enabled and require you to be signed into the Mac App Store."
 read -p "Press Enter to continue or Ctrl+C to cancel..."
-{{ end -}}
+{{- end }}
 
 # Keep sudo session alive
 echo "[Notice] Some packages will require administrator privileges. Please enter your password when prompted."
@@ -23,46 +23,47 @@ fi
 brew update
 
 # Install packages
-{{ $packageGroups := dict
+{{- $ifFull := eq .installType "full" }}
+{{- $packageGroups := dict
     "core" true
-    "development" (eq .installType "full")
-    "cloud_and_infrastructure" (eq .installType "full")
-    "data_and_database" (eq .installType "full")
-    "system_and_network" (eq .installType "full")
-    "media_and_documentation" (eq .installType "full")
-    "app_store" .installAppStorePackages -}}
+    "development" $full
+    "cloud_and_infrastructure" $full
+    "data_and_database" $full
+    "system_and_network" $full
+    "media_and_documentation" $full
+    "app_store" .installAppStorePackages }}
 
-{{ range $group, $enabled := $packageGroups -}}
+{{- range $group, $enabled := $packageGroups }}
 echo "[Configuration] {{ $group }} packages: {{ if $enabled }}✓ enabled{{ else }}✗ skipped{{ end }}"
-{{ if $enabled -}}
+{{- if $enabled }}
 echo "[Installing] Starting installation of {{ $group }} packages..."
 brew bundle --file=/dev/stdin <<EOF
-{{ range index $.brew_packages $group "taps" -}}
+{{- range index $.brew_packages $group "taps" -}}
 {{- if not (has . (default (list) $.brew_exclusions.taps)) }}
 tap {{ . | quote }}
 {{- end }}
 {{ end -}}
-{{ range index $.brew_packages $group "brews" -}}
+{{ range index $.brew_packages $group "brews" }}
 {{- if not (has . (default (list) $.brew_exclusions.brews)) }}
 brew {{ . | quote }}
 {{- end }}
-{{ end -}}
-{{ range index $.brew_packages $group "casks" -}}
+{{- end }}
+{{- range index $.brew_packages $group "casks" }}
 {{- if not (has . (default (list) $.brew_exclusions.casks)) }}
 cask {{ . | quote }}
 {{- end }}
-{{ end -}}
-{{ range index $.brew_packages $group "mas" -}}
+{{- end }}
+{{- range index $.brew_packages $group "mas" }}
 {{- if not (has .name (default (list) $.brew_exclusions.mas)) }}
 mas {{ .name | quote }}, id: {{ .id }}
 {{- end }}
-{{ end -}}
+{{- end }}
 EOF
-{{ range index $.brew_packages $group "links" -}}
+{{- range index $.brew_packages $group "links" }}
 brew link {{ . | quote }} --force
-{{ end -}}
-{{ end -}}
-{{ end -}}
+{{- end }}
+{{- end }}
+{{- end }}
 
 # Report pinned packages
 echo "[Information] Checking for pinned packages..."
