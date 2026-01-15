@@ -31,7 +31,8 @@ brew update
     "data_and_database" $isFull
     "system_and_network" $isFull
     "media_and_documentation" $isFull
-    "app_store" .installAppStorePackages }}
+    "app_store" .installAppStorePackages
+}}
 
 {{- range $group, $enabled := $packageGroups }}
 echo "[Configuration] {{ $group }} packages: {{ if $enabled }}✓ enabled{{ else }}✗ skipped{{ end }}"
@@ -43,7 +44,7 @@ brew bundle --file=/dev/stdin <<EOF
 tap {{ . | quote }}
 {{- end }}
 {{- end }}
-{{ range index $.brew_packages $group "brews" }}
+{{- range index $.brew_packages $group "brews" }}
 {{- if not (has . (default (list) $.brew_exclusions.brews)) }}
 brew {{ . | quote }}
 {{- end }}
