@@ -8,7 +8,7 @@ if ! command -v brew &>/dev/null; then
 fi
 
 echo "[Configuration] Creating new CA and installing in system trust store..."
-if [[ -n "$SSH_CONNECTION" ]]; then
+if [[ -n "${SSH_CONNECTION:-}" ]]; then
     echo "[Skipping] mkcert --install (requires GUI)"
 else
     mkcert --install
